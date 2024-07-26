@@ -1,0 +1,9 @@
+# other files
+*.o
+
+# sobfolders
+.obj/
+.vscode/
+
+# binary
+./ex00/megaphone
