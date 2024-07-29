@@ -23,7 +23,7 @@ Megaphone::Megaphone(int argc, char **argv) {
 	}
 }
 
-//Constructor definition outside the class
+//Methos definition outside the class
 void Megaphone::transformMessage() {
 	transformedMessage = originalMessage;
 	for (std::size_t i = 0; i < originalMessage.size(); i++) {
