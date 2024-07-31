@@ -13,7 +13,14 @@ OBJ			= $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRC))
 all: $(NAME)
 
 run: $(NAME)
-	./$(NAME)
+	@echo "$(YELLOW) ||-----------------------------------------------------------------------------------||$(DEFAULT)"
+	@echo "$(YELLOW) ||                      WELCOME TO YOUR 80's FAVORITE PHONEBOOK                      ||$(DEFAULT)"
+	@echo "$(YELLOW) ||                                                                                   ||$(DEFAULT)"
+	@echo "$(YELLOW) ||  As usual you have multiple options to interact with your phonebook. These are:   ||$(DEFAULT)"
+	@echo "$(YELLOW) ||                                                                                   ||$(DEFAULT)"
+	@echo "$(YELLOW) ||    1: ADD a new contact     2: SEARCH for a specific contact       3: EXIT        ||$(DEFAULT)"
+	@echo "$(YELLOW) ||-----------------------------------------------------------------------------------||$(DEFAULT)"
+	@./$(NAME)
 
 test: $(NAME)
 	./$(NAME)
