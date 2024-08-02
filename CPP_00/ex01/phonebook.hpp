@@ -15,6 +15,8 @@
 # define WHITE		"\033[1;37m"
 # define DEFAULT	"\033[0m"
 
+# define DEBUG		0
+
 class Phonebook
 {
 private:
@@ -22,9 +24,13 @@ private:
 	int		oldestIndex;
 public:
 	Phonebook();
-	// void	initOldestIndex();
-	void	addNewContact(Contact newContact);
-	void	displayContacts() const;
+	void		addNewContact(Contact &newContact);
+	void		displayContacts() const;
+	void		printingPhonebookHeader() const;
+	void		displayContactInfo(int &contactIndex) const;
+	std::string	truncateAndFormat(const std::string &str, std::size_t width) const;
+	//Getters
+	int			getIndex() const;
 };
 
 #endif

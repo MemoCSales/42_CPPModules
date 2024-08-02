@@ -1,5 +1,32 @@
 #include "contact.hpp"
 
+void	Contact::setContactInformation(Contact &newContact) {
+	std::string input;
+	long	number;
+
+	std::cout << "Enter First Name: ";
+	std::cin >> std::ws;
+	std::getline(std::cin, input);
+	newContact.setFirstName(input);
+
+	std::cout << "Enter Last Name: ";
+	std::getline(std::cin, input);
+	newContact.setLastName(input);
+
+	std::cout << "Enter Nick Name: ";
+	std::getline(std::cin, input);
+	newContact.setNickName(input);
+
+	std::cout << "Enter your phone number: ";
+	std::cin >> number;
+	newContact.setPhoneNumber(number);
+	std::cin.ignore();
+	
+	std::cout << "Enter your Darkest Secret: ";
+	std::getline(std::cin, input);
+	newContact.setDarkestSecret(input);
+}
+
 //Setters
 void	Contact::setFirstName(const std::string &fName) {
 	firstName = fName;
@@ -13,7 +40,7 @@ void	Contact::setNickName(const std::string &nName) {
 void	Contact::setDarkestSecret(const std::string &dSecret) {
 	darkestSecret = dSecret;
 }
-void	Contact::setPhoneNumber(int &pNumber) {
+void	Contact::setPhoneNumber(long &pNumber) {
 	phoneNumber = pNumber;
 }
 
@@ -30,6 +57,6 @@ std::string Contact::getNickName() const {
 std::string Contact::getDarkestName() const {
 	return darkestSecret;
 }
-int	Contact::getPhoneNumber() const {
+long	Contact::getPhoneNumber() const {
 	return phoneNumber;
 }

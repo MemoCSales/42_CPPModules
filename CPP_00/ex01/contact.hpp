@@ -12,22 +12,21 @@ private:
 	std::string lastName;
 	std::string nickName;
 	std::string darkestSecret;
-	int         phoneNumber;
+	long		phoneNumber;
 public:
+	void	setContactInformation(Contact &newContact);
 	//Setters
-	void	setContactIndex(int index);
 	void	setFirstName(const std::string &fName);
 	void	setLastName(const std::string &lName);
 	void	setNickName(const std::string &nName);
 	void	setDarkestSecret(const std::string &dSecret);
-	void	setPhoneNumber(int &pNumber);
+	void	setPhoneNumber(long &pNumber);
 	//Getters
-	int			getContactIndex() const;
 	std::string getFirstName() const;
 	std::string getLastName() const;
 	std::string getNickName() const;
 	std::string getDarkestName() const;
-	int			getPhoneNumber() const;
+	long		getPhoneNumber() const;
 };
 
 #endif
