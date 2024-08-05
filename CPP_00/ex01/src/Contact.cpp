@@ -1,4 +1,5 @@
 #include "Contact.hpp"
+#include "Phonebook.hpp"
 
 void	Contact::setContactInformation(Contact &newContact) {
 	std::string input;
@@ -19,7 +20,8 @@ void	Contact::setContactInformation(Contact &newContact) {
 
 	std::cout << "Enter your phone number: ";
 	std::cin >> number;
-	newContact.setPhoneNumber(number);
+	if (newContact.setPhoneNumber(number))
+		return ;
 	std::cin.ignore();
 	
 	std::cout << "Enter your Darkest Secret: ";
@@ -40,8 +42,14 @@ void	Contact::setNickName(const std::string &nName) {
 void	Contact::setDarkestSecret(const std::string &dSecret) {
 	darkestSecret = dSecret;
 }
-void	Contact::setPhoneNumber(long &pNumber) {
-	phoneNumber = pNumber;
+int	Contact::setPhoneNumber(long &pNumber) {
+	if (pNumber > 0) {
+		phoneNumber = pNumber;
+		return 0;
+	} else {
+		std::cerr << RED <<"Invalid phone number format. Please try again." << DEFAULT << std::endl;
+		return 1;
+	}
 }
 
 //Getters

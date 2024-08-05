@@ -33,13 +33,11 @@ int main() {
 				std::cout << WHITE << "Bye bye *Hangs Up*" << DEFAULT << std::endl;
 				break;
 			}
-			else {
+			else
 				continue;
-			}
 		}
-		else {
+		else
 			std::cout << RED << "Error: Not the right option. Try again." << DEFAULT << std::endl;
-		}
 	}
 	return 0;
 }

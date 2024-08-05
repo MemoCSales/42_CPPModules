@@ -20,7 +20,7 @@ public:
 	void	setLastName(const std::string &lName);
 	void	setNickName(const std::string &nName);
 	void	setDarkestSecret(const std::string &dSecret);
-	void	setPhoneNumber(long &pNumber);
+	int	setPhoneNumber(long &pNumber);
 	//Getters
 	std::string getFirstName() const;
 	std::string getLastName() const;
