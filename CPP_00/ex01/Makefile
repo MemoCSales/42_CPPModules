@@ -2,13 +2,15 @@ NAME = phonebook
 
 CPP			= g++
 CPPFLAGS	= -std=c++98
-CPPFLAGS	+= -Wall -Wextra -Werror
+CPPFLAGS	+= -Wall -Wextra -Werror -Iinclude
 CPPFLAGS	+= -g
 
-SRC 		= $(wildcard *.cpp)
+SRCDIR		= src
+SRC 		= $(wildcard $(SRCDIR)/*.cpp)
 
 OBJDIR		= .obj
-OBJ			= $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRC))
+# OBJ			= $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRC))
+OBJ			= $(SRC:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
 all: $(NAME)
 
@@ -28,7 +30,7 @@ test: $(NAME)
 $(NAME): $(OBJ)
 	@$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)
 
-$(OBJDIR)/%.o: %.cpp
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(OBJDIR)
 	@$(CPP) -o "$@" $(CPPFLAGS) "$<" -c
 

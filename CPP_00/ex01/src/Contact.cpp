@@ -1,4 +1,4 @@
-#include "contact.hpp"
+#include "Contact.hpp"
 
 void	Contact::setContactInformation(Contact &newContact) {
 	std::string input;

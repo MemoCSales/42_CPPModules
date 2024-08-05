@@ -4,7 +4,7 @@
 # include <iostream>
 # include <string>
 # include <iomanip>
-# include "contact.hpp"
+# include "Contact.hpp"
 
 # define RED		"\033[1;31m"
 # define GREEN		"\033[1;32m"
