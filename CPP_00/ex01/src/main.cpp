@@ -8,12 +8,12 @@ int main() {
 	while (1) {
 		std::cout << YELLOW << "Choose an option (ADD, SEARCH or EXIT):" << DEFAULT << std::endl;
 		std::cin >> option;
+		std::cin.ignore();
 		if (option == "ADD")
 		{
 			Contact 	newContact;
 			
 			newContact.setContactInformation(newContact);
-
 			if (DEBUG)
 				std::cout << "Adding new contact at index: " << myPhoneBook.getIndex() << std::endl;
 			myPhoneBook.addNewContact(newContact);

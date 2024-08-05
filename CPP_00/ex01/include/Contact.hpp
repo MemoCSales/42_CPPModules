@@ -4,6 +4,8 @@
 # include <iostream>
 # include <string>
 # include <cstring>
+# include <cctype>
+# include <sstream>
 
 class Contact
 {
@@ -20,13 +22,18 @@ public:
 	void	setLastName(const std::string &lName);
 	void	setNickName(const std::string &nName);
 	void	setDarkestSecret(const std::string &dSecret);
-	int	setPhoneNumber(long &pNumber);
+	void	setPhoneNumber(long &pNumber);
 	//Getters
 	std::string getFirstName() const;
 	std::string getLastName() const;
 	std::string getNickName() const;
 	std::string getDarkestName() const;
 	long		getPhoneNumber() const;
+	long		getValidPhoneNumber(Contact &newContact);
+
+	bool		phoneNumberValidation(std::string &phoneNumber);
+	long		stringToLong(const std::string &str);
+	bool		checkEmptyInput();
 };
 
 #endif

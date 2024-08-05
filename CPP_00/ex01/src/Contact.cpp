@@ -5,28 +5,51 @@ void	Contact::setContactInformation(Contact &newContact) {
 	std::string input;
 	long	number;
 
-	std::cout << "Enter First Name: ";
-	std::cin >> std::ws;
-	std::getline(std::cin, input);
-	newContact.setFirstName(input);
+	while (true) {
+		std::cout << GREEN << "Enter First Name: " << DEFAULT;
+		std::getline(std::cin, input);
+		if (input.empty()) {
+			std::cout << RED << "No fields should be left empty. Please try again." DEFAULT << std::endl;
+			continue;
+		} else {
+			newContact.setFirstName(input);
+			break;
+		}
+	}
+	while(true) {
+		std::cout << GREEN << "Enter Last Name: " << DEFAULT;
+		std::getline(std::cin, input);
+		if (input.empty()) {
+			std::cout << RED << "No fields should be left empty. Please try again." DEFAULT << std::endl;
+		} else {
+			newContact.setLastName(input);
+			break;
+		}
+	}
+	while (true) {
+		std::cout << GREEN << "Enter Nick Name: " << DEFAULT;
+		std::getline(std::cin, input);
+		if (input.empty()) {
+			std::cout << RED << "No fields should be left empty. Please try again." DEFAULT << std::endl;
+		} else {
+			newContact.setNickName(input);
+			break;
+		}
+	}
 
-	std::cout << "Enter Last Name: ";
-	std::getline(std::cin, input);
-	newContact.setLastName(input);
-
-	std::cout << "Enter Nick Name: ";
-	std::getline(std::cin, input);
-	newContact.setNickName(input);
-
-	std::cout << "Enter your phone number: ";
-	std::cin >> number;
-	if (newContact.setPhoneNumber(number))
-		return ;
-	std::cin.ignore();
+	number = getValidPhoneNumber(newContact);
+	newContact.setPhoneNumber(number);
 	
-	std::cout << "Enter your Darkest Secret: ";
-	std::getline(std::cin, input);
-	newContact.setDarkestSecret(input);
+	while (true) {
+		std::cout << GREEN << "Enter your Darkest Secret: " << DEFAULT;
+		std::getline(std::cin, input);
+		if (input.empty()) {
+			std::cout << RED << "No fields should be left empty. Please try again." DEFAULT << std::endl;
+		} else {
+			newContact.setDarkestSecret(input);
+			break;
+		}
+	}
 }
 
 //Setters
@@ -42,14 +65,8 @@ void	Contact::setNickName(const std::string &nName) {
 void	Contact::setDarkestSecret(const std::string &dSecret) {
 	darkestSecret = dSecret;
 }
-int	Contact::setPhoneNumber(long &pNumber) {
-	if (pNumber > 0) {
-		phoneNumber = pNumber;
-		return 0;
-	} else {
-		std::cerr << RED <<"Invalid phone number format. Please try again." << DEFAULT << std::endl;
-		return 1;
-	}
+void	Contact::setPhoneNumber(long &pNumber) {
+	phoneNumber = pNumber;
 }
 
 //Getters
@@ -67,4 +84,57 @@ std::string Contact::getDarkestName() const {
 }
 long	Contact::getPhoneNumber() const {
 	return phoneNumber;
+}
+
+
+bool	Contact::phoneNumberValidation(std::string &phoneNumber) {
+	if (phoneNumber.length() == 0) {
+		std::cout << RED << "No fields should be left empty. Please try again." DEFAULT << std::endl;
+		return false;
+	}
+	for (size_t i = 0; i < phoneNumber.length(); i++) {
+		if (!std::isdigit(phoneNumber[i]) || phoneNumber[i] == '\0') {
+			std::cerr << RED << "Enter a valid number (No signs, no spaces. Just numbers). Try again." << DEFAULT << std::endl;
+			return false;
+		}
+	}
+	return true;
+}
+
+long	Contact::stringToLong(const std::string &str) {
+	std::stringstream	ss(str);
+	long				result;
+
+	ss >> result;
+	return result;
+}
+
+long	Contact::getValidPhoneNumber(Contact &newContact) {
+	std::string	input;
+	bool isValid = false;
+	long	number;
+
+	while (!isValid) {
+		std::cout << GREEN << "Enter your phone number: " << DEFAULT;
+		std::getline(std::cin, input);
+
+		isValid = true;
+		if (!newContact.phoneNumberValidation(input)) {
+			isValid = false;
+			continue ;
+		}
+	}
+	if (isValid) {
+		number = stringToLong(input);
+	}
+	return number;
+}
+
+bool	Contact::checkEmptyInput() {
+	std::string input;
+	
+	if (!getFirstName().empty())
+		return true;
+	else
+		return false;
 }
