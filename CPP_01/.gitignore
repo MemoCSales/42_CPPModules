@@ -1,0 +1,12 @@
+# other files
+./ex00/*.o
+./ex01/*.o
+
+# sobfolders
+./ex00/obj/
+./ex01/obj/
+.vscode/
+
+# binary
+./ex00/brains
+./ex01/brains
