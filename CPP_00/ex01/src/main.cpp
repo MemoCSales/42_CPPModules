@@ -9,8 +9,7 @@ int main() {
 		std::cout << YELLOW << "Choose an option (ADD, SEARCH or EXIT):" << DEFAULT << std::endl;
 		std::cin >> option;
 		std::cin.ignore();
-		if (option == "ADD")
-		{
+		if (option == "ADD") {
 			Contact 	newContact;
 			
 			newContact.setContactInformation(newContact);
@@ -20,21 +19,20 @@ int main() {
 			if (DEBUG)
 				std::cout << "Contact added: " << newContact.getFirstName() << " " << newContact.getLastName() << std::endl;
 		}
-		else if (option == "SEARCH")
-		{
+		else if (option == "SEARCH") {
 			myPhoneBook.displayContacts();
 		}
 		else if (option == "EXIT") {
-			std::cout << RED << "Are you sure you want to exit? Your contacts will be erased forever...☠️" << DEFAULT << std::endl;
-			char	flag;
-			std::cout << YELLOW << "Press (Y) / Yes or (N) / No: " << DEFAULT;
-			std::cin >> flag;
-			if (flag == 'Y') {
+			// std::cout << RED << "Are you sure you want to exit? Your contacts will be erased forever...☠️" << DEFAULT << std::endl;
+			// char	flag;
+			// std::cout << YELLOW << "Press (Y)/Yes or (N)/No: " << DEFAULT;
+			// std::cin >> flag;
+			// if (flag == 'Y' || flag == 'y') {
 				std::cout << WHITE << "Bye bye *Hangs Up*" << DEFAULT << std::endl;
 				break;
-			}
-			else
-				continue;
+			// }
+			// else
+			// 	continue;
 		}
 		else
 			std::cout << RED << "Error: Not the right option. Try again." << DEFAULT << std::endl;

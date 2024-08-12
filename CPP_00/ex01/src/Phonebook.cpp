@@ -62,6 +62,6 @@ void	Phonebook::displayContactInfo(int &contactIndex) const {
 		std::cout << "◽️ Darkest Secret: "<< contacts[contactIndex].getDarkestName() << std::endl;
 	}
 	else {
-		std::cout << "Invalid Index" << std::endl;
+		std::cout << RED << "Invalid Index" << DEFAULT << std::endl;
 	}
 }
