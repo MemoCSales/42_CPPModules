@@ -4,7 +4,7 @@
 # include <iostream>
 # include <string>
 
-# define DEBUG	1
+# define DEBUG	0
 
 # define RED		"\033[1;31m"
 # define GREEN		"\033[1;32m"
