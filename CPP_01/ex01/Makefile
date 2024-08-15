@@ -15,8 +15,12 @@ all: $(NAME)
 run: $(NAME)
 	@./$(NAME)
 
-# test: $(NAME)
-
+test: $(NAME)
+	@echo "$(YELLOW) ||------------------------------------------------------------------------------||$(DEFAULT)"
+	@echo "$(YELLOW) ||                                    TESTING                                   ||$(DEFAULT)"
+	@echo "$(YELLOW) ||------------------------------------------------------------------------------||$(DEFAULT)"
+	@echo "$(GREEN) ||--------------------TIME TO A HORDE OF ZOMBIES--------------------------------||$(DEFAULT)"
+	@./$(NAME)
 
 $(NAME): $(OBJ)
 	$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)
