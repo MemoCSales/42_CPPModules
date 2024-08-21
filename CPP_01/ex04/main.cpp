@@ -22,7 +22,9 @@ It will open the file <filename> and copies its content into a new file <filenam
 */
 int main(int argc, char **argv) {
 	
-	std::string	filename, s1, s2;
+	std::string	filename, outFileName, s1, s2;
+	std::string fileExtension = ".replace";
+	std::string lineFile;
 
 	if (argc != 4)
 		std::cerr << RED << "\tError: " << DEFAULT << WHITE << " ./program_name filename string1 string2" << DEFAULT << std::endl;
@@ -31,18 +33,34 @@ int main(int argc, char **argv) {
 	s1 = argv[3];
 	s2 = argv[2];
 
-	std::cout << "Filename: " <<  filename << std::endl;
-	std::cout << "String1: " <<  s1 << std::endl;
-	std::cout << "String2: " <<  s2 << std::endl;
+	//Remove the extension from the file
+	size_t	lastDot = filename.rfind('.');
+	if (lastDot != std::string::npos) {
+		filename = filename.substr(0, lastDot);
+	}
+
+	// std::cout << "Filename: " <<  filename << std::endl;
+	// std::cout << "String1: " <<  s1 << std::endl;
+	// std::cout << "String2: " <<  s2 << std::endl;
 	
-	std::ifstream ifs;
-	ifs.open(argv[1], std::ifstream::in);
-	if (ifs.is_open())
-		std::cout << "File: " << filename << " opened successfully." << std::endl;
+	std::ifstream inFile(argv[1], std::ifstream::in);
+
+	if (inFile.is_open()) {
+		// std::cout << "File: " << filename << " opened successfully." << std::endl;
+		std::getline(inFile, lineFile);
+		// std::cout << lineFile << std::endl;
+		inFile.close();
+	}
 	else
 		std::cerr << "Error opening file." << std::endl;
 
-	ifs.close();
+	filename.append(fileExtension);
+	std::ofstream outFile(filename.c_str(), std::ofstream::out | std::ofstream::app);
+
+	if (outFile.is_open()) {
+		outFile << lineFile << std::endl;
+		outFile.close();
+	}
 
 	return 0;
 }
