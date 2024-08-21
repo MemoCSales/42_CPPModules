@@ -1,7 +1,7 @@
 #include "Weapon.hpp"
 
 //Setters
-void    Weapon::setType(const std::string &_type) {
+void    Weapon::setType(const std::string& _type) {
 	type = _type;
 }
 
