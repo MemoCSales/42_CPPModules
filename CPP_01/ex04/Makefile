@@ -32,10 +32,22 @@ fclean: clean
 re: fclean
 	$(MAKE) $(NAME)
 
-val: 
-	valgrind --leak-check=full ./$(NAME)
+val:
+	@if [ -z "$(FILE)" ]; then \
+		echo "Error: Please specify a file using 'make val FILE=<filename>'"; \
+		exit 1; \
+	fi
+	valgrind --leak-check=full ./$(NAME) $(FILE)
 
-.PHONY: all clean fclean re
+replace:
+	@echo "$(YELLOW) ---Deleting files with .replace extension ---$(DEFAULT)"
+	@files=$$(find . -name "*.replace" -type f); \
+	for file in $$files; do \
+		echo "Deleting $$file"; \
+		rm -r "$$file"; \
+	done
+
+.PHONY: all clean fclean re replace
 
 # Colors
 RED			= \033[1;31m

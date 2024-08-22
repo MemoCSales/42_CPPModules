@@ -1,12 +1,21 @@
 # other files
 ./ex00/*.o
 ./ex01/*.o
+./ex04/*.o
+./ex04/*.replace
 
 # sobfolders
 ./ex00/obj/
 ./ex01/obj/
+./ex02/obj/
+./ex03/obj/
+./ex04/obj/
 .vscode/
 
 # binary
 ./ex00/brains
 ./ex01/brains
+./ex02/brains
+./ex03/uviolence
+./ex03/uviolence
+./ex03/sed
