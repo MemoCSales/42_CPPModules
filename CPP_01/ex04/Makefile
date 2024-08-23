@@ -30,30 +30,43 @@ test: $(NAME)
 	./$(NAME) empty.txt 1 2
 	@echo "$(GREEN) ||-------------------------------TEST 2: JUST NEW LINE----------------------------||$(DEFAULT)"
 	./$(NAME) newline.txt 1 2
+	@cat newline.replace
 	@echo "$(GREEN) ||--------------------------------TEST 3: NO MATCH: s1----------------------------||$(DEFAULT)"
 	./$(NAME) nomatch.txt 42 dog
+	@cat nomatch.replace
 	@echo "$(GREEN) ||---------------------------------TEST 4: MULTIPLE-------------------------------||$(DEFAULT)"
 	./$(NAME) multiple.test ab cd
+	@cat multiple.replace
 	@echo "$(GREEN) ||---------------------------------TEST 5: MULTIPLE_2-----------------------------||$(DEFAULT)"
 	./$(NAME) multiple.test aaaaa b
+	@cat multiple.replace
 	@echo "$(GREEN) ||---------------------------------TEST 6: BEGGINNING-----------------------------||$(DEFAULT)"
 	./$(NAME) hello.txt hello Adios
+	@cat hello.replace
 	@echo "$(GREEN) ||---------------------------------TEST 7: END------------------------------------||$(DEFAULT)"
 	./$(NAME) hello.txt bye hola
+	@cat hello.replace
 	@echo "$(GREEN) ||---------------------------------TEST 8: LOOONG---------------------------------||$(DEFAULT)"
 	./$(NAME) long.txt Lorem 42
 	@echo "$(GREEN) ||---------------------------------TEST 9: SPECIAL CHARS--------------------------||$(DEFAULT)"
 	./$(NAME) multiple.test '%' '&'
+	@cat multiple.replace
 	@echo "$(GREEN) ||---------------------------------TEST 10: CASE SENSITIV-------------------------||$(DEFAULT)"
 	./$(NAME) multiple.test Hi hola
+	@cat multiple.replace
 	@echo "$(GREEN) ||---------------------------------TEST 11: ONE CHAR s1---------------------------||$(DEFAULT)"
 	./$(NAME) multiple.test a x
+	@cat multiple.replace
 	@echo "$(GREEN) ||---------------------------------TEST 12: ONE CHAR s2---------------------------||$(DEFAULT)"
 	./$(NAME) multiple.test bb y
+	@cat multiple.replace
 	@echo "$(GREEN) ||---------------------------------TEST 13: WHITE SPACE---------------------------||$(DEFAULT)"
 	./$(NAME) multiple.test " " "_"
+	@cat multiple.replace
 	@echo "$(GREEN) ||---------------------------------TEST 14: MULTIPLE------------------------------||$(DEFAULT)"
 	./$(NAME) hello.txt hello goodbye
+	@cat hello.replace
+
 	@echo "$(GREEN) ||---------------------------------TEST 15: EMPTY STRINGS-------------------------||$(DEFAULT)"
 	@echo "$(WHITE) Test manually $(DEFAULT)" 
 
