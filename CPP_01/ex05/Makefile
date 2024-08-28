@@ -13,7 +13,6 @@ OBJ			= $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRC))
 all: $(NAME)
 
 run: $(NAME)
-	@./$(NAME) test.txt hola adios
 
 $(NAME): $(OBJ)
 	$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)
