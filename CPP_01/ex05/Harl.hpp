@@ -15,16 +15,6 @@
 # define WHITE	 	"\033[1;37m"
 # define DEFAULT	"\033[0m"
 
-// typedef void(Harl::*myPointerToMethod) (std::string);
-
-enum Level {
-    DEBUG1,
-    INFO,
-    WARNING,
-    ERROR,
-    INVALID
-};
-
 class Harl
 {
 private:
@@ -32,7 +22,6 @@ private:
     void    info(void);
     void    warning(void);
     void    error(void);
-    Level   resolveLevel(const std::string& level);
 public:
     Harl();
     ~Harl();
