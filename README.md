@@ -4,8 +4,8 @@
 
 ### Table of contents
 <p align="center">
-<a href="#The Challenge">The Challenge</a> &#xa0; | &#xa0;
-<a href="#The Modules">The Modules</a> &#xa0; | &#xa0;
+<a href="#The-Challenge">The Challenge</a> &#xa0; | &#xa0;
+<a href="#The-Modules">The Modules</a> &#xa0; | &#xa0;
 <a href="#CPP_00">CPP_00</a> &#xa0; | &#xa0;
 <a href="#CPP_01">CPP_01</a> &#xa0; | &#xa0;
 </p>
