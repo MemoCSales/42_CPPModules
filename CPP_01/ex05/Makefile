@@ -12,7 +12,8 @@ OBJ			= $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRC))
 
 all: $(NAME)
 
-run: $(NAME)
+run:
+	@./$(NAME)
 
 $(NAME): $(OBJ)
 	$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)

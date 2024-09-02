@@ -1,5 +1,6 @@
 #include "Harl.hpp"
 
+// ReturnType (ClassName::*PointerName)(ParameterTypes)
 typedef void(Harl::*myPointerToFunction) (void);
 
 Harl::Harl()

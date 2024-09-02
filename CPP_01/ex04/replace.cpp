@@ -1,14 +1,14 @@
 #include "Sed.hpp"
 
 void	validateArgs(int argc, char **argv) {
-	std::string s1 = argv[2];
-	std::string s2 = argv[3];
 
 	if (argc != 4) {
 		std::cerr << RED << "\tError: " << DEFAULT << WHITE << " ./program_name filename string1 string2" << DEFAULT << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
+	std::string s1 = argv[2];
+	std::string s2 = argv[3];
 	if (s1.empty() || s2.empty()) {
 		std::cout << "Error: Empty string found. Please try again with valid string input." << std::endl;
 		exit(EXIT_FAILURE);

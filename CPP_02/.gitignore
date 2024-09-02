@@ -2,7 +2,6 @@
 ./ex00/*.o
 ./ex01/*.o
 ./ex04/*.o
-./ex04/*.replace
 
 # sobfolders
 ./ex00/obj/
@@ -13,9 +12,4 @@
 .vscode/
 
 # binary
-./ex00/brains
-./ex01/brains
-./ex02/brains
-./ex03/uviolence
-./ex04/uviolence
-./ex03/sed
+./ex00/fixed
