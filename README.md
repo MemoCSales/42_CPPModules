@@ -27,3 +27,5 @@ Let's go!
 - ex03: It's about the use of references, pointers and class relationships and in which scenarios use each one.
 - ex04: It's about reproducing the behavior of the replace function of the string library and handling all the edge cases.
 - ex05: Here I am learning about the use of pointers to member functions and an understanding of managing different levels of verbosity or logging.
+
+### CPP_02
