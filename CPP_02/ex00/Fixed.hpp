@@ -16,11 +16,12 @@ class Fixed
 {
 	private:
 		int                 raw;
-		static const int    number;
+		static const int    number = 8;
 	public:
 		Fixed();
 		Fixed(const Fixed& b);	//Copy constructor
 		~Fixed();
+		Fixed &operator=(const Fixed& F);
 		//Setters
 		void    setRawBits(int const _raw);
 		//Getters
