@@ -8,6 +8,7 @@
 <a href="#The-Modules">The Modules</a> &#xa0; | &#xa0;
 <a href="#CPP_00">CPP_00</a> &#xa0; | &#xa0;
 <a href="#CPP_01">CPP_01</a> &#xa0; | &#xa0;
+<a href="#CPP_02">CPP_02</a> &#xa0; | &#xa0;
 </p>
 
 ##  The Challenge
@@ -29,3 +30,10 @@ Let's go!
 - ex05: Here I am learning about the use of pointers to member functions and an understanding of managing different levels of verbosity or logging.
 
 ### CPP_02
+ This module is about learning the Orthodox Canonical Form by applyinh a fixed-point number.
+ 
+ By giving some main function examples and certain instruction on each exercise you need you create you own Orthodox Canonical Form class named Fixed and make you program work to get the expected output.
+
+ Sound fun, right?
+
+ Take a look if you're interested in learning about this.
