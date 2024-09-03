@@ -2,6 +2,7 @@
 # define FIXED_HPP
 
 # include <iostream>
+# include <cmath>
 
 # define RED		"\033[1;31m"
 # define GREEN		"\033[1;32m"
@@ -15,21 +16,21 @@
 class Fixed
 {
 	private:
-		int                 raw;
 		int					fixPoint;
-		static const int    number = 8;
 	public:
 		Fixed();
-		Fixed(const int value);	//Integer constructor
-		Fixed(const float value);
+		Fixed(const int value);		//Integer constructor
+		Fixed(const float value);	//Float constructor
 		Fixed(const Fixed& b);	//Copy constructor
 		~Fixed();
 		Fixed &operator=(const Fixed& F);
-		//Setters
-		void    setRawBits(int const _raw);
 		//Getters
-		int     getRawBits(void) const;
-
+		int     getFixPoint(void) const;
+		//Member functions
+		float	toFloat(void) const;
+		int		toInt(void)const;
 };
+
+std::ostream &operator<<(std::ostream &o, const Fixed &value);
 
 #endif

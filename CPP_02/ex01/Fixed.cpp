@@ -1,48 +1,66 @@
 #include "Fixed.hpp"
 
-// Setter
-void    Fixed::setRawBits(int const _raw) {
-    //Something about fixed-point numbers goes here
-	raw = _raw;
-	std::cout << "setRawBits member function called" << std::endl;
-}
-
-//Getters
-int     Fixed::getRawBits(void) const {
-	std::cout << "getRawBits member function called" << std::endl;
-	return raw;
-}
-
 //Constructor
 Fixed::Fixed () {
-	std::cout << "Default constructor called" << std::endl;
-	// raw = 0;
+	std::cout << GREEN << "Default constructor called" << DEFAULT << std::endl;
 }
 
 //Int constructor
 Fixed::Fixed(const int value) {
-	fixPoint = value * 256;
-	//put the message
+	std::cout << GREEN << "Int constructor called" << DEFAULT << std::endl;
+	fixPoint = value * 256;		//256 = 2^8
+}
+
+//Float constructor
+Fixed::Fixed(const float value) {
+	std::cout << GREEN << "Float constructor called" << DEFAULT << std::endl;
+	fixPoint = roundf(value * 256);
 }
 
 //Copy constructor
 /* A constructor which creates and object by initializing it with an object of the same
 class, which has been created previously. */
 Fixed::Fixed(const Fixed& b) {
-	std::cout << "Copy Constructor called" << std::endl;
+	std::cout << YELLOW << "Copy constructor called" << DEFAULT << std::endl;
 	*this = b;
 }
 
 //Destructor
 Fixed::~Fixed() {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << RED << "Destructor called" << DEFAULT << std::endl;
 }
+
+//---------------------------------------------------------------------
+
+//Getters
+int     Fixed::getFixPoint(void) const {
+	// std::cout << "getRawBits member function called" << std::endl;
+	return fixPoint;
+}
+
+//-----------------------------------------------------------------------
 
 //Move Assignment Operator Overload
 Fixed &Fixed::operator=(const Fixed& F) {
-	std::cout << "Copy assignment operator called" << std::endl;
-	if (this != &F) {
-		raw = F.getRawBits();
-	}
+	std::cout << WHITE << "Copy assignment operator called" << DEFAULT << std::endl;
+	if (this != &F)
+		this->fixPoint = F.fixPoint;
 	return *this;
+}
+
+//Output stream operator
+std::ostream &operator<<(std::ostream &o, const Fixed &value) {
+	o << value.toFloat();
+	return (o);
+}
+
+//----------------------------------------------------------------------
+
+//Member functions
+float	Fixed::toFloat(void) const {
+	return (fixPoint / 256.0);
+}
+
+int	Fixed::toInt(void) const {
+	return (fixPoint / 256);
 }
