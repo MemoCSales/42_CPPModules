@@ -16,9 +16,12 @@ class Fixed
 {
 	private:
 		int                 raw;
+		int					fixPoint;
 		static const int    number = 8;
 	public:
 		Fixed();
+		Fixed(const int value);	//Integer constructor
+		Fixed(const float value);
 		Fixed(const Fixed& b);	//Copy constructor
 		~Fixed();
 		Fixed &operator=(const Fixed& F);

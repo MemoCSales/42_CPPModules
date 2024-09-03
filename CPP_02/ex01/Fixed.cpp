@@ -16,7 +16,13 @@ int     Fixed::getRawBits(void) const {
 //Constructor
 Fixed::Fixed () {
 	std::cout << "Default constructor called" << std::endl;
-	raw = 0;
+	// raw = 0;
+}
+
+//Int constructor
+Fixed::Fixed(const int value) {
+	fixPoint = value * 256;
+	//put the message
 }
 
 //Copy constructor
