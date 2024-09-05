@@ -2,10 +2,8 @@
 **/*.o
 
 # Ignore specific directories
-.vscode/
 .obj/
+.vscode/
 
-# Ignore binary files
-./ex00/fixed
-./ex01/fixed
-./ex02/fixed
+# binary
+./ex00/claptrap
