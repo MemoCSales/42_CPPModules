@@ -18,10 +18,10 @@ class Fixed
 		int                 raw;
 		static const int    number = 8;
 	public:
-		Fixed();
-		Fixed(const Fixed& b);	//Copy constructor
-		~Fixed();
-		Fixed &operator=(const Fixed& F);
+		Fixed();								//Default constructor
+		Fixed(const Fixed& b);					//Copy constructor
+		~Fixed();								//Destructor
+		Fixed &operator=(const Fixed& F);		//Copy assignment operator
 		//Setters
 		void    setRawBits(int const _raw);
 		//Getters

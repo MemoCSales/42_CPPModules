@@ -18,12 +18,12 @@ class Fixed
 	private:
 		int					fixPoint;
 	public:
-		Fixed();
-		Fixed(const int value);		//Integer constructor
-		Fixed(const float value);	//Float constructor
-		Fixed(const Fixed& b);	//Copy constructor
-		~Fixed();
-		Fixed &operator=(const Fixed& F);
+		Fixed();							//Default constructor
+		Fixed(const int value);				//Integer constructor
+		Fixed(const float value);			//Float constructor
+		Fixed(const Fixed& b);				//Copy constructor
+		~Fixed();							//Destructor
+		Fixed &operator=(const Fixed& F);	//Assignment operator overload
 		//Getters
 		int     getFixPoint(void) const;
 		//Member functions

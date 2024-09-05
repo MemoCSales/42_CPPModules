@@ -34,7 +34,6 @@ Fixed::~Fixed() {
 
 //Getters
 int     Fixed::getFixPoint(void) const {
-	// std::cout << "getRawBits member function called" << std::endl;
 	return fixPoint;
 }
 

@@ -1,7 +1,7 @@
 NAME = fixed
 
 CPP			 = c++
-CPPFLAGS	 = -std=c++98
+CPPFLAGS	+= -std=c++98
 CPPFLAGS	+= -Wall -Wextra -Werror
 CPPFLAGS	+= -g
 

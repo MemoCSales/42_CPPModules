@@ -19,18 +19,27 @@ int main(void) {
 	// {
 	// 	Fixed	a;
 	// 	Fixed	const b(Fixed(5.05f) * Fixed(2));
+	// 	Fixed	z(1);
 	// 	std::cout << BLUE << "MY TESTS: " << DEFAULT << std::endl;
 	// 	// Basic tests
 	// 	std::cout << "Initial value of a: " << a << std::endl;
 	// 	std::cout << "Value of b: " << b << std::endl;
+	// 	std::cout << "Value of c: " << z << std::endl;
 
 	// 	// Increment and Decrement tests
+	// 	std::cout << GREEN << "Increment and Decrement Tests: " << DEFAULT << std::endl;
 	// 	std::cout << "Prefix increment of a: " << ++a << std::endl;
 	// 	std::cout << "Postfix increment of a: " << a++ << std::endl;
 	// 	std::cout << "Value of a after postfix increment: " << a << std::endl;
 	// 	std::cout << "Prefix decrement of a: " << --a << std::endl;
 	// 	std::cout << "Postfix decrement of a: " << a-- << std::endl;
 	// 	std::cout << "Value of a after postfix decrement: " << a << std::endl;
+	// 	std::cout << "Prefix increment of z: " << ++z << std::endl;
+	// 	std::cout << "Postfix increment of z: " << z++ << std::endl;
+	// 	std::cout << "Value of z after postfix increment: " << z << std::endl;
+	// 	std::cout << "Prefix decrement of z: " << --z << std::endl;
+	// 	std::cout << "Postfix decrement of z: " << z-- << std::endl;
+	// 	std::cout << "Value of z after postfix decrement: " << z << std::endl;
 
 	// 	// Arithmetic operations
 	// 	Fixed c = Fixed(10);
