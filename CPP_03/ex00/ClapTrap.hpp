@@ -2,6 +2,8 @@
 # define CLAPTRAP_HPP
 # include <iostream>
 
+# define DEBUG 0
+
 class ClapTrap
 {
 	private:
@@ -19,6 +21,10 @@ class ClapTrap
 		void	attack(const std::string& target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
+		//Setter
+		void setName(std::string& name);
+		//Getters
+		std::string getName(void) const;
 };
 
 #endif
