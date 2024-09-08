@@ -22,6 +22,7 @@ class Fixed
 		Fixed(const int value);		//Integer constructor
 		Fixed(const float value);	//Float constructor
 		Fixed(const Fixed& other);
+		~Fixed();
 		Fixed &operator=(const Fixed &other);
 		//Comparison operators
 		bool operator>(const Fixed&other) const;
@@ -39,7 +40,6 @@ class Fixed
 		Fixed &operator--();
 		Fixed operator--(int);
 		Fixed operator-(const Fixed &other) const;
-		~Fixed();
 		//Member functions
 		float	toFloat(void) const;
 		int		toInt(void)const;
