@@ -2,15 +2,15 @@
 # define CLAPTRAP_HPP
 # include <iostream>
 
-# define DEBUG 0
+# define DEBUG 1
 
 class ClapTrap
 {
 	private:
-		std::string	name;
-		int	hitPoints = 10;
-		int	enPoints = 10;
-		int	attPoints = 10;
+		std::string		name;
+		unsigned int	hitPoints;
+		int				energyPoints;
+		int				attackDamage;
 	public:
 		ClapTrap(void);
 		ClapTrap(std::string name);

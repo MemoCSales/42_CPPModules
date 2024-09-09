@@ -2,7 +2,7 @@ NAME = claptrap
 
 CPP			 = c++
 CPPFLAGS	 = -std=c++98
-CPPFLAGS	+= -Wall -Wextra -Werror
+CPPFLAGS	+= -Wall -Wextra -Werror -pedantic
 CPPFLAGS	+= -g
 
 SRC			= $(wildcard *.cpp)
