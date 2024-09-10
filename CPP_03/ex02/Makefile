@@ -1,4 +1,4 @@
-NAME = scavtrap
+NAME = fragtrap
 
 SRC			= $(wildcard *.cpp) \
 				../ex00/ClapTrap.cpp

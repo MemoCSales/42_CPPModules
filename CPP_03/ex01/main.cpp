@@ -4,7 +4,7 @@
 int main() {
 	{
 		std::cout << GREEN << "\n--- TEST 1: Initial Test ---" << DEFAULT << std::endl;
-		ScavTrap bot("ClapTrap_2025");
+		ScavTrap bot("ScavTrap_2025");
 		std::cout << WHITE << "ScavTrap attributes: " << bot.getName() << DEFAULT << std::endl;
 		std::cout << "Energy Points for ScavTrap: " << GREEN << bot.getEnergyPoints() << DEFAULT << std::endl;
 		std::cout << "Hit Points for ScavTrap: " << BLUE << bot.getHitPoints() << DEFAULT << std::endl;
