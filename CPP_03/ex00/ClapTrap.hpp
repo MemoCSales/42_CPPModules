@@ -2,7 +2,7 @@
 # define CLAPTRAP_HPP
 # include <iostream>
 
-# define DEBUG 0
+# define DEBUG 1
 # define MAX_HIT_POINTS 10
 
 # define RED		"\033[1;31m"
@@ -27,10 +27,19 @@ class ClapTrap
 		ClapTrap(const ClapTrap& other);
 		ClapTrap &operator=(const ClapTrap &other);
 		~ClapTrap();
+		//Setters
+		void			setHitPoints(unsigned int hp);
+		void			setEnergyPoints(int energy);
+		void			setAttackDamage(int damage);
+		//Getters
+		std::string		getName() const;
+		unsigned int	getHitPoints() const;
+		int				getEnergyPoints() const;
+		int				getAttackDamage() const;
 		//Member function
-		void	attack(const std::string& target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
+		void			attack(const std::string& target);
+		void			takeDamage(unsigned int amount);
+		void			beRepaired(unsigned int amount);
 };
 
 #endif

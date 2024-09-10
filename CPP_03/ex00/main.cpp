@@ -20,10 +20,10 @@ int main() {
 	}
 	{
 		std::cout << GREEN << "Test 3: Zero Energy or Zero Hit Points" << DEFAULT << std::endl;
-		ClapTrap bot("Clapbotbot");
+		ClapTrap clapbotbot("Clapbotbot");
 
-		bot.takeDamage(10);
-		bot.attack("Clapzilla");
+		clapbotbot.takeDamage(10);
+		clapbotbot.attack("Clapzilla");
 		std::cout << std::endl;
 	}
 	{
