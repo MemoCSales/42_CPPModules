@@ -2,7 +2,7 @@
 
 int main() {
 	{
-		std::cout << GREEN << "Test 1" << DEFAULT << std::endl;
+		std::cout << GREEN << "Test 1: Attack and take Damage" << DEFAULT << std::endl;
 		ClapTrap bot("Clapbot 3000");
 		ClapTrap bot2("Clapzilla");
 
@@ -11,7 +11,7 @@ int main() {
 		std::cout << std::endl;
 	}
 	{
-		std::cout << GREEN << "Test 2" << DEFAULT << std::endl;
+		std::cout << GREEN << "Test 2: Take Damage and repair yourself" << DEFAULT << std::endl;
 		ClapTrap bot("Clapbot 3000");
 
 		bot.takeDamage(5);

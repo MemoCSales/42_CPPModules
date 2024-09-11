@@ -48,7 +48,7 @@ int main() {
 
 		bot.attack("Target");
 		bot.highFivesGuy();
-		std::cout << "Energy Points after attack: " << GREEN << bot.getEnergyPoints() << DEFAULT << std::endl;
+		std::cout << "Energy Points of " << bot.getName() << " after attack: " << GREEN << bot.getEnergyPoints() << DEFAULT << std::endl;
 
 		bot.highFivesGuy();
 		bot.highFivesGuy();

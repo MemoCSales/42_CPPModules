@@ -43,7 +43,7 @@ ClapTrap::~ClapTrap(void)
 
 // Attack public member function
 void ClapTrap::attack(const std::string& target) {
-	std::cout << "👊 ClapTrap " << name << " (with " << energyPoints << " Energy Points) -> ";
+	std::cout << "👊 ClapTrap " << name << " (with " << energyPoints << " Energy Points - " << hitPoints << " Hit Points) -> ";
 	if (energyPoints > 0 && hitPoints > 0) {
 		energyPoints--;
 		std::cout << " attacks " << target << " || " << name << " now has: " << energyPoints << " energy points left!" << std::endl;
