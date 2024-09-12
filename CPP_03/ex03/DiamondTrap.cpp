@@ -14,7 +14,7 @@ DiamondTrap::DiamondTrap(std::string _name)
 	this->setHitPoints(FragTrap::getHitPoints());			// DiamondTrap will inherit hitPoints from FragTrap
 	this->setEnergyPoints(ScavTrap::getEnergyPoints());		// DiamondTrap will inherit energyPoints from ScavTrap
 	this->setAttackDamage(FragTrap::getAttackDamage());		// DiamondTrap will inherit attackDamage from FragTrap
-	// ScavTrap::attack();
+	ScavTrap::attack("Target");
 }
 
 
