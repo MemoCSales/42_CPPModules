@@ -8,6 +8,8 @@ CPPFLAGS	+= -g
 # Directories
 OBJDIR		= .obj
 EX00DIR		= ex00
+EX01DIR		= ex01
+EX02DIR		= ex02
 
 # Common rules
 $(OBJDIR)/%.o: %.cpp
@@ -16,7 +18,7 @@ $(OBJDIR)/%.o: %.cpp
 
 clean:
 	$(RM) $(OBJ)
-	-@rmdir $(OBJDIR) $(EX00DIR) 2>/dev/null
+	-@rmdir $(OBJDIR) $(EX00DIR) $(EX01DIR) $(EX02DIR) 2>/dev/null
 
 fclean: clean
 	$(RM) $(NAME)

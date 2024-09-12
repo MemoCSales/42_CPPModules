@@ -2,6 +2,7 @@
 #include "FragTrap.hpp"
 
 int main() {
+	std::cout << GREEN << "\n--- TESTS FRAGTRAP ---" << DEFAULT << std::endl;
 	{
 		std::cout << GREEN << "\n--- TEST 1: Initial Test ---" << DEFAULT << std::endl;
 		FragTrap bot("FragTrap_2025");

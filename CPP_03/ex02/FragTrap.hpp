@@ -3,10 +3,13 @@
 # include <iostream>
 # include "../ex00/ClapTrap.hpp"
 
-class FragTrap : public ClapTrap
+class FragTrap : virtual public ClapTrap
 {
 	public:
+		FragTrap(void);
 		FragTrap(std::string name);
+		FragTrap(const FragTrap& other);
+		FragTrap &operator=(const FragTrap &other);
 		~FragTrap();
 		void	highFivesGuy(void);
 };

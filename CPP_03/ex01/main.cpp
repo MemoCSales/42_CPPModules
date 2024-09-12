@@ -2,6 +2,7 @@
 #include "ScavTrap.hpp"
 
 int main() {
+		std::cout << GREEN << "\n--- TESTS SCAVTRAP ---" << DEFAULT << std::endl;
 	{
 		std::cout << GREEN << "\n--- TEST 1: Initial Test ---" << DEFAULT << std::endl;
 		ScavTrap bot("ScavTrap_2025");

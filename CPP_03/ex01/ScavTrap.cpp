@@ -1,6 +1,12 @@
 #include "../ex00/ClapTrap.hpp"
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap(void)
+{
+	if (DEBUG)
+		std::cout << "Default constructor called" << std::endl;
+	return ;
+}
 
 ScavTrap::ScavTrap(std::string _name) : ClapTrap(_name) {
 	if (DEBUG)
@@ -9,6 +15,27 @@ ScavTrap::ScavTrap(std::string _name) : ClapTrap(_name) {
 	setEnergyPoints(50);
 	setAttackDamage(20);
 }
+
+// Copy constructor
+ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
+{
+	if (DEBUG)
+		std::cout << "Copy constructor called" << std::endl;
+	(void) other;
+	return ;
+}
+
+// Assignment operator overload
+ScavTrap &ScavTrap::operator=(const ScavTrap &other)
+{
+	if (DEBUG)
+		std::cout << "Assignment operator called" << std::endl;
+	if (this != &other) {
+		ClapTrap::operator=(other);
+	}
+	return (*this);
+}
+
 
 ScavTrap::~ScavTrap() {
     if (DEBUG)
