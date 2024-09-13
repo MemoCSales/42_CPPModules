@@ -6,7 +6,7 @@
 # include "../ex01/ScavTrap.hpp"
 # include "../ex02/FragTrap.hpp"
 
-class DiamondTrap : public FragTrap , public ScavTrap
+class DiamondTrap : public FragTrap, public ScavTrap
 {
 private:
 	std::string name;

@@ -7,26 +7,26 @@ DiamondTrap::DiamondTrap(void) {
 
 
 DiamondTrap::DiamondTrap(std::string _name)
-	: ClapTrap(_name + "_clap_name"), FragTrap(_name), ScavTrap(_name), name(_name) {
+	: ClapTrap(_name + "_clap_name"), FragTrap(_name), ScavTrap(_name),  name(_name) {
 	if (DEBUG)
 		std::cout << "DiamondTrap parameter constructor called" << std::endl;
 
+	this->setAttackDamage(FragTrap::getAttackDamage());		// DiamondTrap will inherit attackDamage from FragTrap
 	this->setHitPoints(FragTrap::getHitPoints());			// DiamondTrap will inherit hitPoints from FragTrap
 	this->setEnergyPoints(ScavTrap::getEnergyPoints());		// DiamondTrap will inherit energyPoints from ScavTrap
-	this->setAttackDamage(FragTrap::getAttackDamage());		// DiamondTrap will inherit attackDamage from FragTrap
 
 	std::cout << "DiamondTrap Attack Damage: " << this->getAttackDamage() << std::endl;
 	std::cout << "FragTrap Attack Damage: " << FragTrap::getAttackDamage() << std::endl;
+	std::cout << "DiamondTrap Energy Points: " << this->getEnergyPoints() << std::endl;
+	std::cout << "ScavTrap Energy Points: " << ScavTrap::getEnergyPoints() << std::endl;
 }
 
 
 // Copy constructor
 DiamondTrap::DiamondTrap(const DiamondTrap &other)
-	: ClapTrap(other), FragTrap(other), ScavTrap(other), name(other.name) {
+	: ClapTrap(other), FragTrap(other), ScavTrap(other),  name(other.name) {
 	if (DEBUG)
 		std::cout << "Diamond copy constructor called" << std::endl;
-	// (void)other;
-	// return ;
 }
 
 
@@ -36,11 +36,10 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other) {
 		std::cout << "DiamondTrap Operator called" << std::endl;
 	if (this != &other) {
 		ClapTrap::operator=(other);
-		FragTrap::operator=(other);
 		ScavTrap::operator=(other);
+		FragTrap::operator=(other);
 		name = other.name;
 	}
-	// (void)other;
 	return (*this);
 }
 
