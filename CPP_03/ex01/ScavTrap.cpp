@@ -4,7 +4,7 @@
 ScavTrap::ScavTrap(void)
 {
 	if (DEBUG)
-		std::cout << "Default constructor called" << std::endl;
+		std::cout << "ScavTrap default constructor called" << std::endl;
 	return ;
 }
 
