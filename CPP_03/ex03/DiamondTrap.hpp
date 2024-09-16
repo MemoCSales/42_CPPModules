@@ -2,15 +2,18 @@
 # define DIAMONDTRAP_HPP
 # include <iostream>
 # include <cassert>
-# include "../ex00/ClapTrap.hpp"
-# include "../ex01/ScavTrap.hpp"
-# include "../ex02/FragTrap.hpp"
+# include "ClapTrap.hpp"
+# include "ScavTrap.hpp"
+# include "FragTrap.hpp"
 
-class DiamondTrap : public FragTrap, public ScavTrap
+class DiamondTrap : public ScavTrap, public FragTrap
 {
 private:
 	std::string name;
 public:
+	// using	FragTrap::hitPoints;
+	// using	FragTrap::attackDamage;
+	// using	ScavTrap::energyPoints;
 	DiamondTrap(void);
 	DiamondTrap(std::string name);
 	DiamondTrap (const DiamondTrap& other);

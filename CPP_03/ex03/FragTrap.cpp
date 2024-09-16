@@ -1,4 +1,3 @@
-#include "../ex00/ClapTrap.hpp"
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap(void) {
@@ -9,9 +8,9 @@ FragTrap::FragTrap(void) {
 FragTrap::FragTrap(std::string _name) : ClapTrap(_name) {
 	if (DEBUG)
 		std::cout << "FragTrap parameter constructor called" << std::endl;
-	setHitPoints(100);
-	setEnergyPoints(100);
-	setAttackDamage(30);
+	this->hitPoints = 100;
+	this->energyPoints = 100;
+	this->attackDamage = 30;
 }
 
 // Copy constructor
