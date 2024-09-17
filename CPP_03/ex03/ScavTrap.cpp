@@ -10,8 +10,9 @@ ScavTrap::ScavTrap(void)
 ScavTrap::ScavTrap(std::string _name) : ClapTrap(_name) {
 	if (DEBUG)
 		std::cout << "ScavTrap parameter constructor called" << std::endl;
+	
+	setEnergyPoints(ScavTrap::_energyPoints = 50);
 	this->hitPoints = 100;
-	this->energyPoints = 50;
 	this->attackDamage = 20;
 }
 

@@ -7,23 +7,12 @@ DiamondTrap::DiamondTrap(void) {
 
 
 DiamondTrap::DiamondTrap(std::string _name)
-	: ClapTrap(_name + "_clap_name"), ScavTrap(_name), FragTrap(_name) {
+	: ClapTrap(_name + "_clap_name"), ScavTrap(_name), FragTrap(_name), name(_name) {
 	if (DEBUG)
 		std::cout << "DiamondTrap parameter constructor called" << std::endl;
-
-	// this->name = _name;
-	// this->hitPoints = FragTrap::hitPoints;
-	// this->energyPoints = ScavTrap::energyPoints;
-	// this->attackDamage = FragTrap::attackDamage;
-	FragTrap::setAttackDamage(30);
-	FragTrap::setHitPoints(100);
-	ScavTrap::setEnergyPoints(50);
-	std::cout << "ScavTrap: " << ScavTrap::energyPoints << std::endl;
-
-	std::cout << "DiamondTrap Attack Damage: " << this->attackDamage << std::endl;
-	std::cout << "FragTrap Attack Damage: " << FragTrap::attackDamage << std::endl;
-	std::cout << "DiamondTrap Energy Points: " << this->energyPoints << std::endl;
-	std::cout << "ScavTrap Energy Points: " << ScavTrap::energyPoints << std::endl;
+	this->hitPoints = FragTrap::_hitPoints;
+	this->energyPoints = ScavTrap::_energyPoints;
+	this->attackDamage = FragTrap::_attackDamage;
 }
 
 
@@ -64,4 +53,9 @@ DiamondTrap::~DiamondTrap() {
 void DiamondTrap::whoAmI() {
 	std::cout << "I am " << GREEN << this->name << DEFAULT \
 	" and my ClapTrap name is " << YELLOW << ClapTrap::getName() << DEFAULT << std::endl;
+}
+
+// Getters
+std::string	DiamondTrap::getName() const {
+	return name;
 }

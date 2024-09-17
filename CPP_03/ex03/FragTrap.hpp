@@ -5,6 +5,9 @@
 
 class FragTrap : virtual public ClapTrap
 {
+	protected:
+		int	_hitPoints;
+		int	_attackDamage;
 	public:
 		FragTrap(void);
 		FragTrap(std::string name);

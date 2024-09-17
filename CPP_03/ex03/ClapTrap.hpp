@@ -2,7 +2,7 @@
 # define CLAPTRAP_HPP
 # include <iostream>
 
-# define DEBUG 1
+# define DEBUG 0
 # define MAX_HIT_POINTS 10
 
 # define RED		"\033[1;31m"
@@ -31,6 +31,7 @@ class ClapTrap
 		void			setHitPoints(unsigned int hp);
 		void			setEnergyPoints(int energy);
 		void			setAttackDamage(int damage);
+		void			setName(std::string _name) ;
 		//Getters
 		std::string		getName() const;
 		unsigned int	getHitPoints() const;

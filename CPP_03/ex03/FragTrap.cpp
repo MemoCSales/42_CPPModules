@@ -8,9 +8,10 @@ FragTrap::FragTrap(void) {
 FragTrap::FragTrap(std::string _name) : ClapTrap(_name) {
 	if (DEBUG)
 		std::cout << "FragTrap parameter constructor called" << std::endl;
-	this->hitPoints = 100;
+
+	setHitPoints(FragTrap::_hitPoints = 100);
+	setAttackDamage(FragTrap::_attackDamage = 30);
 	this->energyPoints = 100;
-	this->attackDamage = 30;
 }
 
 // Copy constructor

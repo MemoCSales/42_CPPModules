@@ -41,10 +41,11 @@ ClapTrap::~ClapTrap(void)
 
 // Attack public member function
 void ClapTrap::attack(const std::string& target) {
-	std::cout << "👊 ClapTrap " << name << " (with " << energyPoints << " Energy Points - " << hitPoints << " Hit Points) -> ";
+	// std::cout << "👊 ClapTrap " << name << " (with " << energyPoints << " Energy Points - " << hitPoints << " Hit Points) -> ";
+	(void) target;
 	if (energyPoints > 0 && hitPoints > 0) {
 		energyPoints--;
-		std::cout << " attacks " << target << " || " << name << " now has: " << energyPoints << " energy points left!" << std::endl;
+		// std::cout << " attacks " << target << " || " << name << " now has: " << energyPoints << " energy points left!" << std::endl;
 	} else {
 		std::cout << "ClapTrap " << name << " has no Energy Points left!" << std::endl;
 	}
@@ -57,22 +58,22 @@ void ClapTrap::takeDamage(unsigned int amount) {
 			hitPoints = 0;
 		else
 			hitPoints -= amount;
-		std::cout << "🤖 ClapTrap " << name << " took " << amount << " points of damage.";
-		std::cout << " ...now it has " << hitPoints << " hitPoints." << std::endl;
+		// std::cout << "🤖 ClapTrap " << name << " took " << amount << " points of damage.";
+		// std::cout << " ...now it has " << hitPoints << " hitPoints." << std::endl;
 	} else
 		std::cout << "😵 ClapTrap " << name << " has " << hitPoints << " and can no longer do anything. " << std::endl;
 }
 
 //Repairing member function
 void ClapTrap::beRepaired(unsigned int amount) {
-	std::cout << "🔋 ClapTrap " << name << " with (" << hitPoints << " Hit Points) -> ";
+	// std::cout << "🔋 ClapTrap " << name << " with (" << hitPoints << " Hit Points) -> ";
 	if (hitPoints > 0 && energyPoints > 0) {
 		energyPoints--;
 		hitPoints += amount;
 		// if (hitPoints > MAX_HIT_POINTS)
 		// 	hitPoints = MAX_HIT_POINTS;
-		 std::cout << " repair itself with " << amount << " points.";
-		std::cout << " ...it has now " << energyPoints << " points of energy." << std::endl;
+		//  std::cout << " repair itself with " << amount << " points.";
+		// std::cout << " ...it has now " << energyPoints << " points of energy." << std::endl;
 	} else {
 		std::cout << "😵 ClapTrap " << name << " has " << energyPoints << " and can no longer do anything. " << std::endl;
 	}
@@ -90,6 +91,10 @@ void	ClapTrap::setEnergyPoints(int _energy) {
 
 void	ClapTrap::setAttackDamage(int _damage) {
 	attackDamage = _damage;
+}
+
+void	ClapTrap::setName(std::string _name) {
+	name = _name;
 }
 
 // Getters
