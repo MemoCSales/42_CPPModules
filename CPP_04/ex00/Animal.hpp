@@ -3,7 +3,7 @@
 # include <iostream>
 # include <string>
 
-# define DEBUG 1
+# define DEBUG 0
 
 # define RED		"\033[1;31m"
 # define GREEN		"\033[1;32m"
@@ -23,47 +23,13 @@ public:
 	Animal(std::string type);
 	Animal(const Animal &other);
 	Animal &operator=(const Animal &other);
-	~Animal();
+	virtual ~Animal();
 	// Methods
-	
+	virtual void	makeSound() const;
+	// Setters
+	void	setType(std::string type);
+	// Getters
+	virtual std::string getType() const;
 };
-
-Animal::Animal(void) {
-	if (DEBUG)
-		std::cout << "Animal default constructor called" << std::endl;
-}
-
-Animal::Animal(std::string _type) : type(_type) 
-{
-	if (DEBUG)
-		std::cout << "Animal parameter constructor called" << std::endl;
-}
-
-Animal::Animal(const Animal &other) : type(other.type)
-{
-	if (DEBUG)
-		std::cout << "Animal copy constructor called" << std::endl;
-	if (this != &other) {
-		this->type = other.type;
-	}
-}
-
-Animal &Animal::operator=(const Animal &other) {
-	if (DEBUG)
-		std::cout << "Animal Operator Overload called" << std::endl;
-	if (this != &other) {
-		this->type = other.type;
-	}
-	return (*this);
-}
-
-
-Animal::~Animal()
-{
-	if (DEBUG)
-		std::cout << "Animal destructor called" << std::endl;
-}
-
-
 
 #endif
