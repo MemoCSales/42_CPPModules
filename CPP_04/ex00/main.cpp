@@ -1,6 +1,8 @@
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 
 int main()
 {
@@ -73,6 +75,7 @@ int main()
 		copyCat.makeSound();
 	}
 	{
+		std::cout << GREEN << "\n---TEST 5: EDGE CASE---" << DEFAULT << std::endl;
 		const Animal* 	animal = NULL;
 
 		if (animal == NULL) {
@@ -85,6 +88,23 @@ int main()
 		bird->makeSound();	// Should call the base class's makeSound since Bird does not override
 
 		delete bird;
+	}
+	{
+		std::cout << GREEN << "\n---TEST 6: WRONG ANIMAL---" << DEFAULT << std::endl;
+		const WrongAnimal* meta = new WrongAnimal();
+		const WrongAnimal* i = new WrongCat();
+
+		std::cout << BLUE << "TYPE -> " << DEFAULT << i->getType() << " " << std::endl;
+		std::cout << WHITE << "SOUND: " << DEFAULT;
+		i->makeSound();
+		
+		std::cout << BLUE << "TYPE -> " << DEFAULT << meta->getType() << " " << std::endl;
+		std::cout << WHITE << "SOUND: " << DEFAULT;
+		meta->makeSound();
+
+		delete meta;
+		delete i;
+
 	}
 	return 0;
 }
