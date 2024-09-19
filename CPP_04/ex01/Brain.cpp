@@ -2,7 +2,7 @@
 
 Brain::Brain(void) {
 	if (DEBUG)
-		std::cout << "Default Brain constructor called" << std::endl;
+		std::cout << "🧠 Default Brain constructor called" << std::endl;
 
 	for (int i = 0; i < 100; i++) {
 		ideas[i] = "Empty idea";
@@ -21,7 +21,7 @@ Brain::Brain(const Brain& other) {
 // Assignment operator overload
 Brain &Brain::operator=(const Brain &other) {
 	if (DEBUG)
-		std::cout << "Brain assignment operator called" << std::endl;
+		std::cout << "🧠 Brain assignment operator called" << std::endl;
 	if (this != &other) {
 		for (int i = 0; i < 100; i++) {
 			ideas[i] = other.ideas[i];
@@ -32,7 +32,7 @@ Brain &Brain::operator=(const Brain &other) {
 
 Brain::~Brain() {
 	if (DEBUG)
-		std::cout << "Brain destructor called" << std::endl;
+		std::cout << RED << "🧠 Brain destructor called" << DEFAULT << std::endl;
 }
 
 // Setters

@@ -2,15 +2,24 @@
 # define CAT_HPP
 # include <iostream>
 # include "Animal.hpp"
+# include "Brain.hpp"
 
 class Cat : public Animal
 {
-public:
-	Cat();
-	Cat(std::string type);
-	virtual ~Cat();
-	// Method
-	void makeSound() const;
+	private:
+		Brain* catBrain;
+	public:
+		Cat();
+		Cat(std::string type);
+		Cat(const Cat &other);
+		Cat &operator=(const Cat &other);
+		virtual ~Cat();
+		// Method
+		void makeSound() const;
+		// Setters
+		void	setCatIdea(int index, const std::string &idea);
+		// Getters
+		std::string getCatIdea(int index) const;
 };
 
 #endif
