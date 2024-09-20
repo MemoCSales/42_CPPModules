@@ -7,7 +7,7 @@ class WrongCat : public WrongAnimal
 {
 public:
 	WrongCat();
-	virtual ~WrongCat();
+	~WrongCat();
 	// Methods
 	virtual void makeSound() const;
 	// Getters
