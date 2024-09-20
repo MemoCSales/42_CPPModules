@@ -30,10 +30,6 @@ Animal &Animal::operator=(const Animal &other) {
 	return (*this);
 }
 
-// Virtual function makeSound
-// void Animal::makeSound() const {
-// 	std::cout << MAGENT << "🫠  -> 🔊 I do a generic sound" << DEFAULT << std::endl;
-// }
 
 Animal::~Animal()
 {
