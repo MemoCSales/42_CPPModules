@@ -15,6 +15,8 @@ public:
 	~Character();
 	// Getters
 	std::string const & getName() const;
+	// Method
+	void equip(AMateria* m);
 };
 
 

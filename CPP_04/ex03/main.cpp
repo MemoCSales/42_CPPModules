@@ -30,20 +30,27 @@ int main() {
 	// 	delete src;
 
 	// }
-	{
-		std::cout << "TEST 2: TESTING CLONE METHOD" << std::endl;
+	// {
+	// 	std::cout << "TEST 2: TESTING CLONE METHOD" << std::endl;
+	// 	AMateria* materia = new Cure();
+	// 	Character hero("HeroName");
+	// 	materia->use(hero);
+
+	// 	AMateria* cloneMateria = materia->clone();
+	// 	cloneMateria->use(hero);
+
+	// 	std::cout << "Memory address of the original Materia: " << &materia << std::endl;
+	// 	std::cout << "Memory address of the cloned Materia: " << &cloneMateria << std::endl;
+
+	// 	delete materia;
+	// 	delete cloneMateria;
+
+	// }
+		{
+		std::cout << "TEST 3: TESTING COPY AND ASSIGNMENT CONSTRUCTOR FOR CHARACTER" << std::endl;
 		AMateria* materia = new Cure();
-		Character hero("HeroName");
-		materia->use(hero);
-
-		AMateria* cloneMateria = materia->clone();
-		cloneMateria->use(hero);
-
-		std::cout << "Memory address of the original Materia: " << &materia << std::endl;
-		std::cout << "Memory address of the cloned Materia: " << &cloneMateria << std::endl;
-
-		delete materia;
-		delete cloneMateria;
+		AMateria* newMateria = new Ice();
+		Character hero("Hero");
 
 	}
 	return 0;
