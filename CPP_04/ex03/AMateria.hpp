@@ -2,6 +2,10 @@
 # define AMATERIA_HPP
 # include <iostream>
 # include "ICharacter.hpp"
+// # include "Character.hpp"
+
+// Forward declaration of ICharacter. Tells the compile the class will be defined later
+class ICharacter;
 
 # define DEBUG 1
 
@@ -14,6 +18,7 @@
 # define WHITE	 	"\033[1;37m"
 # define DEFAULT	"\033[0m"
 
+// This is the abstract class representing any type of materia (e.g. "Ice" and "Cure")
 class AMateria
 {
 protected:
@@ -28,21 +33,5 @@ public:
 	virtual AMateria* clone() const = 0;
 	virtual void use(ICharacter& target);
 };
-
-AMateria::AMateria(std::string const & _type) : type(_type) {
-	if (DEBUG)
-		std::cout << "AMateria parameter constructor called" << std::endl;
-}
-
-AMateria::~AMateria() {
-	if (DEBUG)
-		std::cout << RED << "AMateria virtual destructor called" << DEFAULT << std::endl;
-}
-
-// Getters
-std::string const & AMateria::getType() const {
-	return type;
-}
-
 
 #endif
