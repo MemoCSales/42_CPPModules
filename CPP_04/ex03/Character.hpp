@@ -3,6 +3,8 @@
 # include "ICharacter.hpp"
 # include "AMateria.hpp"
 
+
+// AMateria* unequippedMateria[4];
 class Character : public ICharacter
 {
 private:
@@ -17,6 +19,8 @@ public:
 	std::string const & getName() const;
 	// Method
 	void equip(AMateria* m);
+	void unequip(int idx);
+	void use(int idx, ICharacter& target);
 };
 
 
