@@ -76,15 +76,16 @@ void Character::equip(AMateria* m) {
 }
 
 void Character::unequip(int idx) {
-	if (idx < 0 && idx >= 4)
-		return ;
-	if (inventory[idx] == NULL)
+	if (idx < 0 || idx >= 4 || inventory[idx] == NULL)
 		return ;
 	// unequippedMateria[idx] = inventory[idx];
-	delete inventory[idx];
+	delete inventory[idx]; //check it later
 	inventory[idx] == NULL;
 }
 
 void Character::use(int idx, ICharacter& target) {
-	//do something here
+	if (idx < 0 || idx >= 4 || inventory[idx] == NULL)
+		return ;
+	
+	inventory[idx]->use(target);		// Call the use method from the corresponding AMateria
 }
