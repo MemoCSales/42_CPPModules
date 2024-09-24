@@ -75,3 +75,6 @@ void Character::equip(AMateria* m) {
 	}
 }
 
+void Character::unequip(int idx) {
+	//something here
+}
