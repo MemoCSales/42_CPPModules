@@ -2,7 +2,7 @@
 
 
 // ++++Constructor
-Cure::Cure(void) : AMateria(type) {
+Cure::Cure(void) : AMateria("cure") {
 	if (DEBUG) {
 		std::cout << "Cure default constructor called" << std::endl;
 	}

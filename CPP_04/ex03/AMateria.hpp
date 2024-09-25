@@ -2,12 +2,11 @@
 # define AMATERIA_HPP
 # include <iostream>
 # include "ICharacter.hpp"
-// # include "Character.hpp"
 
 // Forward declaration of ICharacter. Tells the compile the class will be defined later
 class ICharacter;
 
-# define DEBUG 1
+# define DEBUG 0
 
 # define RED		"\033[1;31m"
 # define GREEN		"\033[1;32m"

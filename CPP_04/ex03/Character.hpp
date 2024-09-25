@@ -17,6 +17,7 @@ public:
 	~Character();
 	// Getters
 	std::string const & getName() const;
+	AMateria* getMateria(int idx) const;
 	// Method
 	void equip(AMateria* m);
 	void unequip(int idx);

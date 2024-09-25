@@ -35,7 +35,6 @@ Character &Character::operator=(const Character &other) {
 		for (int i = 0; i < 4; i++)	{
 			if (inventory[i] != NULL) {
 				delete inventory[i];
-				inventory[i] = NULL;
 			}
 		}
 		this->name = other.name;
@@ -75,12 +74,19 @@ void Character::equip(AMateria* m) {
 	}
 }
 
+AMateria* Character::getMateria(int idx) const {
+	if (idx < 0 || idx >= 4) {
+		return NULL;
+	}
+	return inventory[idx];
+}
+
 void Character::unequip(int idx) {
 	if (idx < 0 || idx >= 4 || inventory[idx] == NULL)
 		return ;
 	// unequippedMateria[idx] = inventory[idx];
 	delete inventory[idx]; //check it later
-	inventory[idx] == NULL;
+	inventory[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter& target) {
