@@ -4,7 +4,7 @@
 # include "AMateria.hpp"
 
 
-// AMateria* unequippedMateria[4];
+extern AMateria* unequippedMateria[4];
 class Character : public ICharacter
 {
 private:

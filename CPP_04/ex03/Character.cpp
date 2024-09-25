@@ -1,7 +1,11 @@
 #include "Character.hpp"
 
+
+AMateria* unequippedMateria[4] = {NULL, NULL, NULL, NULL};
+
+
 // ++++Constructor
-Character::Character(std::string inputName) : ICharacter(), name(inputName) {
+Character::Character(std::string inputName) : name(inputName) {
 	if (DEBUG) {
 		std::cout << "Character parameter constructor called" << std::endl;
 	}
@@ -54,6 +58,12 @@ Character::~Character() {
 	if (DEBUG) {
 		std::cout << "Character destructor called" << std::endl;
 	}
+	for (int i = 0; i < 4; i++) {
+		if (this->inventory[i] != NULL) {
+			delete this->inventory[i];
+			// inventory[i] = NULL;
+		}
+	}
 }
 
 // Getters
@@ -68,7 +78,7 @@ void Character::equip(AMateria* m) {
 	for (int i = 0; i < 4; i++)
 	{
 		if (inventory[i] == NULL) {
-			inventory[i] = m;
+			inventory[i] = m->clone();
 			break;
 		}
 	}
@@ -84,8 +94,8 @@ AMateria* Character::getMateria(int idx) const {
 void Character::unequip(int idx) {
 	if (idx < 0 || idx >= 4 || inventory[idx] == NULL)
 		return ;
-	// unequippedMateria[idx] = inventory[idx];
-	delete inventory[idx]; //check it later
+	unequippedMateria[idx] = inventory[idx];
+	delete inventory[idx];
 	inventory[idx] = NULL;
 }
 

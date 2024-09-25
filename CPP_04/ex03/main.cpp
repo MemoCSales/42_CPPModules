@@ -30,6 +30,7 @@ int main() {
 	// 	delete src;
 
 	// }
+	// return (0);
 	// {
 	// 	std::cout << "TEST 2: TESTING CLONE METHOD" << std::endl;
 	// 	AMateria* materia = new Cure();
@@ -77,138 +78,221 @@ int main() {
 	// 	delete cure;
 	// 	delete ice;
 	// }
-	{
-		std::cout << "TEST 4: TESTING LEARN MATERIA WITH NULL" << std::endl;
-		IMateriaSource* src = new MateriaSource();
-		src->learnMateria(NULL);
+	// return (0);
 
-		AMateria* tmp = src->createMateria("ice");
-		if (tmp == NULL) {
-			std::cout << GREEN << "Successfully handled learning NULL pointer!" << DEFAULT << std::endl;
-		}
-		delete src;
-	}
-	{
-		std::cout << "TEST 5: TESTING CAPACITY LIMITS" << std::endl;
-		IMateriaSource* src = new MateriaSource();
-		src->learnMateria(new Ice());
-		src->learnMateria(new Cure());
-		src->learnMateria(new Ice());
-		src->learnMateria(new Cure());
-		src->learnMateria(new Ice()); // This one should not be stored
+	// {
+	// 	std::cout << "TEST 4: TESTING LEARN MATERIA WITH NULL" << std::endl;
+	// 	IMateriaSource* src = new MateriaSource();
+	// 	src->learnMateria(NULL);
 
-		std::cout << YELLOW << "LEARNED MATERIA:" << DEFAULT << std::endl;
-		for (int i = 0; i < 4; i++) {
-			std::cout << "+-------+" << std::endl;  // Top border of the box
-			std::cout << "| ";
+	// 	AMateria* tmp = src->createMateria("ice");
+	// 	if (tmp == NULL) {
+	// 		std::cout << GREEN << "Successfully handled learning NULL pointer!" << DEFAULT << std::endl;
+	// 	}
+	// 	delete src;
+	// }
+	// return (0);
+	// {
+	// 	std::cout << "TEST 5: TESTING CAPACITY LIMITS" << std::endl;
+	// 	IMateriaSource* src = new MateriaSource();
+	// 	src->learnMateria(new Ice());
+	// 	src->learnMateria(new Cure());
+	// 	src->learnMateria(new Ice());
+	// 	src->learnMateria(new Cure());
+	// 	src->learnMateria(new Ice()); // This one should not be stored
+
+	// 	std::cout << YELLOW << "LEARNED MATERIA:" << DEFAULT << std::endl;
+	// 	for (int i = 0; i < 4; i++) {
+	// 		std::cout << "+-------+" << std::endl;  // Top border of the box
+	// 		std::cout << "| ";
 			
-			// Check which Materia is equipped and print the corresponding emoji
-			AMateria* materia = static_cast<MateriaSource*>(src)->getMateriaSource(i);
-			if (materia != nullptr) {
-				if (materia->getType() == "ice") {
-					std::cout << "❄️ ";  // Ice emoji
-				} else if (materia->getType() == "cure") {
-					std::cout << "💊 ";  // Cure emoji
-				}
-			} else {
-				std::cout << "   ";  // Empty space for unequipped
-			}
-			std::cout << "|" << std::endl;  // Right border of the box
-   		 }
-			std::cout << "+-------+" << std::endl;  // Bottom border of the box
+	// 		// Check which Materia is equipped and print the corresponding emoji
+	// 		AMateria* materia = static_cast<MateriaSource*>(src)->getMateriaSource(i);
+	// 		if (materia != NULL) {
+	// 			if (materia->getType() == "ice") {
+	// 				std::cout << "❄️ ";  // Ice emoji
+	// 			} else if (materia->getType() == "cure") {
+	// 				std::cout << "💊 ";  // Cure emoji
+	// 			}
+	// 		} else {
+	// 			std::cout << "   ";  // Empty space for unequipped
+	// 		}
+	// 		std::cout << "|" << std::endl;  // Right border of the box
+   	// 	 }
+	// 		std::cout << "+-------+" << std::endl;  // Bottom border of the box
 		
+
+	// 	Character hero("Hero");
+	// 	AMateria* tmp1 = src->createMateria("ice");
+	// 	AMateria* tmp2 = src->createMateria("cure");
+	// 	hero.equip(tmp1);
+	// 	hero.equip(tmp2);
+
+	// 	std::cout << YELLOW << "INVENTORY:" << DEFAULT << std::endl;
+
+	// 	for (int i = 0; i < 4; i++) {
+	// 		std::cout << "+-------+" << std::endl;  // Top border of the box
+	// 		std::cout << "| ";
+			
+	// 		// Check which Materia is equipped and print the corresponding emoji
+	// 		if (hero.getMateria(i) != NULL) {
+	// 			if (hero.getMateria(i)->getType() == "ice") {
+	// 				std::cout << "❄️ ";  // Ice emoji
+	// 			} else if (hero.getMateria(i)->getType() == "cure") {
+	// 				std::cout << "💊 ";  // Cure emoji
+	// 			}
+	// 		} else {
+	// 			std::cout << "   ";  // Empty space for unequipped
+	// 		}
+
+	// 		std::cout << "|" << std::endl;  // Right border of the box
+   	// 	 }
+	// 		std::cout << "+-------+" << std::endl;  // Bottom border of the box
+
+	// 	if (tmp1)
+	// 	{
+	// 		std::cout << GREEN << "Successfully learned 4 Materia, limit intact" << DEFAULT << std::endl;
+	// 	} else {
+	// 		std::cout << "No more Materia can be learned" << std::endl;
+	// 	}
+		
+	// 	delete tmp1;
+	// 	delete tmp2;
+	// 	delete src;
+	// }
+	// return (0);
+	// {
+	// 	std::cout << "TEST 6: TESTING createMateria WITH UNKNOWN TYPE" << std::endl;
+	// 	IMateriaSource* src = new MateriaSource();
+	// 	src->learnMateria(new Ice());
+
+	// 	AMateria* tmp = src->createMateria("unknown");
+	// 	if (tmp == NULL)
+	// 	{
+	// 		std::cout << GREEN << "Successfully returned a NULL pointer for unknown type!" << DEFAULT << std::endl;
+	// 	} else {
+	// 		std::cout << "Error: created a Materia for unknown type" << std::endl;
+	// 	}
+	// 	delete src;
+	// }
+	// return (0);
+	// {
+	// 	std::cout << "TEST 7: TESTING CHARACTER WITHOUT EQUIPPED MATERIA" << std::endl;
+	// 	ICharacter* character = new Character("NoMateria");
+	// 	ICharacter* target = new Character("Target");
+
+	// 	// Trying to use Materia when there is nothing equipped
+	// 	character->use(0, *target);
+	// 	std::cout << GREEN << "Handled use with no equipped Materia" << DEFAULT << std::endl;
+
+	// 	delete character;
+	// 	delete target;
+	// }
+	// return (0);
+	// {
+	// 	std::cout << "TEST 8: TESTING COPY CONSTRUCTOR FOR MATERIASOURCE" << std::endl;
+	// 	IMateriaSource* src = new MateriaSource();
+	// 	src->learnMateria(new Ice());
+	// 	src->learnMateria(new Cure());
+
+	// 	// Copy the MateriaSource
+	// 	IMateriaSource* srcCopy = new MateriaSource(*static_cast<MateriaSource*>(src));
+
+	// 	// Creating a new character and using the original source
+	// 	ICharacter* char1 = new Character("Character 1");
+	// 	AMateria* tmp1 = src->createMateria("ice");
+	// 	char1->equip(tmp1);
+	// 	char1->use(0, *char1);
+
+	// 	// Create a new Character and use the copied source
+	// 	ICharacter* char2 = new Character("Character 2");
+	// 	AMateria* tmp2 = srcCopy->createMateria("cure");
+	// 	char2->equip(tmp2);
+	// 	char2->use(0, *char2);
+
+	// 	std::cout << GREEN << "Original and copy used independently" << DEFAULT << std::endl;
+
+	// 	delete srcCopy;
+	// 	delete src;
+	// 	delete char1;
+	// 	delete char2;
+	// 	delete tmp1;
+	// 	delete tmp2;
+	// }
+	// return 0;
+	{
+		std::cout << "TEST 9: TESTING UNEQUIP & EQUIP METHOD FUNCTION" << std::endl;
+
 		Character hero("Hero");
-		AMateria* tmp1 = src->createMateria("ice");
-		AMateria* tmp2 = src->createMateria("cure");
-		hero.equip(tmp1);
-		hero.equip(tmp2);
 
-		std::cout << YELLOW << "INVENTORY:" << DEFAULT << std::endl;
+		AMateria* ice = new Ice();
+		AMateria* cure = new Cure();
 
+		hero.equip(ice);
+		hero.equip(cure);
+
+		std::cout << "Before unequip: " << std::endl;
 		for (int i = 0; i < 4; i++) {
-			std::cout << "+-------+" << std::endl;  // Top border of the box
+			std::cout << "+-------+" << std::endl;
 			std::cout << "| ";
 			
-			// Check which Materia is equipped and print the corresponding emoji
-			if (hero.getMateria(i) != nullptr) {
+			if (hero.getMateria(i) != NULL) {
 				if (hero.getMateria(i)->getType() == "ice") {
-					std::cout << "❄️ ";  // Ice emoji
+					std::cout << "❄️ ";
 				} else if (hero.getMateria(i)->getType() == "cure") {
-					std::cout << "💊 ";  // Cure emoji
+					std::cout << "💊 ";
 				}
 			} else {
-				std::cout << "   ";  // Empty space for unequipped
+				std::cout << "   ";
 			}
 
-			std::cout << "|" << std::endl;  // Right border of the box
+			std::cout << "|" << std::endl;
    		 }
-			std::cout << "+-------+" << std::endl;  // Bottom border of the box
+		std::cout << "+-------+" << std::endl;
+		
+		hero.unequip(0);
 
-		if (tmp1)
-		{
-			std::cout << GREEN << "Successfully learned 4 Materia, limit intact" << DEFAULT << std::endl;
-		} else {
-			std::cout << "No more Materia can be learned" << std::endl;
-		}
-		delete src;
-		delete tmp1;
-		delete tmp2;
-	}
-	{
-		std::cout << "TEST 6: TESTING createMateria WITH UNKNOWN TYPE" << std::endl;
-		IMateriaSource* src = new MateriaSource();
-		src->learnMateria(new Ice());
+		std::cout << "\nAfter unequip: " << std::endl;
+		for (int i = 0; i < 4; i++) {
+			std::cout << "+-------+" << std::endl;
+			std::cout << "| ";
+			
+			if (hero.getMateria(i) != NULL) {
+				if (hero.getMateria(i)->getType() == "ice") {
+					std::cout << "❄️ ";
+				} else if (hero.getMateria(i)->getType() == "cure") {
+					std::cout << "💊 ";
+				}
+			} else {
+				std::cout << "   ";
+			}
 
-		AMateria* tmp = src->createMateria("unknown");
-		if (tmp == NULL)
-		{
-			std::cout << GREEN << "Successfully returned a NULL pointer for unknown type!" << DEFAULT << std::endl;
-		} else {
-			std::cout << "Error: created a Materia for unknown type" << std::endl;
-		}
-		delete src;
-	}
-	{
-		std::cout << "TEST 7: TESTING CHARACTER WITHOUT EQUIPPED MATERIA" << std::endl;
-		ICharacter* character = new Character("NoMateria");
-		ICharacter* target = new Character("Target");
+			std::cout << "|" << std::endl;
+   		 }
+		std::cout << "+-------+" << std::endl;
 
-		// Trying to use Materia when there is nothing equipped
-		character->use(0, *target);
-		std::cout << GREEN << "Handled use with no equipped Materia" << DEFAULT << std::endl;
+		hero.equip(ice);
+		std::cout << "\nAfter equip AGAIN: " << std::endl;
+		for (int i = 0; i < 4; i++) {
+			std::cout << "+-------+" << std::endl;
+			std::cout << "| ";
+			
+			if (hero.getMateria(i) != NULL) {
+				if (hero.getMateria(i)->getType() == "ice") {
+					std::cout << "❄️ ";
+				} else if (hero.getMateria(i)->getType() == "cure") {
+					std::cout << "💊 ";
+				}
+			} else {
+				std::cout << "   ";
+			}
 
-		delete character;
-		delete target;
-	}
-	{
-		std::cout << "TEST 8: TESTING COPY CONSTRUCTOR FOR MATERIASOURCE" << std::endl;
-		IMateriaSource* src = new MateriaSource();
-		src->learnMateria(new Ice());
-		src->learnMateria(new Cure());
+			std::cout << "|" << std::endl;
+   		 }
+		std::cout << "+-------+" << std::endl;
 
-		// Copy the MateriaSource
-		IMateriaSource* srcCopy = new MateriaSource(*static_cast<MateriaSource*>(src));
-
-		// Creating a new character and using the original source
-		ICharacter* char1 = new Character("Character 1");
-		AMateria* tmp1 = src->createMateria("ice");
-		char1->equip(tmp1);
-		char1->use(0, *char1);
-
-		// Create a new Character and use the copied source
-		ICharacter* char2 = new Character("Character 2");
-		AMateria* tmp2 = srcCopy->createMateria("cure");
-		char2->equip(tmp2);
-		char2->use(0, *char2);
-
-		std::cout << GREEN << "Original and copy used independently" << DEFAULT << std::endl;
-
-		delete srcCopy;
-		delete src;
-		delete char1;
-		delete char2;
-		delete tmp1;
-		delete tmp2;
+		delete ice;
+		delete cure;
 	}
 	return 0;
 }

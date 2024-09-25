@@ -17,8 +17,7 @@ Cure::~Cure() {
 
 // Methods
 AMateria* Cure::clone() const {
-	Cure* cloneMateria = new Cure();
-	return (dynamic_cast<AMateria*>(cloneMateria));
+	return new Cure();
 }
 
 void Cure::use(ICharacter& target) {

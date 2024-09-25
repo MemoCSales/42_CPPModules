@@ -21,8 +21,7 @@ Ice::~Ice() {
 /* The return type is being upcasted to the upper class (AMateria). 
 	This is safe because Ice is derived from AMateria*/
 AMateria* Ice::clone() const {
-	Ice* cloneMateria = new Ice();
-	return (dynamic_cast<AMateria*>(cloneMateria)); // Upcasting
+	return new Ice();
 }
 
 void Ice::use(ICharacter& target) {
