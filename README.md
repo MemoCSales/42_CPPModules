@@ -40,4 +40,14 @@ Let's go!
  Take a look if you're interested in learning about this.
 
  ### CPP_03
- Module to Introduce Inheritance in C++
+ Module to Introduce Inheritance in C++. It focuses in the concepts of base classes, derived classes.
+ - ex00 and ex01: Create a base class and a derived class to understand the basics of inheritance
+ - ex02: Now it's time to extend the inheritance hierarchy by adding another derived class
+ - ex03: Understand the concept of multiple inheritance and the diamond problem.
+
+ ### CPP_04
+This module introduce you to Polymorphism, and memory management.
+- ex00: Bring inheritance knowledge from previous module and understand how polymorphism allows for dynamic method binding.
+- ex01: This exercise extends the previous one by creating a class hierarchy with multiple levels and ensuring proper construction and destruction of objects. Example: By instantiate a Dog object with its own independent Brain object.
+- ex02: Abstract classes are introduced here. They are used to be used as a base class, and you cannot instantiate directly from abstract classes.
+- ex03: Interfaces do not exists in C++98 so in this exercise it's about trying to implement them. Interfaces = Pure abstract classes.
