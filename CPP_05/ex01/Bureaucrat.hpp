@@ -35,16 +35,15 @@ public:
 	class GradeTooHighException :  public std::exception {
 		public:
 			virtual const char* what() const throw() {
-				return ("Error: Grade is too High");
+				return ("Error: Bureaucrat grade is too High");
 			}
 	};
 	class GradeTooLowException :  public std::exception {
 		public:
 			virtual const char* what() const throw() {
-				return ("Error: Grade is too Low");
+				return ("Error: Bureaucrat grade is too Low");
 			}
 	};
-
 };
 
 std::ostream &operator<<(std::ostream &o, const Bureaucrat &bureaucrat);
