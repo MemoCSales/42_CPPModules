@@ -10,6 +10,7 @@
 <a href="#CPP_01">CPP_01</a> &#xa0; | &#xa0;
 <a href="#CPP_02">CPP_02</a> &#xa0; | &#xa0;
 <a href="#CPP_03">CPP_03</a> &#xa0; | &#xa0;
+<a href="#CPP_04">CPP_04</a> &#xa0; | &#xa0;
 </p>
 
 ##  The Challenge
