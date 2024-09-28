@@ -3,47 +3,60 @@
 int main() {
 		std::cout << GREEN << "---- STARTING TESTING ----" <<  DEFAULT << std::endl;
 	{
-		std::cout << YELLOW << "---- TEST 1: BUREAUCRAT CREATION & EXCEPTION ----" <<  DEFAULT << std::endl;
-		int grade = 0;
-		try	{
-			Bureaucrat temp("Temp", grade);
-			std::cout << temp << std::endl;
+		try {
+			Bureaucrat john("John", 40);
+
+			// Creating a form
+			Form leaveRequest("Leave Request", 50, 20);
+
+			// John tries to sign the form
+			john.signForm(leaveRequest);
+
+			// new form: form_name, gradeToSign, gradeToExecute
+			Form budgetApproval("Budget Approval", 30, 10);
+
+			john.signForm(budgetApproval);
 		}
-		catch(const Bureaucrat::GradeTooHighException &e) {
-			std::cerr << e.what() << std::endl;
-		} catch (const Bureaucrat::GradeTooLowException &e) {
-			std::cerr << e.what() << std::endl;
+		catch (const std::exception& e) {
+			std::cout << e.what() << std::endl;
 		}
 	}
 	{
-		std::cout << YELLOW << "---- TEST 2: INCREASING & DECREASING GRADES ----" <<  DEFAULT << std::endl;
-		int grade = 1;
-		try	{
-			Bureaucrat bob("Bob", grade);
-			std::cout << bob << std::endl;
-			bob.incrementGrade();
-			std::cout << bob << std::endl;
-		}
-		catch(const Bureaucrat::GradeTooHighException &e) {
-			std::cerr << e.what() << std::endl;
-		} catch (const Bureaucrat::GradeTooLowException &e) {
-			std::cerr << e.what() << std::endl;
-		}
+		try
+		{
+			Bureaucrat alice("Alice", 50);
+			Form contract("Contract", 50, 20);
 
-		try	{
-			Bureaucrat karen("Karen", 140);
-			std::cout << karen << std::endl;
-			for (int i = 0; i < 100; i++) {
-				karen.decrementGrade();
-				std::cout << "i: " << i << " -> ";
-				std::cout << karen << std::endl;
-			}
+			alice.signForm(contract);
 		}
-		catch(const Bureaucrat::GradeTooHighException &e) {
-			std::cerr << e.what() << std::endl;
-		} catch (const Bureaucrat::GradeTooLowException &e) {
-			std::cerr << e.what() << std::endl;
+		catch(const std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
 		}
+	}
+	{
+		try
+		{
+			Bureaucrat intern("Intern", 150);
+			Form taxForm("Tax Form", 100, 50);
+
+			intern.signForm(taxForm);
+		}
+		catch(const std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
+	{
+		try
+		{
+			Form invalidForm("Invalid Form", 0, 10);
+		}
+		catch(const std::exception& e)
+		{
+			std::cout << e.what() << '\n';
+		}
+		
 	}
 	return 0;
 }

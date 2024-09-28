@@ -2,6 +2,8 @@
 # define BUREAUCRAT_HPP
 # include <iostream>
 # include <exception>
+# include "Form.hpp"
+
 
 # define DEBUG 0
 
@@ -13,6 +15,8 @@
 # define CYAN		"\033[1;36m"
 # define WHITE	 	"\033[1;37m"
 # define DEFAULT	"\033[0m"
+
+class Form;
 
 class Bureaucrat
 {
@@ -31,6 +35,7 @@ public:
 	// Methods
 	void incrementGrade();
 	void decrementGrade();
+	void signForm(Form& form);
 	// Exceptions
 	class GradeTooHighException :  public std::exception {
 		public:
