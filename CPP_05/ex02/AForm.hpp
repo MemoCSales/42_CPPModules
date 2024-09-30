@@ -25,8 +25,8 @@ public:
 	int			getGradeToSign() const;
 	int			getGradeToExecute() const;
 	// Methods
-	void		beSigned(Bureaucrat& bureaucrat);
-	// execute method virtual!!
+	void				beSigned(Bureaucrat& bureaucrat);
+	virtual void		execute(Bureaucrat const& bureaucrat) const = 0;
 	// Exceptions
 	class GradeTooHighException :  public std::exception {
 		public:
@@ -44,6 +44,12 @@ public:
 		public:
 			virtual const char* what() const throw() {
 				return "Error: AForm grade out of bounds. Must be between 1 and 150. Please check!";
+			}
+	};
+	class FormIsNotSignedException : public std::exception {
+		public:
+			virtual const char* what() const throw() {
+				return "Error: Form is not signed yet";
 			}
 	};
 };

@@ -42,6 +42,7 @@ int main() {
 		{
 			Bureaucrat intern("Intern", 150);
 			Form taxForm("Tax Form", 100, 50);
+			// taxForm.beSigned(intern);
 			std::cout << intern << std::endl;
 			std::cout << taxForm << std::endl;
 

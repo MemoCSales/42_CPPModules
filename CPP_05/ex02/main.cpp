@@ -1,68 +1,28 @@
 #include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main() {
 		std::cout << GREEN << "---- STARTING TESTING ----" <<  DEFAULT << std::endl;
 	{
-		std::cout << BLUE << "\n---- John Test: ----" <<  DEFAULT << std::endl;
+		std::cout << BLUE << "\n---- ShrubberyCreationForm Test: ----" <<  DEFAULT << std::endl;
 		try {
-			Bureaucrat john("John", 40);
+			Bureaucrat john("John", 10);
 
 			// Creating a form
-			Form leaveRequest("Leave Request", 50, 20);
+			ShrubberyCreationForm form("file");
 
+			std::cout << john << std::endl;
+			std::cout << form << std::endl;
 			// John tries to sign the form
-			john.signForm(leaveRequest);
+			john.signForm(form);
 
-			// new form: form_name, gradeToSign, gradeToExecute
-			Form budgetApproval("Budget Approval", 30, 10);
+			// form.execute(john);
+			john.executeform(form);
 
-			john.signForm(budgetApproval);
 		}
 		catch (const std::exception& e) {
 			std::cout << e.what() << std::endl;
 		}
-	}
-	{
-		std::cout << BLUE << "\n---- Alice Test: ----" <<  DEFAULT << std::endl;
-		try
-		{
-			Bureaucrat alice("Alice", 50);
-			Form contract("Contract", 50, 20);
-
-			alice.signForm(contract);
-		}
-		catch(const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-	}
-	{
-		std::cout << BLUE << "\n---- Intern Test: ----" <<  DEFAULT << std::endl;
-		try
-		{
-			Bureaucrat intern("Intern", 150);
-			Form taxForm("Tax Form", 100, 50);
-			std::cout << intern << std::endl;
-			std::cout << taxForm << std::endl;
-
-			intern.signForm(taxForm);
-		}
-		catch(const std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-	}
-	{
-		std::cout << BLUE << "\n---- Invalid Form Test: ----" <<  DEFAULT << std::endl;
-		try
-		{
-			Form invalidForm("Invalid Form", 0, 10);
-		}
-		catch(const std::exception& e)
-		{
-			std::cout << e.what() << '\n';
-		}
-		
 	}
 	return 0;
 }
