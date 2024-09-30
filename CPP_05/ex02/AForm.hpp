@@ -1,12 +1,12 @@
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 # include <iostream>
 # include <exception>
 # include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 private:
 	const std::string	_formName;
@@ -14,11 +14,11 @@ private:
 	const int			_gradeToSign;
 	const int			_gradeToExecute;
 public:
-	Form();
-	Form(const std::string formName, const int gradeToSign, const int gradeToExecute);
-	Form(const Form &other);
-	Form &operator=(const Form &other);
-	~Form();
+	AForm();
+	AForm(const std::string formName, const int gradeToSign, const int gradeToExecute);
+	AForm(const AForm &other);
+	AForm &operator=(const AForm &other);
+	~AForm();
 	// Getters
 	std::string getFormName() const;
 	bool		getIsSigned() const;
@@ -26,6 +26,7 @@ public:
 	int			getGradeToExecute() const;
 	// Methods
 	void		beSigned(Bureaucrat& bureaucrat);
+	// execute method virtual!!
 	// Exceptions
 	class GradeTooHighException :  public std::exception {
 		public:
@@ -42,12 +43,12 @@ public:
 	class FormGradeException : public std::exception {
 		public:
 			virtual const char* what() const throw() {
-				return "Error: Form grade out of bounds. Must be between 1 and 150. Please check!";
+				return "Error: AForm grade out of bounds. Must be between 1 and 150. Please check!";
 			}
 	};
 };
 
-std::ostream &operator<<(std::ostream &o, const Form &form);
+std::ostream &operator<<(std::ostream &o, const AForm &form);
 
 
 #endif

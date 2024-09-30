@@ -1,16 +1,16 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
 // ++++Constructor
-Form::Form() :
+AForm::AForm() :
 	_formName(""), _isSigned(false), _gradeToSign(0), _gradeToExecute(0){
 	if (DEBUG) { 
-		std::cout << "Form default constructor called" << std::endl;
+		std::cout << "AForm default constructor called" << std::endl;
 	}
 }
-Form::Form(const std::string formName, const int gradeToSign, const int gradeToExecute) :
+AForm::AForm(const std::string formName, const int gradeToSign, const int gradeToExecute) :
 	_formName(formName), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
 	if (DEBUG) { 
-		std::cout << "Form parameter constructor called" << std::endl;
+		std::cout << "AForm parameter constructor called" << std::endl;
 	}
 	if (gradeToSign < 1)
 		throw FormGradeException();
@@ -19,17 +19,17 @@ Form::Form(const std::string formName, const int gradeToSign, const int gradeToE
 }
 
 // Copy Constructor
-Form::Form(const Form &other) : 
+AForm::AForm(const AForm &other) : 
  _formName(other._formName), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute) {
 	if (DEBUG) { 
-		std::cout << "Form copy constructor called" << std::endl;
+		std::cout << "AForm copy constructor called" << std::endl;
 	}
  }
 
 // Assignment Operator
-Form &Form::operator=(const Form &other) {
+AForm &AForm::operator=(const AForm &other) {
 	if (DEBUG) { 
-		std::cout << "Form Assignment Operator" << std::endl;
+		std::cout << "AForm Assignment Operator" << std::endl;
 	}
 	if (this != &other) {
 		this->_isSigned = other._isSigned;
@@ -39,26 +39,26 @@ Form &Form::operator=(const Form &other) {
 
 
 // ----Destructor
-Form::~Form() {
+AForm::~AForm() {
 	if (DEBUG) { 
-		std::cout << "Form Destructor called" << std::endl;
+		std::cout << "AForm Destructor called" << std::endl;
 	}
 }
 
 // Getters
-std::string Form::getFormName() const {
+std::string AForm::getFormName() const {
 	return _formName;
 }
 
-bool Form::getIsSigned() const {
+bool AForm::getIsSigned() const {
 	return _isSigned;
 }
 
-int Form::getGradeToSign() const {
+int AForm::getGradeToSign() const {
 	return _gradeToSign;
 }
 
-int Form::getGradeToExecute() const {
+int AForm::getGradeToExecute() const {
 	return _gradeToExecute;
 }
 
@@ -67,7 +67,7 @@ int Form::getGradeToExecute() const {
 	This function changes the form’s signed status based on a 
 	Bureaucrat object that attempts to sign it.
 */
-void Form::beSigned(Bureaucrat& bureaucrat) {
+void AForm::beSigned(Bureaucrat& bureaucrat) {
 	if (bureaucrat.getGrade() <= getGradeToSign())
 		_isSigned = true;
 	else
@@ -75,8 +75,8 @@ void Form::beSigned(Bureaucrat& bureaucrat) {
 }
 
 // << Overload Operator
-std::ostream &operator<<(std::ostream &o, const Form &form) {
-	o << "Form: " << CYAN << form.getFormName() << DEFAULT << "\n";
+std::ostream &operator<<(std::ostream &o, const AForm &form) {
+	o << "AForm: " << CYAN << form.getFormName() << DEFAULT << "\n";
 	o << "Sign Status: " << WHITE << form.getIsSigned() << DEFAULT << "\n";
 	o << "Required Grade to Sign: " << GREEN << form.getGradeToSign() << DEFAULT << "\n";
 	o << "Required Grade to Execute: " << MAGENT << form.getGradeToExecute() << DEFAULT << std::endl; 
