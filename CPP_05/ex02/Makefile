@@ -12,7 +12,7 @@ run: $(NAME)
 
 file:
 	@files=$$(find . -name "*_shrubbery" -type f); \
-	rm -r "$$files";
+	if [ -n "$$files" ]; then rm -r $$files; else echo "No Shrubbery files found"; fi
 
 fclean: clean file
 

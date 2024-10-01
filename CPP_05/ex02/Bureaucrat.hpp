@@ -2,6 +2,7 @@
 # define BUREAUCRAT_HPP
 # include <iostream>
 # include <exception>
+# include <cstdlib>
 # include "AForm.hpp"
 
 

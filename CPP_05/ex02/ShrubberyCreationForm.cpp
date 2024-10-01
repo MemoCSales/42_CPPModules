@@ -16,7 +16,8 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string targetFile) :
 }
 
 // Copy Constructor
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other), _targetFile(other._targetFile) {
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : 
+	AForm(other), _targetFile(other._targetFile) {
 	if (DEBUG) {
 		std::cout << "ShrubberyCreationForm copy constructor called" << std::endl;
 	}
