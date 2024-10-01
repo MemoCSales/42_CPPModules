@@ -15,7 +15,7 @@ $(OBJDIR)/%.o: %.cpp
 
 clean:
 	$(RM) $(OBJ)
-	-@rmdir $(OBJDIR) 2>/dev/null
+	-@rmdir $(OBJDIR) 2>/dev/null || true
 
 fclean: clean
 	$(RM) $(NAME)
