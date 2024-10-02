@@ -3,7 +3,7 @@
 CPP			 = c++
 CPPFLAGS	 = -std=c++98
 CPPFLAGS	+= -Wall -Wextra -Werror -Wshadow -pedantic
-SAN			+= -fsanitize=address
+# CPPFLAGS	+= -fsanitize=address
 CPPFLAGS	+= -g
 
 # Directories
