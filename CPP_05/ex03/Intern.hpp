@@ -7,6 +7,11 @@
 # include "PresidentialPardonForm.hpp"
 
 class Intern {
+	private:
+		AForm* createShrubberyCreationForm(const std::string &target);
+		AForm* createRobotomyRequestForm(const std::string &target);
+		AForm* createPresidentialPardonForm(const std::string &target);
+
 	public:
 		Intern(void);
 		// Intern("Parameter Constructor");
@@ -14,10 +19,14 @@ class Intern {
 		Intern &operator=(const Intern &other);
 		~Intern();
 		// Methods
-		AForm* createShrubberyCreationForm(std::string &target);
-		AForm* createRobotomyRequestForm(std::string &target);
-		AForm* createPresidentialPardonForm(std::string &target);
-		AForm* makeForm(std::string formType, std::string target);
+		AForm* makeForm(const std::string &formType, const std::string &target);
+		// Exceptions
+		class FormNotValid : public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return "Error: Form type not recognized";
+				}
+		};
 };
 
 #endif

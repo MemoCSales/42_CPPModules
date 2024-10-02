@@ -1,6 +1,6 @@
 #include "Intern.hpp"
 
-typedef AForm* (Intern::*myPointerToFunction) (std::string &target);
+typedef AForm* (Intern::*myPointerToFunction) (const std::string &target);
 
 // ++++Constructor
 Intern::Intern(void) {
@@ -42,36 +42,45 @@ Intern::~Intern() {
 }
 
 // Method
-AForm* Intern::createShrubberyCreationForm(std::string &target) {
+AForm* Intern::createShrubberyCreationForm(const std::string &target) {
 	return new ShrubberyCreationForm(target);
 }
 
-AForm* Intern::createRobotomyRequestForm(std::string &target) {
+AForm* Intern::createRobotomyRequestForm(const std::string &target) {
 	return new RobotomyRequestForm(target);
 }
 
-AForm* Intern::createPresidentialPardonForm(std::string &target) {
+AForm* Intern::createPresidentialPardonForm(const std::string &target) {
 	return new PresidentialPardonForm(target);
 }
 
-AForm* Intern::makeForm(std::string formType, std::string target) {
-	myPointerToFunction functionPointer[] = {
-		&Intern::createShrubberyCreationForm,
-		&Intern::createRobotomyRequestForm,
-		&Intern::createPresidentialPardonForm};
-	std::string formTypes[] = {"shrubbery sreation",
-							"robotomy request",
-							"presidential pardon"};
-	
-	for (size_t i = 0; i < sizeof(formTypes) / sizeof(std::string); i++)
-	{
-		if (formType == formTypes[i]) {
-			std::cout << "Intern creates " << MAGENT << formType << DEFAULT << std::endl;
-			return (this->*functionPointer[i]) (target);
-		}
+AForm* Intern::makeForm(const std::string &formType, const std::string &target) {
+	// try
+	// {
+		myPointerToFunction functionPointer[] = {
+			&Intern::createShrubberyCreationForm,
+			&Intern::createRobotomyRequestForm,
+			&Intern::createPresidentialPardonForm};
+		std::string formTypes[] = {"shrubbery creation",
+								"robotomy request",
+								"presidential pardon"};
 		
-	}
-	std::cerr << RED << "Error: " << DEFAULT << WHITE << "Form type not recognized" << DEFAULT << std::endl;
-	return NULL;
+		for (size_t i = 0; i < sizeof(formTypes) / sizeof(std::string); i++)
+		{
+			if (formType == formTypes[i]) {
+				std::cout << "Intern creates " << MAGENT << formType << DEFAULT << std::endl;
+				return (this->*functionPointer[i]) (target);
+			}
+			
+		}
+	// }
+	// catch(const std::exception& e)
+	// {
+	// 	std::cerr << e.what() << '\n';
+	// }
 	
+	
+	// std::cerr << RED << "Error: " << DEFAULT << WHITE << "Form type not recognized" << DEFAULT << std::endl;
+	// throw FormNotValid();
+	return NULL;
 }
