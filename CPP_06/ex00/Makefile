@@ -1,4 +1,4 @@
-NAME = cast
+NAME = convert
 
 SRC = $(wildcard *.cpp)
 OBJ = $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRC))
