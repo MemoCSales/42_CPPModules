@@ -6,6 +6,10 @@
 # include <cmath>
 # include <math.h>
 # include <cstdlib> //atoi
+# include <climits> // probably not used
+# include <limits>
+# include <stdint.h>
+# include <sstream>
 
 # define DEBUG 0
 
@@ -22,16 +26,18 @@ class ScalarConverter {
 	private:
 		ScalarConverter(void);
 	public:
-		static void convert(std::string& literal);
+		static void convert(const std::string& literal);
 		
 };
 
 
-bool isChar(std::string& lit);
-bool isInt(std::string& lit);
+bool isChar(const std::string& lit);
+bool isInt(const std::string& lit);
+bool isFloat(const std::string& lit);
 
-void printChar(std::string& lit);
-void printInt(std::string& lit);
+void printChar(const std::string& lit);
+void printInt(const std::string& lit);
+void printFloat(const std::string& lit);
 
 #endif
 
@@ -44,21 +50,23 @@ ScalarConverter::ScalarConverter(void) {
 	}
 }
 
-void ScalarConverter::convert(std::string& literal) {
+void ScalarConverter::convert(const std::string& literal) {
 	if (isChar(literal))
 		printChar(literal);
 	else if (isInt(literal))
 		printInt(literal);
+	else if (isFloat(literal))
+		printFloat(literal);
 }
 
-bool isChar(std::string& lit) {
+bool isChar(const std::string& lit) {
 	if (lit.length() == 1 && isprint(lit[0]) && !isdigit(lit[0])) {
 		return true;
 	}
 	return false;	
 }
 
-bool isInt(std::string& lit) {
+bool isInt(const std::string& lit) {
 	if (lit.empty()) {
 		return false;
 	}
@@ -75,10 +83,39 @@ bool isInt(std::string& lit) {
 			return false;
 		}
 	}
+
+	// Check range
+	char* end;
+	long num = std::strtol(lit.c_str(), &end, 10);
+
+	if (*end != '\0' || num < std::numeric_limits<int>::min() || num > std::numeric_limits<int>::max())
+		return false;
+	
+
 	return true;
 }
 
-void printChar(std::string& lit) {
+bool isFloat(const std::string& lit) {
+	if (lit.empty()) return false;
+
+	if (lit[lit.size() - 1] != 'f') return false;
+
+	// Create a substring without the trailing 'f'
+	std::string numPart = lit.substr(0, lit.size() - 1);
+
+	// Check if the remaining part has a point
+	if (numPart.find('.') == std::string::npos) return false;
+
+	// Check if the remaining part is a valid float
+	std::istringstream iss(numPart);
+	float num;
+	iss >> num;
+
+	// True if the extraction is successful and the end of the string was reach.
+	return !iss.fail() && iss.eof();
+}
+
+void printChar(const std::string& lit) {
 	char c = lit[0];
 	std::cout << "char: '" << lit << "'" << std::endl;
 	std::cout << "int: " << static_cast<int>(c) << std::endl;
@@ -87,12 +124,40 @@ void printChar(std::string& lit) {
 	std::cout << "double: " << static_cast<double>(c) << std::endl;
 }
 
-void printInt(std::string& lit) {
+void printInt(const std::string& lit) {
 	int num = std::atoi(lit.c_str());
-	std::cout << "char: Non displayable" << std::endl;
+
+	if (num >= 1 && num <= 127) {
+		if (isprint(num)) {
+			std::cout << "char: " << static_cast<char>(num) << std::endl;
+		} else {
+			std::cout << "char: Non displayable" << std::endl;
+		} 
+	} else {
+		std::cout << "char: impossible" << std::endl;
+	}
+
 	std::cout << "int: " << num << std::endl;
-	// std::cout << std::fixed << std::setprecision(1);
 	std::cout << "float: " << static_cast<float>(num) << ".0f" << std::endl;
 	std::cout << "double: " << static_cast<double>(num) << ".0" << std::endl;
 }
-// 2147483647
+
+void printFloat(const std::string& lit) {
+	float floatNum = atof(lit.c_str());
+
+	if (floatNum >= 1 && floatNum <= 127) {
+		if (isprint(floatNum)) {
+			std::cout << "char: " << static_cast<char>(floatNum) << std::endl;
+		} else {
+			std::cout << "char: Non displayable" << std::endl;
+		}
+	} else {
+		std::cout << "char: impossible" << std::endl;
+	}
+	std::cout << "int: " << static_cast<int>(floatNum) << std::endl;
+	std::cout << "float: " << static_cast<float>(floatNum) << "f" << std::endl;
+	std::cout << "double: " << static_cast<double>(floatNum) << std::endl;
+
+	//check nan, +inf, -inf
+
+}
