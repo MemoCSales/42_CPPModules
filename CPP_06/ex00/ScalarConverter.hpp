@@ -34,10 +34,14 @@ class ScalarConverter {
 bool isChar(const std::string& lit);
 bool isInt(const std::string& lit);
 bool isFloat(const std::string& lit);
+bool isDouble(const std::string& lit);
 
 void printChar(const std::string& lit);
 void printInt(const std::string& lit);
 void printFloat(const std::string& lit);
+void printDouble(const std::string& lit);
+void printSpecialFloat(const std::string& lit);
+void printSpecialDouble(const std::string& lit);
 
 #endif
 
@@ -57,6 +61,14 @@ void ScalarConverter::convert(const std::string& literal) {
 		printInt(literal);
 	else if (isFloat(literal))
 		printFloat(literal);
+	else if (isDouble(literal))
+		printDouble(literal);
+	else if (literal == "nanf" || literal == "+inff" || literal == "-inff")
+		printSpecialFloat(literal);
+	else if (literal == "nan" || literal == "+inf" || literal == "-inf")
+		printSpecialDouble(literal);
+	else
+		std::cerr << "Invalid literal: " << literal << std::endl;
 }
 
 bool isChar(const std::string& lit) {
@@ -67,9 +79,7 @@ bool isChar(const std::string& lit) {
 }
 
 bool isInt(const std::string& lit) {
-	if (lit.empty()) {
-		return false;
-	}
+	// if (lit.empty()) return false;
 
 	size_t start = 0;
 	if (lit[0] == '+' || lit[0] == '-') {
@@ -91,12 +101,13 @@ bool isInt(const std::string& lit) {
 	if (*end != '\0' || num < std::numeric_limits<int>::min() || num > std::numeric_limits<int>::max())
 		return false;
 	
-
 	return true;
 }
 
 bool isFloat(const std::string& lit) {
-	if (lit.empty()) return false;
+	// if (lit.empty()) return false;
+
+	// if (lit == "nanf" || lit == "+inff" || lit == "-inff") return false;
 
 	if (lit[lit.size() - 1] != 'f') return false;
 
@@ -115,7 +126,20 @@ bool isFloat(const std::string& lit) {
 	return !iss.fail() && iss.eof();
 }
 
+bool isDouble(const std::string& lit) {
+	if (lit[lit.size() - 1] == 'f') return true;
+
+	if (lit.find('.') == std::string::npos) return false;
+
+	std::istringstream iss(lit);
+	double doubleNum;
+	iss >> doubleNum;
+
+	return !iss.fail() && iss.eof();
+}
+
 void printChar(const std::string& lit) {
+	std::cout << "PRINTING CHAR" << std::endl;
 	char c = lit[0];
 	std::cout << "char: '" << lit << "'" << std::endl;
 	std::cout << "int: " << static_cast<int>(c) << std::endl;
@@ -125,6 +149,7 @@ void printChar(const std::string& lit) {
 }
 
 void printInt(const std::string& lit) {
+	std::cout << "PRINTING INT" << std::endl;
 	int num = std::atoi(lit.c_str());
 
 	if (num >= 1 && num <= 127) {
@@ -143,6 +168,7 @@ void printInt(const std::string& lit) {
 }
 
 void printFloat(const std::string& lit) {
+	std::cout << "PRINTING FLOAT" << std::endl;
 	float floatNum = atof(lit.c_str());
 
 	if (floatNum >= 1 && floatNum <= 127) {
@@ -157,7 +183,43 @@ void printFloat(const std::string& lit) {
 	std::cout << "int: " << static_cast<int>(floatNum) << std::endl;
 	std::cout << "float: " << static_cast<float>(floatNum) << "f" << std::endl;
 	std::cout << "double: " << static_cast<double>(floatNum) << std::endl;
+}
 
-	//check nan, +inf, -inf
+void printDouble(const std::string& lit) {
+	std::cout << "PRINTING DOUBLE" << std::endl;
+	double doubleNum = atof(lit.c_str());
 
+	if (doubleNum >= 1 && doubleNum <= 127) {
+		if (isprint(doubleNum)) {
+			std::cout << "char: " << static_cast<char>(doubleNum) << std::endl;
+		} else {
+			std::cout << "char: Non displayable" << std::endl;
+		}
+	} else {
+		std::cout << "char: impossible" << std::endl;
+	}
+	if (doubleNum > INT32_MAX && doubleNum < INT32_MIN) {
+		std::cout << "int: " << static_cast<int>(doubleNum) << std::endl;
+	} else {
+		std::cout << "int: impossible" << std::endl;
+	}
+
+}
+
+void printSpecialFloat(const std::string& lit) {
+	std::cout << "PRINTING SPECIAL FLOAT" << std::endl;
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	float floatValue = atof(lit.c_str());
+	std::cout << "float: " << static_cast<float>(floatValue) << "f" << std::endl;
+	std::cout << "double: " << static_cast<double>(floatValue) << std::endl;
+}
+
+void printSpecialDouble(const std::string& lit) {
+	std::cout << "PRINTING SPECIAL DOUBLE" << std::endl;
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	double doubleValue = atof(lit.c_str());
+	std::cout << "float: " << static_cast<float>(doubleValue) << "f" << std::endl;
+	std::cout << "double: " << static_cast<double>(doubleValue) << std::endl;
 }
