@@ -11,6 +11,8 @@
 <a href="#CPP_02">CPP_02</a> &#xa0; | &#xa0;
 <a href="#CPP_03">CPP_03</a> &#xa0; | &#xa0;
 <a href="#CPP_04">CPP_04</a> &#xa0; | &#xa0;
+<a href="#CPP_05">CPP_05</a> &#xa0; | &#xa0;
+<a href="#CPP_06">CPP_06</a> &#xa0; | &#xa0;
 </p>
 
 ##  The Challenge
@@ -52,3 +54,13 @@ This module introduce you to Polymorphism, and memory management.
 - ex01: This exercise extends the previous one by creating a class hierarchy with multiple levels and ensuring proper construction and destruction of objects. Example: By instantiate a Dog object with its own independent Brain object.
 - ex02: Abstract classes are introduced here. They are used to be used as a base class, and you cannot instantiate directly from abstract classes.
 - ex03: Interfaces do not exists in C++98 so in this exercise it's about trying to implement them. Interfaces = Pure abstract classes.
+
+### CPP_05
+Module 05 is about the concept of exception and error handling.
+- ex00: Learning the basics by creating a "Bureaucrat" class that throws exceptions when invalid operations are performed.
+- ex01: Handling more complex scenarios and ensure proper exception handling.
+- ex02: Putting the Bureaucrats to work by creating forms that can be signed depending on the bureaucrat's rank.
+- ex03: Making things harder.
+- ex04: Implement a "Intern" class that will create the forms to be signed or executed by the Bureaucrat.
+
+### CPP_06
