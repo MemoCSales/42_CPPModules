@@ -105,8 +105,6 @@ bool isInt(const std::string& lit) {
 }
 
 bool isFloat(const std::string& lit) {
-	// if (lit.empty()) return false;
-
 	// if (lit == "nanf" || lit == "+inff" || lit == "-inff") return false;
 
 	if (lit[lit.size() - 1] != 'f') return false;
@@ -129,13 +127,16 @@ bool isFloat(const std::string& lit) {
 bool isDouble(const std::string& lit) {
 	if (lit[lit.size() - 1] == 'f') return true;
 
-	if (lit.find('.') == std::string::npos) return false;
-
 	std::istringstream iss(lit);
 	double doubleNum;
 	iss >> doubleNum;
 
-	return !iss.fail() && iss.eof();
+	if (!(!iss.fail() && iss.eof())) return false;
+
+	if (doubleNum < -std::numeric_limits<double>::max() || doubleNum > std::numeric_limits<double>::max())
+		return false;
+	
+	return true;
 }
 
 void printChar(const std::string& lit) {
@@ -203,6 +204,10 @@ void printDouble(const std::string& lit) {
 	} else {
 		std::cout << "int: impossible" << std::endl;
 	}
+
+	double doubleValue = atof(lit.c_str());
+	std::cout << "float: " << static_cast<float>(doubleValue) << "f" << std::endl;
+	std::cout << "double: " << doubleValue << std::endl;
 
 }
 

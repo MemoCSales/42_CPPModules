@@ -7,7 +7,8 @@ void testConversion(const std::string& literal) {
 }
 
 int	main(int argc, char **argv) {
-	(void)argv;
+	// (void)argv;
+	// (void)argc;
 	if (argc < 2)
 	{
 		std::cerr << "Literal missing!\n";
@@ -24,6 +25,12 @@ int	main(int argc, char **argv) {
 	// testConversion("+inf");
 	// testConversion("-inf");
 	// testConversion("inf");
+	// testConversion("2147483647"); // Max value
+	// testConversion("2147483648"); // Invalid max int value
+	// testConversion("-1.7976931348623157E+308"); // Lowest double value
+	// testConversion("1.7976931348623157E+308");
+	// testConversion("3.4028235E+38"); // Max float value
+	// testConversion("1.17549435E-38"); // Min float value
 	
 	return 0;
 }
