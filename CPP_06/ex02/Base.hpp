@@ -4,6 +4,7 @@
 # include <cstdlib> //for srand() and rand()
 # include <ctime> // for time()
 # include <unistd.h>
+# include <typeinfo>
 
 # define DEBUG 0
 
