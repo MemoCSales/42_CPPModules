@@ -1,6 +1,8 @@
-#ifndef Serializer_HPP
-# define Serializer_HPP
+#ifndef SERIALIZER_HPP
+# define SERIALIZER_HPP
 # include <iostream>
+# include <stdint.h>
+# include <cassert>
 # include "DataStruct.hpp"
 
 # define DEBUG 0
@@ -19,8 +21,8 @@ class Serializer {
 		Serializer(void);
 	public:
 		// Methods
-		static uintptr_t	serialize(Data* ptr);
-		static Data*		deserialize(uintptr_t raw);
+		static uintptr_t serialize(Data* ptr);
+		static Data* deserialize(uintptr_t raw);
 };
 
 #endif
