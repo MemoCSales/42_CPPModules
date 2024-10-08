@@ -6,4 +6,6 @@
 .vscode/
 
 # binary
-./ex00/bureaucrat
+./ex00/convert
+./ex01/serial
+./ex02/type
