@@ -6,6 +6,6 @@
 .vscode/
 
 # binary
-./ex00/convert
-./ex01/serial
-./ex02/type
+./ex00/tfunctions
+./ex01/iter
+./ex02/array
