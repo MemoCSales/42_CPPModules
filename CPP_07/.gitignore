@@ -6,6 +6,6 @@
 .vscode/
 
 # binary
-./ex00/tfunctions
-./ex01/iter
-./ex02/array
+**/tfunctions
+**/iter
+**/array
