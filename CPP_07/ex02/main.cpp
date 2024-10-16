@@ -1,57 +1,103 @@
-#include <iostream>
-#include "Array.hpp"
+# include <iostream>
+# include "Array.hpp"
 
-#define MAX_VAL 750
-int main(int, char**)
-{
+# define MAX_VAL 750
+
+void testArrayBounds() {
     Array<int> numbers(MAX_VAL);
-    int* mirror = new int[MAX_VAL];
-    srand(time(NULL));
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        const int value = rand();
-        numbers[i] = value;
-        mirror[i] = value;
-    }
-    std::cout << GREEN << "Size of the array: " << DEFAULT << numbers.size() << std::endl;
-    //SCOPE
-    {
-        Array<int> tmp = numbers;
-        Array<int> test(tmp);
-    }
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        if (mirror[i] != numbers[i])
-        {
-            std::cerr << "didn't save the same value!!" << std::endl;
-            return 1;
-        }
-    }
     try
     {
-        numbers[-2] = 0;
+        numbers[-1] = 0;
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
     }
+
     try
     {
-        // std::cout << "MAX_VAL: " << MAX_VAL << std::endl;
-        // std::cout << "Array size: " << sizeof(numbers) / sizeof(numbers[0]) << std::endl;
         numbers[MAX_VAL] = 0;
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
-    }
+    }    
+}
 
+void testArrayCopy() {
+    Array<int> numbers(MAX_VAL);
     for (int i = 0; i < MAX_VAL; i++)
     {
-        numbers[i] = rand();
-        // std::cout << "numbers[" << i << "] =" << numbers[i] << std::endl;
+        numbers[i] = i;
     }
-    delete [] mirror;//
+
+    Array<int> copy = numbers;
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (copy[i] != numbers[i])
+        {
+            std::cout << "Copy constructor failed at index " << i << std::endl;
+            return ;
+        }
+    }
+    
+    Array<int> assigned;
+    assigned = numbers;
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (assigned[i] != numbers[i])
+        {
+            std::cout << "Assignment operator failed at index " << i << std::endl;
+            return ;
+        }
+    }
+    
+    std::cout << GREEN <<"Copy constructor and assignment operator passed the tests" << DEFAULT<< std::endl;
+}
+
+void testArraySize() {
+    Array<int> numbers(MAX_VAL);
+
+    if (numbers.size() != MAX_VAL)
+    {
+        std::cerr << RED << "Size method failed." << DEFAULT << std::endl;
+    } else {
+        std::cerr << GREEN << "Size method passed." << DEFAULT << std::endl;
+    }
+}
+
+void testEmptyArray() {
+    Array<int> empty;
+
+    if (empty.size() != 0)
+    {
+        std::cerr << RED << "Size method failed." << DEFAULT << std::endl;
+    } else {
+        std::cerr << GREEN << "Size method passed." << DEFAULT << " Size: " << empty.size() << std::endl;
+    }
+    try
+    {
+        empty[0] = 1;
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << RED << "Empty array is initialized by NULL. Cannot assign any values into it." << DEFAULT << '\n';
+    }
+    
+}
+int main() {
+    std::cout << CYAN << "Testing Array Bounds:" << DEFAULT << std::endl;
+    testArrayBounds();
+    std::cout << "\n";
+    std::cout << CYAN << "Testing Array Copy:" << DEFAULT << std::endl;
+    testArrayCopy();
+    std::cout << "\n";
+    std::cout << CYAN << "Testing Array Size:" << DEFAULT << std::endl;
+    testArraySize();
+    std::cout << "\n";
+    std::cout << CYAN << "Testing Empty Array: " << DEFAULT << std::endl;
+    testEmptyArray();
+
     return 0;
 }
