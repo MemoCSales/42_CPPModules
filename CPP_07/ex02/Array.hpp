@@ -24,7 +24,7 @@ class Array {
 		Array(const Array &other);
 		Array &operator=(const Array &other);
 		~Array();
-		int& operator[](int);
+		T& operator[](int);
 		// Exceptions
 		class ArrayOutOfBounds : public std::exception {
 			public:

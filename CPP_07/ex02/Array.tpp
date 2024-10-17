@@ -29,7 +29,7 @@ Array<T> &Array<T>::operator=(const Array &other) {
 }
 
 template <typename T>
-int& Array<T>::operator[](int index) {
+T& Array<T>::operator[](int index) {
 	if (index < 0 || index >= static_cast<int>(_size)) {
 		// std::cout << "index: " << index << std::endl;
 		// std::cout << "_size: " << _size << std::endl;
