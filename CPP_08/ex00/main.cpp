@@ -12,17 +12,13 @@ void vectorTest() {
 	int min = 1;
 	int max = 100;
 
-	for (std::vector<int>::iterator it = vectorTest.begin(); it != vectorTest.end(); it++)	{
-		*it = min + std::rand() % (max - min + 1);
-	}
-	
+	populateContainer(vectorTest, min, max);
 	//Table header
 	std::cout << GREEN << "TESTING WITH VECTOR" << DEFAULT << std::endl;
 	std::cout << std::left << std::setw(10) << "Index" << std::setw(10) << "Value" << std::endl;
 	std::cout << std::string(20, '-') << std::endl;
-	for (std::vector<int>::size_type i = 0; i != vectorTest.size(); i++)	{
-        std::cout << std::left << std::setw(5) << i << " ->     " << std::setw(10) << vectorTest[i] << std::endl;
-	}
+
+	iter(vectorTest, printIndexAndValue<int>);
 	try
 	{
 		int value = 42;
@@ -39,23 +35,16 @@ void vectorTest() {
 
 void listTest() {
 	std::list<int> listTest(MAX_SIZE);
-
-	srand(static_cast<unsigned int>(time(0)));
 	int min = 1;
 	int max = 100;
 
-	for (std::list<int>::iterator it = listTest.begin(); it != listTest.end(); it++)	{
-		*it = min + std::rand() % (max - min + 1);
-	}
+	populateContainer(listTest, min, max);
 	//Table header
 	std::cout << GREEN << "TESTING WITH LIST" << DEFAULT << std::endl;
 	std::cout << std::left << std::setw(10) << "Index" << std::setw(10) << "Value" << std::endl;
 	std::cout << std::string(20, '-') << std::endl;
-	int index = 0;
+	iter(listTest, printIndexAndValue<int>);
 
-	for (std::list<int>::iterator it = listTest.begin(); it != listTest.end(); ++it, index++)	{
-        std::cout << std::left << std::setw(5) << index << " ->     " << std::setw(10) << *it << std::endl;
-	}
 	try
 	{
 		int value = 42;
@@ -67,7 +56,6 @@ void listTest() {
 	{
 		std::cerr << RED << e.what() << DEFAULT << '\n';
 	}
-
 }
 
 int main () {

@@ -23,6 +23,7 @@ class NoOcurrenceFound : public std::exception {
 		}
 };
 
+
 template <typename T> typename T::iterator easyfind(T &first, int value) {
 
 	typename T::iterator it = std::find(first.begin(), first.end(), value);
@@ -34,16 +35,23 @@ template <typename T> typename T::iterator easyfind(T &first, int value) {
 }
 
 
-template <typename T> void iter(T *array, size_t size, void (*func)(T&)) {
-	for (size_t i = 0; i < size; i++) {
-		func(array[i]);
+// -------My own implementation-------------------
+template <typename Container, typename Function>
+void iter(Container& container, Function func) {
+	size_t index = 0;
+	for (typename Container::iterator it = container.begin(); it != container.end(); it++, index++) {
+		func(index, *it);
 	}
 }
 
 template <typename T> void populateContainer(T& element, int min, int max) {
-	for (T::iterator it = 0; i < count; i++)
+	srand(static_cast<unsigned int>(time(0)));
+	for (typename T::iterator it = element.begin(); it != element.end(); it++)
 	{
-		/* code */
+		*it = min + std::rand() % (max - min + 1);
 	}
-	
+}
+
+template <typename T> void printIndexAndValue(size_t index, int value) {
+	std::cout << std::left << std::setw(5) << index << "  ->   " << std::setw(10) << value << std::endl;
 }
