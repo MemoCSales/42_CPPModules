@@ -39,3 +39,11 @@ template <typename T> void iter(T *array, size_t size, void (*func)(T&)) {
 		func(array[i]);
 	}
 }
+
+template <typename T> void populateContainer(T& element, int min, int max) {
+	for (T::iterator it = 0; i < count; i++)
+	{
+		/* code */
+	}
+	
+}
