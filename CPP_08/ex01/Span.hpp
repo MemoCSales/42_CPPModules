@@ -3,7 +3,7 @@
 # include <iostream>
 # include <vector>
 
-# define DEBUG 0
+# define DEBUG 1
 
 # define RED		"\033[1;31m"
 # define GREEN		"\033[1;32m"
@@ -14,18 +14,19 @@
 # define WHITE		"\033[1;37m"
 # define DEFAULT	"\033[0m"
 
-template <typename T>
 class Span {
 	private:
 		unsigned int _N;
-		std::vector<T> _numbers;
+		std::vector<int> _numbers;
 	public:
+		// Span(void);
 		Span(unsigned int N);
 		Span(const Span &other);
 		Span &operator=(const Span &other);
 		~Span();
 		// Method
 		void addNumber(int value); 
+		void printNumbers() const;
 		// Exceptions
 		class MaximumCapacity : public std::exception {
 		public:
@@ -40,44 +41,46 @@ class Span {
 // #include "Span.hpp"
 
 // ++++Constructor
-template <typename T>
-Span<T>::Span(unsigned int N) : _N(N), _numbers(N) {
+
+// Span::Span() : _N(0), _numbers(0) {
+// 	if (DEBUG) {
+// 		std::cout << "Span parameter constructor called" << std::endl;
+// 	}
+// }
+
+
+Span::Span(unsigned int N) : _N(N), _numbers(0) {
 	if (DEBUG) {
 		std::cout << "Span parameter constructor called" << std::endl;
 	}
 }
 
 // Copy Constructor
-template <typename T>
-Span<T>::Span(const Span &other) {
+
+Span::Span(const Span &other) {
 	if (DEBUG) {
 		std::cout << "Span copy constructor called" << std::endl;
 	}
 	this->_N = other._N;
-	for (std::vector<int>::iterator it = _numbers.begin(); it != _numbers.end(); it++) {
-		this->_numbers.at(it) = other._numbers.at(it);
-	}
+	this->_numbers = other._numbers;
 }
 
 // Assignment Operator
-template <typename T>
-Span<T> &Span<T>::operator=(const Span &other) {
+
+Span &Span::operator=(const Span &other) {
 	if (DEBUG) {
 		std::cout << "Span Assignment Operator called" << std::endl;
 	}
 	if (this != &other) {
-		_numbers.clear();
 		this->_N = other._N;
-		for (std::vector<int>::iterator it = _numbers.begin(); it != _numbers.end(); it++) {
-			this->_numbers.at(it) = other._numbers.at(it);
-		}
+		this->_numbers = other._numbers;
 	}
 	return *this;
 }
 
 // ----Destructor
-template <typename T>
-Span<T>::~Span() {
+
+Span::~Span() {
 	if (DEBUG) {
 		std::cout << "Span destructor called" << std::endl;
 	}
@@ -85,11 +88,18 @@ Span<T>::~Span() {
 
 
 // Methods
-template <typename T>
-void Span<T>::addNumber(int value) {
+void Span::addNumber(int value) {
 	if (_numbers.size() != _N) {
 		_numbers.push_back(value);
 	} else {
 		throw MaximumCapacity();
 	}
+}
+
+void Span::printNumbers() const {
+	for (std::vector<int>::const_iterator it = _numbers.begin(); it != _numbers.end(); it++)
+	{
+		std::cout << "Numbers: " << *it << std::endl;
+	}
+	
 }
