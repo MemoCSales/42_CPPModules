@@ -59,8 +59,8 @@ void listTest() {
 }
 
 int main () {
-	vectorTest();
-	// listTest();
+	// vectorTest();
+	listTest();
 	
 	return 0;
 }

@@ -36,10 +36,10 @@ template <typename T> typename T::iterator easyfind(T &first, int value) {
 
 
 // -------My own implementation-------------------
-template <typename Container, typename Function>
-void iter(Container& container, Function func) {
+template <typename T>
+void iter(T& container, void (*func)(size_t, typename T::value_type&)) {
 	size_t index = 0;
-	for (typename Container::iterator it = container.begin(); it != container.end(); it++, index++) {
+	for (typename T::iterator it = container.begin(); it != container.end(); it++, index++) {
 		func(index, *it);
 	}
 }
@@ -52,6 +52,6 @@ template <typename T> void populateContainer(T& element, int min, int max) {
 	}
 }
 
-template <typename T> void printIndexAndValue(size_t index, int value) {
+template <typename T> void printIndexAndValue(size_t index, int& value) {
 	std::cout << std::left << std::setw(5) << index << "  ->   " << std::setw(10) << value << std::endl;
 }
