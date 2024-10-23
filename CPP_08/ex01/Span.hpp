@@ -2,8 +2,14 @@
 # define Span_HPP
 # include <iostream>
 # include <vector>
+# include <algorithm>
+# include <limits.h>
+# include <cstdlib>
+# include <set>
 
-# define DEBUG 1
+
+
+# define DEBUG 0
 
 # define RED		"\033[1;31m"
 # define GREEN		"\033[1;32m"
@@ -19,14 +25,16 @@ class Span {
 		unsigned int _N;
 		std::vector<int> _numbers;
 	public:
-		// Span(void);
 		Span(unsigned int N);
 		Span(const Span &other);
 		Span &operator=(const Span &other);
 		~Span();
-		// Method
-		void addNumber(int value); 
+		// Methods
+		void addNumber(int value);
+		int shortestSpan();
+		int longestSpan();
 		void printNumbers() const;
+		void populateVector(int, int);
 		// Exceptions
 		class MaximumCapacity : public std::exception {
 		public:
@@ -34,72 +42,12 @@ class Span {
 				return ("Vector has reached its maximum capacity");
 			}
 		};
+		class SpanError : public std::exception {
+			public:
+			virtual const char* what() const throw() {
+				return ("Vector needs to have at least 2 numbers, please check");
+			}
+		};
 };
 
 #endif
-
-// #include "Span.hpp"
-
-// ++++Constructor
-
-// Span::Span() : _N(0), _numbers(0) {
-// 	if (DEBUG) {
-// 		std::cout << "Span parameter constructor called" << std::endl;
-// 	}
-// }
-
-
-Span::Span(unsigned int N) : _N(N), _numbers(0) {
-	if (DEBUG) {
-		std::cout << "Span parameter constructor called" << std::endl;
-	}
-}
-
-// Copy Constructor
-
-Span::Span(const Span &other) {
-	if (DEBUG) {
-		std::cout << "Span copy constructor called" << std::endl;
-	}
-	this->_N = other._N;
-	this->_numbers = other._numbers;
-}
-
-// Assignment Operator
-
-Span &Span::operator=(const Span &other) {
-	if (DEBUG) {
-		std::cout << "Span Assignment Operator called" << std::endl;
-	}
-	if (this != &other) {
-		this->_N = other._N;
-		this->_numbers = other._numbers;
-	}
-	return *this;
-}
-
-// ----Destructor
-
-Span::~Span() {
-	if (DEBUG) {
-		std::cout << "Span destructor called" << std::endl;
-	}
-}
-
-
-// Methods
-void Span::addNumber(int value) {
-	if (_numbers.size() != _N) {
-		_numbers.push_back(value);
-	} else {
-		throw MaximumCapacity();
-	}
-}
-
-void Span::printNumbers() const {
-	for (std::vector<int>::const_iterator it = _numbers.begin(); it != _numbers.end(); it++)
-	{
-		std::cout << "Numbers: " << *it << std::endl;
-	}
-	
-}
