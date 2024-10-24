@@ -13,56 +13,22 @@
 # define WHITE		"\033[1;37m"
 # define DEFAULT	"\033[0m"
 
-class MutantStack {
-	private:
-	
+template <typename T>
+class MutantStack : public std::stack<T> {
+	// protected:
+	// 	std::deque<T> _c;
 	public:
 		MutantStack(void);
-		MutantStack("Parameter Constructor");
 		MutantStack(const MutantStack &other);
 		MutantStack &operator=(const MutantStack &other);
 		~MutantStack();
+		// Defining iterators types
+		typedef typename std::stack<T>::container_type::iterator iterator;				// during iterations elements can be modify
+		typedef typename std::stack<T>::container_type::const_iterator const_iterator;	// during iteration elements can not be modified
+		// Implementations of iterators
+		iterator begin() { return this->c.begin(); }
+		iterator end() { return this->c.end(); }
 };
 
-#endif
-
-#include "MutantStack.hpp"
-
-// ++++Constructor
-MutantStack::MutantStack(void) {
-	if (DEBUG) {
-		std::cout << "MutantStack default constructor called" << std::endl;
-	}
-}
-
-// ++++Constructor
-MutantStack::MutantStack("Parameters") {
-	if (DEBUG) {
-		std::cout << "MutantStack parameter constructor called" << std::endl;
-	}
-}
-
-// Copy Constructor
-MutantStack::MutantStack(const MutantStack &other) : "_variable(other._variable)"{
-	if (DEBUG) {
-		std::cout << "MutantStack copy constructor called" << std::endl;
-	}
-}
-
-// Assignment Operator
-MutantStack &MutantStack::operator=(const MutantStack &other) {
-	if (DEBUG) {
-		std::cout << "MutantStack Assignment Operator called" << std::endl;
-	}
-	if (this != &other) {
-		// Copy data from other to this
-	}
-	return *this;
-}
-
-// ----Destructor
-MutantStack::~MutantStack() {
-	if (DEBUG) {
-		std::cout << "MutantStack destructor called" << std::endl;
-	}
-}
+// Include template definition
+# include "MutantStack.tpp"
