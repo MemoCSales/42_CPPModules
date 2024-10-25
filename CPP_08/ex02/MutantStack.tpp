@@ -24,7 +24,7 @@ MutantStack<T> &MutantStack<T>::operator=(const MutantStack &other) {
 		std::cout << "MutantStack Assignment Operator called" << std::endl;
 	}
 	if (this != &other) {
-		this->std::stack<T> = other.std::stack<T>;
+		this->c= other.c;
 	}
 	return *this;
 }
