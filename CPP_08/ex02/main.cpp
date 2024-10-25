@@ -3,6 +3,9 @@
 
 int main()
 {
+	std::cout << CYAN << "TEST MUTANTSTACK AGAINST LIST:" << DEFAULT << std::endl;
+
+	// MUTANTSTACK
 	MutantStack<int> mstack;
 	mstack.push(5);
 	mstack.push(17);
@@ -18,11 +21,31 @@ int main()
 	MutantStack<int>::iterator ite = mstack.end();
 	++it;
 	--it;
-	while (it != ite) {
-		std::cout << *it << std::endl;
+
+	// LIST
+	std::list<int> mlist;
+	mlist.push_back(5);
+	mlist.push_back(17);
+	std::cout << mlist.back() << std::endl;
+	mlist.pop_back();
+	std::cout << mlist.size() << std::endl;
+	mlist.push_back(3);
+	mlist.push_back(5);
+	mlist.push_back(737);
+	//[...]
+	mlist.push_back(0);
+	std::list<int>::iterator itList = mlist.begin();
+	std::list<int>::iterator iteList = mlist.end();
+	++itList;
+	--itList;
+	std::list<int> s(mlist);
+
+	while (itList != iteList && it != ite) {
+		std::cout << *it << " -- " << *itList << std::endl;
 		++it;
+		++itList;
 	}
-	std::stack<int> s(mstack);
+	// std::stack<int> s(mstack);
 	return 0;
 }
 
