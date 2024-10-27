@@ -1,17 +1,17 @@
 # include "MutantStack.hpp"
+# include <iomanip>
 # include <list>
 
 int main()
 {
-	std::cout << CYAN << "TEST MUTANTSTACK AGAINST LIST:" << DEFAULT << std::endl;
 
 	// MUTANTSTACK
 	MutantStack<int> mstack;
 	mstack.push(5);
 	mstack.push(17);
-	std::cout << mstack.top() << std::endl;
+	std::cout << "Top(last) element in the stack: " << mstack.top() << std::endl;
 	mstack.pop();
-	std::cout << mstack.size() << std::endl;
+	std::cout << "Size of the stack: " << mstack.size() << std::endl;
 	mstack.push(3);
 	mstack.push(5);
 	mstack.push(737);
@@ -26,9 +26,9 @@ int main()
 	std::list<int> mlist;
 	mlist.push_back(5);
 	mlist.push_back(17);
-	std::cout << mlist.back() << std::endl;
+	std::cout << "Last element in the list: " << mlist.back() << std::endl;
 	mlist.pop_back();
-	std::cout << mlist.size() << std::endl;
+	std::cout << "Size of the stack: " << mlist.size() << std::endl;
 	mlist.push_back(3);
 	mlist.push_back(5);
 	mlist.push_back(737);
@@ -40,8 +40,11 @@ int main()
 	--itList;
 	std::list<int> s(mlist);
 
+	std::cout << CYAN << "TEST MUTANTSTACK AGAINST LIST:" << DEFAULT << std::endl;
+	std::cout << std::left << std::setw(10) << "Stack" << std::setw(10) << "List" << std::endl;
+	std::cout << std::string(20, '-') << std::endl;
 	while (itList != iteList && it != ite) {
-		std::cout << *it << " -- " << *itList << std::endl;
+		std::cout << std::left << std::setw(5) << *it << "  --  " << std::setw(10) <<  *itList << std::endl;
 		++it;
 		++itList;
 	}
