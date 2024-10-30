@@ -7,6 +7,8 @@
 # include <sstream>
 
 # define DEBUG 0
+# define MAX_VALID_YR 9999
+# define MIN_VALID_YR 1800
 # define ERROR_MESSAGE "Error: could not open file."
 
 # define RED		"\033[1;31m"
@@ -27,6 +29,20 @@ class BitcoinExchange {
 		BitcoinExchange(const BitcoinExchange &other);
 		BitcoinExchange &operator=(const BitcoinExchange &other);
 		~BitcoinExchange();
+
+		// Exceptions
+		class NegativeValue : public std::exception {
+			public:
+			virtual const char* what() const throw() {
+				return ("Error: not a positive number.");
+			}
+		};
+		class MaxIntValue : public std::exception {
+			public:
+			virtual const char* what() const throw() {
+				return ("Error: too large a number.");
+			}
+		};
 };
 
 #endif
@@ -35,6 +51,8 @@ void validateArgs(int argc);
 int fileManagement(char** argv);
 bool stringHasDigits(const std::string& str);
 void parseLine(std::string &dateString, std::string &valueString, std::string &line);
+bool isValidDate(std::string& dateString);
+bool isYearLeap(int year);
 
 // #include "BitcoinExchange.hpp"
 
