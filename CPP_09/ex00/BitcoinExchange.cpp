@@ -51,39 +51,75 @@ bool stringHasDigits(const std::string& str) {
 }
 
 void parseLine(std::string &dateString, std::string &valueString, std::string &line) {
-	std::istringstream ss(line);
 
-	if (std::getline(ss, dateString, '|')) {
-		if (std::getline(ss, valueString, '|')) {
-			float price = std::atof(valueString.c_str());
-			// std::cout << "Date: " << dateString << ", Price: " << price << std::endl;
-			(void)price;
+	try	{
+		std::istringstream ss(line);
+		IntFloat value;
+
+		if (std::getline(ss, dateString, '|')) {
+			// std::cout << "Date: " << dateString;
+			if (std::getline(ss, valueString, '|')) {
+				// value = std::atof(valueString.c_str());
+				// std::cout << ", Price: " << valueString << std::endl;
+			} else {
+				valueString = '\0';
+				// std::cout << ", Price: " << valueString << std::endl;
+			}
+		}
+		// std::cout << "value: " << valueString << std::endl;
+		value = parseNumber(valueString);
+
+		if (!isValidDate(dateString)) {
+			std::cerr << "Error: bad input => " << dateString << std::endl;
 		}
 	}
-
-	if (!isValidDate(dateString)) {
-		std::cerr << "Error: bad input => " << dateString << std::endl;
+	catch(const std::exception& e) {
+		std::cerr << e.what() << '\n';
 	}
-	
 }
+
+IntFloat parseNumber(const std::string& str) {
+	IntFloat result;
+	char* end;
+
+	if (str.find('.') != std::string::npos) {
+		// Parse as float
+		float floatValue = std::strtof(str.c_str(), &end);
+		if (*end != '\0') {
+			throw std::invalid_argument("Invalid float value");
+		}
+		result.value.floatValue = floatValue;
+		result.isFloat = true;
+	} else {
+		// Parse as int
+		long intValue = std::strtol(str.c_str(), &end, 10);
+		if (*end != '\0') {
+			throw std::invalid_argument("Invalid int value");
+		}
+		if (intValue < 0) throw NegativeValue();
+		if (intValue > INT_MAX) throw MaxIntValue();
+		result.value.intValue = static_cast<int>(intValue);
+		result.isFloat = false;
+	}
+	return result;
+}
+
 
 bool isValidDate(std::string& dateString) {
 // Parsing date and check if its valid or not
 	std::istringstream ss1(dateString);
 	int day, month, year = 0;
 	std::string dayString, monthString, yearString;
-	if (std::getline(ss1, dayString, '-')) {
-		if (std::getline(ss1, monthString, '-')) {
-			if (std::getline(ss1, yearString, '-')) {
-				day = std::atoi(dayString.c_str());
-				month = std::atoi(monthString.c_str());
-				year = std::atoi(yearString.c_str());
-				// std::cout << "Day = " << day << std::endl;
-				// std::cout << "Month = " << month << std::endl;
-				// std::cout << "Year = " << year << std::endl;
-			}
-		}
+	
+	if (std::getline(ss1,yearString, '-') && std::getline(ss1, monthString, '-') && std::getline(ss1, dayString, '-')) {
+		year = std::atoi(yearString.c_str());
+		month = std::atoi(monthString.c_str());
+		day = std::atoi(dayString.c_str());
+		// return true;
+	} else {
+		return false;
 	}
+
 	// Check valid year
 	if (year > MAX_VALID_YR || year < MIN_VALID_YR) return false;
 	// Check valid month
