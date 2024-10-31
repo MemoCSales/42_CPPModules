@@ -44,18 +44,18 @@ class BitcoinExchange {
 		~BitcoinExchange();
 		// Method
 		bool dataBaseManagement();
+		int fileManagement(char** argv);
 
 };
 
 #endif
 
 void validateArgs(int argc);
-int fileManagement(char** argv);
 bool stringHasDigits(const std::string& str);
 void parseLine(std::string &dateString, std::string &valueString, std::string &line);
+float parseNumber(const std::string& str);
 bool isValidDate(std::string& dateString);
 bool isYearLeap(int year);
-IntFloat parseNumber(const std::string& str);
 
 
 // Exceptions
@@ -65,7 +65,7 @@ class NegativeValue : public std::exception {
 		return ("Error: not a positive number.");
 	}
 };
-class MaxIntValue : public std::exception {
+class MaxValue : public std::exception {
 	public:
 	virtual const char* what() const throw() {
 		return ("Error: too large a number.");

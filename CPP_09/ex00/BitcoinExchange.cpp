@@ -80,11 +80,11 @@ bool stringHasDigits(const std::string& str) {
 	return false;
 }
 
-void parseLine(std::string &dateString, std::string &valueString, std::string &line) {
+void parseLine(std::string &dateString, std::string &valueString, std::string &line, float &price) {
 
 	try	{
 		std::istringstream ss(line);
-		IntFloat value;
+		// float value;
 
 		if (std::getline(ss, dateString, '|')) {
 			// std::cout << "Date: " << dateString;
@@ -97,7 +97,8 @@ void parseLine(std::string &dateString, std::string &valueString, std::string &l
 			}
 		}
 		// std::cout << "value: " << valueString << std::endl;
-		value = parseNumber(valueString);
+		price = parseNumber(valueString);
+		// price = value;
 
 		if (!isValidDate(dateString)) {
 			std::cerr << "Error: bad input => " << dateString << std::endl;
@@ -108,29 +109,12 @@ void parseLine(std::string &dateString, std::string &valueString, std::string &l
 	}
 }
 
-IntFloat parseNumber(const std::string& str) {
-	IntFloat result;
-	char* end;
+float parseNumber(const std::string& str) {
+	float result = std::stof(str.c_str());
 
-	if (str.find('.') != std::string::npos) {
-		// Parse as float
-		float floatValue = std::strtof(str.c_str(), &end);
-		if (*end != '\0') {
-			throw std::invalid_argument("Invalid float value");
-		}
-		result.value.floatValue = floatValue;
-		result.isFloat = true;
-	} else {
-		// Parse as int
-		long intValue = std::strtol(str.c_str(), &end, 10);
-		if (*end != '\0') {
-			throw std::invalid_argument("Invalid int value");
-		}
-		if (intValue < 0) throw NegativeValue();
-		if (intValue > 1000) throw MaxIntValue();
-		result.value.intValue = static_cast<int>(intValue);
-		result.isFloat = false;
-	}
+	if (result < 0.0f) throw NegativeValue();
+	if (result > 1000.0f) throw MaxValue();
+
 	return result;
 }
 
@@ -176,10 +160,12 @@ bool isYearLeap(int year) {
 	return(((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
 }
 
-int fileManagement(char** argv) {
+
+int BitcoinExchange::fileManagement(char** argv) {
 	std::ifstream inputFile(argv[1], std::ifstream::in);
 	std::string line;
 	std::string dateString, valueString;
+	float price;
 
 	if (!(inputFile.is_open())) {
 		std::cerr << ERROR_MESSAGE << std::endl;
@@ -187,12 +173,12 @@ int fileManagement(char** argv) {
 	} else {
 		if (std::getline(inputFile, line)) {}
 		while (std::getline(inputFile, line)) {
-			// if (stringHasDigits(line)) {
-				// std::cout << "Line: " << line << std::endl;
-				parseLine(dateString, valueString, line);
-				// std::cout << "Date: " << dateString << std::endl;
-				// std::cout << "Price: " << valueString << std::endl;
-			// }		
+			// Parsing the line to extract date and value
+			parseLine(dateString, valueString, line, price);
+			std::map<std::string, float>::iterator it = _bitcoin.find(dateString);
+			// if (it != _bitcoin.end()) {
+
+			// }
 		}
 	}
 

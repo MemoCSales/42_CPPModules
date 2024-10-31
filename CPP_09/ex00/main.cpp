@@ -7,7 +7,8 @@ int main (int argc, char** argv) {
 	validateArgs(argc);
 	BitcoinExchange bit;
 	if(!(bit.dataBaseManagement())) return 1;
-	returnValue = fileManagement(argv);
+	
+	returnValue = bit.fileManagement(argv);
 
 	return returnValue;
 }
