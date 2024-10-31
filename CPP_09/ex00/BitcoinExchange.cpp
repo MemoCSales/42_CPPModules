@@ -33,6 +33,35 @@ BitcoinExchange::~BitcoinExchange() {
 	}
 }
 
+// ---------- Methods ------------
+bool BitcoinExchange::dataBaseManagement() {
+	std::ifstream dataBase("data.csv");
+	std::string line;
+
+	if (!(dataBase.is_open())) {
+		std::cerr << ERROR_MESSAGE << std::endl;
+		return false;
+	} else {
+		if (std::getline(dataBase, line)) {}
+		while (std::getline(dataBase, line)) {
+			std::istringstream ss(line);
+			std::string dateString, priceString;
+				if (std::getline(ss, dateString, ',') && std::getline(ss, priceString, ',')) {
+					float price = std::atof(priceString.c_str());
+
+					_bitcoin.insert(std::make_pair(dateString, price));
+				}
+			}
+		}
+	// Debug printing
+	for(std::map<std::string, float>::iterator i = _bitcoin.begin(); i != _bitcoin.end(); i++) {
+		std::cout << i->first << " -> " << i->second << std::endl;
+	}
+	std::cout << "Size of my map: "<<  _bitcoin.size() << std::endl;
+
+	return true;
+}
+
 // ---------- Functions ----------
 void validateArgs(int argc) {
 	if (argc != 2) {
@@ -42,6 +71,7 @@ void validateArgs(int argc) {
 }
 
 bool stringHasDigits(const std::string& str) {
+	std::cout << "Line checked: " << str << std::endl;
 	for (size_t i = 0; i < str.size(); i++) {
 		if (std::isdigit(str[i])) {
 			return true;
@@ -97,7 +127,7 @@ IntFloat parseNumber(const std::string& str) {
 			throw std::invalid_argument("Invalid int value");
 		}
 		if (intValue < 0) throw NegativeValue();
-		if (intValue > INT_MAX) throw MaxIntValue();
+		if (intValue > 1000) throw MaxIntValue();
 		result.value.intValue = static_cast<int>(intValue);
 		result.isFloat = false;
 	}
@@ -154,16 +184,18 @@ int fileManagement(char** argv) {
 	if (!(inputFile.is_open())) {
 		std::cerr << ERROR_MESSAGE << std::endl;
 		return 1;
+	} else {
+		if (std::getline(inputFile, line)) {}
+		while (std::getline(inputFile, line)) {
+			// if (stringHasDigits(line)) {
+				// std::cout << "Line: " << line << std::endl;
+				parseLine(dateString, valueString, line);
+				// std::cout << "Date: " << dateString << std::endl;
+				// std::cout << "Price: " << valueString << std::endl;
+			// }		
+		}
 	}
 
-	while (std::getline(inputFile, line)) {
-		if (stringHasDigits(line)) {
-			// std::cout << "Line: " << line << std::endl;
-			parseLine(dateString, valueString, line);
-			// std::cout << "Date: " << dateString << std::endl;
-			// std::cout << "Price: " << valueString << std::endl;
-		}		
-	}
 	inputFile.close();
 	return 0;
 }
