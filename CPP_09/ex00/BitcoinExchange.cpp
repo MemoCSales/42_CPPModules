@@ -150,6 +150,10 @@ bool parseLine(std::string &dateString, std::string &valueString, std::string &l
 			std::cerr << "Error: bad input => " << dateString << std::endl;
 			return false;
 		}
+		if (!price) {
+			std::cerr << "Error: Invalid value" << std::endl;
+			return false;
+		}
 		return true;
 	}
 	catch(const std::exception& e) {
