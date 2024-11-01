@@ -5,6 +5,7 @@
 # include <fstream>
 # include <sstream>
 # include <limits.h>
+# include <algorithm>
 # include <map>
 
 # define DEBUG 0
@@ -45,6 +46,8 @@ class BitcoinExchange {
 		// Method
 		bool dataBaseManagement();
 		int fileManagement(char** argv);
+		void findDateMatching(std::string &dateString, std::string &valueString, std::string &line, float& price);
+		std::map<std::string, float>::iterator iteratorCheck(const std::string& str);
 
 };
 
@@ -52,7 +55,7 @@ class BitcoinExchange {
 
 void validateArgs(int argc);
 bool stringHasDigits(const std::string& str);
-void parseLine(std::string &dateString, std::string &valueString, std::string &line);
+void parseLine(std::string &dateString, std::string &valueString, std::string &line, float& price);
 float parseNumber(const std::string& str);
 bool isValidDate(std::string& dateString);
 bool isYearLeap(int year);

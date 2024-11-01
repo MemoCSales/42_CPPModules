@@ -54,10 +54,10 @@ bool BitcoinExchange::dataBaseManagement() {
 			}
 		}
 	// Debug printing
-	for(std::map<std::string, float>::iterator i = _bitcoin.begin(); i != _bitcoin.end(); i++) {
-		std::cout << i->first << " -> " << i->second << std::endl;
-	}
-	std::cout << "Size of my map: "<<  _bitcoin.size() << std::endl;
+	// for(std::map<std::string, float>::iterator i = _bitcoin.begin(); i != _bitcoin.end(); i++) {
+	// 	std::cout << i->first << " -> " << i->second << std::endl;
+	// }
+	// std::cout << "Size of my map: "<<  _bitcoin.size() << std::endl;
 
 	return true;
 }
@@ -80,6 +80,11 @@ bool stringHasDigits(const std::string& str) {
 	return false;
 }
 
+void trim(std::string& str) {
+	str.erase(0, str.find_first_not_of(" \t\n\r\f\v"));
+	str.erase(str.find_last_not_of(" \t\n\r\f\v") + 1);
+}
+
 void parseLine(std::string &dateString, std::string &valueString, std::string &line, float &price) {
 
 	try	{
@@ -88,7 +93,9 @@ void parseLine(std::string &dateString, std::string &valueString, std::string &l
 
 		if (std::getline(ss, dateString, '|')) {
 			// std::cout << "Date: " << dateString;
+			trim(dateString);
 			if (std::getline(ss, valueString, '|')) {
+				trim(valueString);
 				// value = std::atof(valueString.c_str());
 				// std::cout << ", Price: " << valueString << std::endl;
 			} else {
@@ -110,7 +117,7 @@ void parseLine(std::string &dateString, std::string &valueString, std::string &l
 }
 
 float parseNumber(const std::string& str) {
-	float result = std::stof(str.c_str());
+	float result = std::atof(str.c_str());
 
 	if (result < 0.0f) throw NegativeValue();
 	if (result > 1000.0f) throw MaxValue();
@@ -160,6 +167,35 @@ bool isYearLeap(int year) {
 	return(((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
 }
 
+std::map<std::string, float>::iterator 
+BitcoinExchange::iteratorCheck(const std::string& str) {
+	std::map<std::string, float>::iterator it = _bitcoin.find(str);
+	std::map<std::string, float>::iterator itBegin = _bitcoin.begin();
+
+	if (it != _bitcoin.end()) {
+		return it;
+	} else if (it->first > str){
+		return it--;
+	} else {
+		return ;
+	}
+
+}
+
+void BitcoinExchange::findDateMatching(std::string& date, std::string& value, std::string& line, float& price) {
+	// std::cout << "dateString value: " << dateString << std::endl;
+	std::map<std::string, float>::iterator it = iteratorCheck(date);
+	if (it != _bitcoin.end()) {
+		float result = it->second * price;
+		// std::cout << dateString << " => " << valueString << result << std::endl;
+		std::cout << "Date: " << it->first << " => " << value << " = " << result << std::endl;
+	} else {
+		// std::map<std::string, float>::iterator iter = _bitcoin.lower_bound(date);
+		float result = it->second * price;
+		std::cout << "(Lower bound)Date: " << it->first << " => " << value << " = " << result << std::endl;
+	}
+}
+
 
 int BitcoinExchange::fileManagement(char** argv) {
 	std::ifstream inputFile(argv[1], std::ifstream::in);
@@ -175,12 +211,13 @@ int BitcoinExchange::fileManagement(char** argv) {
 		while (std::getline(inputFile, line)) {
 			// Parsing the line to extract date and value
 			parseLine(dateString, valueString, line, price);
-			std::map<std::string, float>::iterator it = _bitcoin.find(dateString);
-			// if (it != _bitcoin.end()) {
-
-			// }
+			findDateMatching(dateString, valueString, line, price);
 		}
 	}
+
+	// for(std::map<std::string, float>::iterator i = _bitcoin.begin(); i != _bitcoin.end(); i++) {
+	// 	std::cout << i->first << " -> " << i->second << std::endl;
+	// }
 
 	inputFile.close();
 	return 0;
