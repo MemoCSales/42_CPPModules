@@ -22,18 +22,6 @@
 # define WHITE		"\033[1;37m"
 # define DEFAULT		"\033[0m"
 
-
-union IntFloatUnion {
-	int intValue;
-	float floatValue;
-};
-
-struct IntFloat {
-	IntFloatUnion value;
-	bool isFloat;
-};
-
-
 class BitcoinExchange {
 	private:
 		std::map<std::string, float> _bitcoin;
@@ -50,16 +38,6 @@ class BitcoinExchange {
 		std::map<std::string, float>::iterator iteratorCheck(const std::string& str);
 
 };
-
-#endif
-
-void validateArgs(int argc);
-bool stringHasDigits(const std::string& str);
-void parseLine(std::string &dateString, std::string &valueString, std::string &line, float& price);
-float parseNumber(const std::string& str);
-bool isValidDate(std::string& dateString);
-bool isYearLeap(int year);
-
 
 // Exceptions
 class NegativeValue : public std::exception {
@@ -82,16 +60,14 @@ class MinIntValue : public std::exception {
 	}
 };
 
-// #include "BitcoinExchange.hpp"
+#endif
 
-
-
-// // ++++Constructor
-// BitcoinExchange::BitcoinExchange("Parameters") {
-// 	if (DEBUG) {
-// 		std::cout << "BitcoinExchange parameter constructor called" << std::endl;
-// 	}
-// }
-
+void validateArgs(int argc);
+bool stringHasDigits(const std::string& str);
+void trim(std::string& str);
+bool parseLine(std::string &dateString, std::string &valueString, std::string &line, float& price);
+float parseNumber(const std::string& str);
+bool isValidDate(std::string& dateString);
+bool isYearLeap(int year);
 
 

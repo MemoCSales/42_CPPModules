@@ -33,6 +33,7 @@ BitcoinExchange::~BitcoinExchange() {
 	}
 }
 
+
 // ---------- Methods ------------
 bool BitcoinExchange::dataBaseManagement() {
 	std::ifstream dataBase("data.csv");
@@ -53,14 +54,59 @@ bool BitcoinExchange::dataBaseManagement() {
 				}
 			}
 		}
-	// Debug printing
-	// for(std::map<std::string, float>::iterator i = _bitcoin.begin(); i != _bitcoin.end(); i++) {
-	// 	std::cout << i->first << " -> " << i->second << std::endl;
-	// }
-	// std::cout << "Size of my map: "<<  _bitcoin.size() << std::endl;
-
 	return true;
 }
+
+
+void BitcoinExchange::findDateMatching(std::string& date, std::string& value, float& price) {
+	std::map<std::string, float>::iterator it = iteratorCheck(date);
+	float result = it->second * price;
+	std::cout << "Date: " << date << " => " << value << " = " << result << std::endl;
+}
+
+
+int BitcoinExchange::fileManagement(char** argv) {
+	std::ifstream inputFile(argv[1], std::ifstream::in);
+	std::string line;
+	std::string dateString, valueString;
+	float price;
+
+	if (!(inputFile.is_open())) {
+		std::cerr << ERROR_MESSAGE << std::endl;
+		return 1;
+	} else {
+		// Skips header table
+		if (std::getline(inputFile, line)) {}
+		while (std::getline(inputFile, line)) {
+			// Parsing the line to extract date and value. Skips the line if any error or exception is found
+			if (!parseLine(dateString, valueString, line, price)) {
+				continue;
+			}
+			findDateMatching(dateString, valueString, price);
+		}
+	}
+
+	inputFile.close();
+	return 0;
+}
+
+
+std::map<std::string, float>::iterator 
+BitcoinExchange::iteratorCheck(const std::string& str) {
+	for (std::map<std::string, float>::iterator itBegin = _bitcoin.begin(); itBegin != _bitcoin.end(); itBegin++)
+	{
+		if (itBegin->first == str) return itBegin;
+		if (itBegin->first > str) {
+			if (itBegin == _bitcoin.begin()) {
+				return itBegin;
+			} else {
+				return --itBegin;
+			}
+		}
+	}
+		return _bitcoin.end();
+}
+
 
 // ---------- Functions ----------
 void validateArgs(int argc) {
@@ -85,34 +131,30 @@ void trim(std::string& str) {
 	str.erase(str.find_last_not_of(" \t\n\r\f\v") + 1);
 }
 
-void parseLine(std::string &dateString, std::string &valueString, std::string &line, float &price) {
+bool parseLine(std::string &dateString, std::string &valueString, std::string &line, float &price) {
 
 	try	{
 		std::istringstream ss(line);
-		// float value;
 
 		if (std::getline(ss, dateString, '|')) {
-			// std::cout << "Date: " << dateString;
 			trim(dateString);
 			if (std::getline(ss, valueString, '|')) {
 				trim(valueString);
-				// value = std::atof(valueString.c_str());
-				// std::cout << ", Price: " << valueString << std::endl;
 			} else {
 				valueString = '\0';
-				// std::cout << ", Price: " << valueString << std::endl;
 			}
 		}
-		// std::cout << "value: " << valueString << std::endl;
 		price = parseNumber(valueString);
-		// price = value;
 
 		if (!isValidDate(dateString)) {
 			std::cerr << "Error: bad input => " << dateString << std::endl;
+			return false;
 		}
+		return true;
 	}
 	catch(const std::exception& e) {
 		std::cerr << e.what() << '\n';
+		return false;
 	}
 }
 
@@ -127,7 +169,7 @@ float parseNumber(const std::string& str) {
 
 
 bool isValidDate(std::string& dateString) {
-// Parsing date and check if its valid or not
+	// Parsing date and check if its valid or not
 	std::istringstream ss1(dateString);
 	int day, month, year = 0;
 	std::string dayString, monthString, yearString;
@@ -166,56 +208,3 @@ bool isValidDate(std::string& dateString) {
 bool isYearLeap(int year) {
 	return(((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
 }
-
-
-std::map<std::string, float>::iterator 
-BitcoinExchange::iteratorCheck(const std::string& str) {
-
-for (std::map<std::string, float>::iterator itBegin = _bitcoin.begin(); itBegin != _bitcoin.end(); itBegin++)
-{
-	if (itBegin->first == str) return itBegin;
-	if (itBegin->first > str) {
-		if (itBegin == _bitcoin.begin()) {
-			return itBegin;
-		} else {
-			return --itBegin;
-		}
-	}
-}
-	return _bitcoin.end();
-}
-
-
-void BitcoinExchange::findDateMatching(std::string& date, std::string& value, float& price) {
-	std::map<std::string, float>::iterator it = iteratorCheck(date);
-	float result = it->second * price;
-	std::cout << "Date: " << date << " => " << value << " = " << result << std::endl;
-}
-
-
-int BitcoinExchange::fileManagement(char** argv) {
-	std::ifstream inputFile(argv[1], std::ifstream::in);
-	std::string line;
-	std::string dateString, valueString;
-	float price;
-
-	if (!(inputFile.is_open())) {
-		std::cerr << ERROR_MESSAGE << std::endl;
-		return 1;
-	} else {
-		if (std::getline(inputFile, line)) {}
-		while (std::getline(inputFile, line)) {
-			// Parsing the line to extract date and value
-			parseLine(dateString, valueString, line, price);
-			findDateMatching(dateString, valueString, price);
-		}
-	}
-
-	// for(std::map<std::string, float>::iterator i = _bitcoin.begin(); i != _bitcoin.end(); i++) {
-	// 	std::cout << i->first << " -> " << i->second << std::endl;
-	// }
-
-	inputFile.close();
-	return 0;
-}
-
