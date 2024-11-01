@@ -167,33 +167,29 @@ bool isYearLeap(int year) {
 	return(((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
 }
 
+
 std::map<std::string, float>::iterator 
 BitcoinExchange::iteratorCheck(const std::string& str) {
-	std::map<std::string, float>::iterator it = _bitcoin.find(str);
-	std::map<std::string, float>::iterator itBegin = _bitcoin.begin();
 
-	if (it != _bitcoin.end()) {
-		return it;
-	} else if (it->first > str){
-		return it--;
-	} else {
-		return ;
+for (std::map<std::string, float>::iterator itBegin = _bitcoin.begin(); itBegin != _bitcoin.end(); itBegin++)
+{
+	if (itBegin->first == str) return itBegin;
+	if (itBegin->first > str) {
+		if (itBegin == _bitcoin.begin()) {
+			return itBegin;
+		} else {
+			return --itBegin;
+		}
 	}
-
+}
+	return _bitcoin.end();
 }
 
-void BitcoinExchange::findDateMatching(std::string& date, std::string& value, std::string& line, float& price) {
-	// std::cout << "dateString value: " << dateString << std::endl;
+
+void BitcoinExchange::findDateMatching(std::string& date, std::string& value, float& price) {
 	std::map<std::string, float>::iterator it = iteratorCheck(date);
-	if (it != _bitcoin.end()) {
-		float result = it->second * price;
-		// std::cout << dateString << " => " << valueString << result << std::endl;
-		std::cout << "Date: " << it->first << " => " << value << " = " << result << std::endl;
-	} else {
-		// std::map<std::string, float>::iterator iter = _bitcoin.lower_bound(date);
-		float result = it->second * price;
-		std::cout << "(Lower bound)Date: " << it->first << " => " << value << " = " << result << std::endl;
-	}
+	float result = it->second * price;
+	std::cout << "Date: " << date << " => " << value << " = " << result << std::endl;
 }
 
 
@@ -211,7 +207,7 @@ int BitcoinExchange::fileManagement(char** argv) {
 		while (std::getline(inputFile, line)) {
 			// Parsing the line to extract date and value
 			parseLine(dateString, valueString, line, price);
-			findDateMatching(dateString, valueString, line, price);
+			findDateMatching(dateString, valueString, price);
 		}
 	}
 

@@ -46,7 +46,7 @@ class BitcoinExchange {
 		// Method
 		bool dataBaseManagement();
 		int fileManagement(char** argv);
-		void findDateMatching(std::string &dateString, std::string &valueString, std::string &line, float& price);
+		void findDateMatching(std::string&, std::string&, float&);
 		std::map<std::string, float>::iterator iteratorCheck(const std::string& str);
 
 };
