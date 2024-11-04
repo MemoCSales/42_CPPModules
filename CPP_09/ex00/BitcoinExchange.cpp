@@ -61,7 +61,7 @@ bool BitcoinExchange::dataBaseManagement() {
 void BitcoinExchange::findDateMatching(std::string& date, std::string& value, float& price) {
 	std::map<std::string, float>::iterator it = iteratorCheck(date);
 	float result = it->second * price;
-	std::cout << "Date: " << date << " => " << value << " = " << result << std::endl;
+	std::cout << "✅ Date: " << date << " => " << value << " = " << result << std::endl;
 }
 
 
@@ -104,7 +104,7 @@ BitcoinExchange::iteratorCheck(const std::string& str) {
 			}
 		}
 	}
-		return _bitcoin.end();
+	return _bitcoin.end();
 }
 
 
@@ -131,7 +131,7 @@ void trim(std::string& str) {
 	str.erase(str.find_last_not_of(" \t\n\r\f\v") + 1);
 }
 
-bool parseLine(std::string &dateString, std::string &valueString, std::string &line, float &price) {
+bool BitcoinExchange::parseLine(std::string &dateString, std::string &valueString, std::string &line, float &price) {
 
 	try	{
 		std::istringstream ss(line);
@@ -147,11 +147,11 @@ bool parseLine(std::string &dateString, std::string &valueString, std::string &l
 		price = parseNumber(valueString);
 
 		if (!isValidDate(dateString)) {
-			std::cerr << "Error: bad input => " << dateString << std::endl;
+			std::cerr << "💀 Error: bad input => " << dateString << std::endl;
 			return false;
 		}
 		if (!price) {
-			std::cerr << "Error: Invalid value" << std::endl;
+			throw InvalidValue();
 			return false;
 		}
 		return true;
@@ -163,7 +163,14 @@ bool parseLine(std::string &dateString, std::string &valueString, std::string &l
 }
 
 float parseNumber(const std::string& str) {
-	float result = std::atof(str.c_str());
+	std::stringstream ss(str);
+	float result;
+	ss >> result;
+
+	// Check if  the stream has failed or are any remaining characters in the input string
+	if (ss.fail() || !ss.eof()) {
+		throw InvalidValue();
+	}
 
 	if (result < 0.0f) throw NegativeValue();
 	if (result > 1000.0f) throw MaxValue();
@@ -172,8 +179,16 @@ float parseNumber(const std::string& str) {
 }
 
 
-bool isValidDate(std::string& dateString) {
+bool BitcoinExchange::isValidDate(std::string& dateString) {
 	// Parsing date and check if its valid or not
+	std::map<std::string, float>::iterator itBegin = _bitcoin.begin();
+	std::map<std::string, float>::iterator itEnd = _bitcoin.end();
+
+	if (itEnd != _bitcoin.begin()) {
+		--itEnd;
+	}
+	// Check input date is within the boundries of database
+	if (dateString < itBegin->first || dateString > itEnd->first) return false;
 	std::istringstream ss1(dateString);
 	int day, month, year = 0;
 	std::string dayString, monthString, yearString;
@@ -182,7 +197,6 @@ bool isValidDate(std::string& dateString) {
 		year = std::atoi(yearString.c_str());
 		month = std::atoi(monthString.c_str());
 		day = std::atoi(dayString.c_str());
-		// return true;
 	} else {
 		return false;
 	}

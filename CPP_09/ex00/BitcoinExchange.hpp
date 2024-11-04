@@ -36,6 +36,15 @@ class BitcoinExchange {
 		int fileManagement(char** argv);
 		void findDateMatching(std::string&, std::string&, float&);
 		std::map<std::string, float>::iterator iteratorCheck(const std::string& str);
+		bool isValidDate(std::string& dateString);
+		bool parseLine(std::string &dateString, std::string &valueString, std::string &line, float& price);
+		// Exceptions
+		class DateOutOfBounds : public std::exception {
+			public:
+			virtual const char* what() const throw() {
+				return ("❌ Error: Date has not been found in DataBase. ");
+			}
+		};
 
 };
 
@@ -43,20 +52,27 @@ class BitcoinExchange {
 class NegativeValue : public std::exception {
 	public:
 	virtual const char* what() const throw() {
-		return ("Error: not a positive number.");
+		return ("❌ Error: not a positive number.");
 	}
 };
 class MaxValue : public std::exception {
 	public:
 	virtual const char* what() const throw() {
-		return ("Error: too large a number.");
+		return ("❌ Error: too large a number.");
 	}
 };
 
 class MinIntValue : public std::exception {
 	public:
 	virtual const char* what() const throw() {
-		return ("Error: not a positive number.");
+		return ("❌ Error: not a positive number.");
+	}
+};
+
+class InvalidValue : public std::exception {
+	public:
+	virtual const char* what() const throw() {
+		return ("❌ Error: Invalid value. ");
 	}
 };
 
@@ -65,9 +81,5 @@ class MinIntValue : public std::exception {
 void validateArgs(int argc);
 bool stringHasDigits(const std::string& str);
 void trim(std::string& str);
-bool parseLine(std::string &dateString, std::string &valueString, std::string &line, float& price);
 float parseNumber(const std::string& str);
-bool isValidDate(std::string& dateString);
 bool isYearLeap(int year);
-
-
