@@ -8,7 +8,7 @@ all: $(NAME)
 include ../common.mk
 
 run: $(NAME)
-	@./$(NAME)
+	@./$(NAME) "8 9 * 9 - 9 - 9 - 4 - 1 +"
 
 $(NAME): $(OBJ)
 	$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)
