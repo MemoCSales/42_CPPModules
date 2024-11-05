@@ -13,6 +13,10 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
+	// if (!rpn.solving(argv[1])) {
+	// 	return 1;
+	// }
+
 	// std::cout << "main function yay" << std::endl;
 
 	return 0;

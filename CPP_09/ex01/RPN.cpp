@@ -45,16 +45,31 @@ bool RPN::parsing(std::string str) {
 			std::cout << ERROR_PAR << std::endl;
 			return false;
 		}
+		if (!solving(token)) {
+			return false;
+		}
 	}
-
+	// while (!_stack.empty()) {
+	// 	std::cout << _stack.top() << " ";
+	// 	_stack.pop();
+	// }
+	// return solving(str);
 	return true;
 }
 
-bool RPN::validateToken(std::string& token) {
-	size_t pos = token.find_first_of("+-*/");
-	if (pos != std::string::npos) {
+bool RPN::isNumberInRange(const std::string& str) {
+	long number = std::atoi(str.c_str());
+
+	if (number >= 0 && number < 10)
 		return true;
-	}
+	return false;
+}
+
+bool RPN::isValidOperator(const std::string& token) {
+	return token == "+" || token == "-" || token == "*" || token == "/";
+}
+
+bool RPN::isValidNumber(const std::string& token) {
 	for (size_t i = 0; i < token.size(); i++)
 	{
 		if (!std::isdigit(token[i])) {
@@ -64,3 +79,27 @@ bool RPN::validateToken(std::string& token) {
 	return true;
 }
 
+bool RPN::validateToken(const std::string& token) {
+	if (isNumberInRange(token) && isValidNumber(token)) {
+		return true;
+	}
+	if (isValidOperator(token)) {
+		return true;
+	}
+	return false;
+}
+
+bool RPN::solving(std::string str) {
+	if (isValidNumber(str)) {
+		int number = std::atoi(str.c_str());
+		_stack.push(number);
+		std::cout << "Number added to stack -> " << number << std::endl;
+	}
+	if (isValidOperator(str)) {
+		for (size_t i = 0; i < 2; i++) {
+			_stack.pop();
+		}
+		
+	}
+	return true;
+}
