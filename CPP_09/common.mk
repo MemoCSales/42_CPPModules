@@ -24,7 +24,7 @@ fclean: clean
 re: fclean
 	$(MAKE) $(NAME)
 
-val: 
-	valgrind --leak-check=full ./$(NAME)
+# val: 
+# 	valgrind --leak-check=full ./$(NAME)
 
 .PHONY: all clean fclean re val
