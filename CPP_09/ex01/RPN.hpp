@@ -32,9 +32,10 @@ class RPN {
 		bool parsing(std::string);
 		bool validateToken(const std::string&);
 		bool isNumberInRange(const std::string&);
-		bool solving(std::string);
+		bool solving(std::string, bool);
 		bool isValidOperator(const std::string&);
 		bool isValidNumber(const std::string&);
+		int operation(int, int, std::string&);
 };
 
 #endif
