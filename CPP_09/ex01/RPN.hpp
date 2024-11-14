@@ -38,4 +38,6 @@ class RPN {
 		int operation(int, int, std::string&);
 };
 
+bool argsValidation(int argc, char** argv);
+
 #endif

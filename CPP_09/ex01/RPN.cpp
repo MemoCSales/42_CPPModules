@@ -38,7 +38,6 @@ RPN::~RPN() {
 bool RPN::parsing(std::string str) {
 	std::istringstream ss(str);
 	std::string token;
-	int finalResult = 0;
 
 	while(ss >> token) {
 		// std::cout << token << std::endl;
@@ -48,15 +47,10 @@ bool RPN::parsing(std::string str) {
 			std::cout << ERROR_PAR << std::endl;
 			return false;
 		}
-		if (isLast) {
-			finalResult = solving(token, isLast);
-		} else {
-			if (!solving(token, isLast)) {
-				return false;
-			}
+		if (!solving(token, isLast)) {
+			return false;
 		}
 	}
-	std::cout << _stack.top() << std::endl;
 	return true;
 }
 
@@ -106,45 +100,66 @@ int RPN::operation(int a, int b, std::string& sign) {
 		result = a * b;
 		break;
 	case '/':
+		if (b == 0) {
+			throw std::runtime_error("Error: Division by zero is undefined.");
+		}
 		result = a / b;
 		break;
 	
 	default:
-		std::cout << "Invalid operator" << std::endl;
-		break;
+		throw std::runtime_error("Invalid operator");
 	}
 	return result;
 }
 
 bool RPN::solving(std::string str, bool isLast) {
-	if (isValidNumber(str)) {
-		int number = std::atoi(str.c_str());
-		_stack.push(number);
-		// std::cout << "Number added to stack -> " << number << std::endl;
-	}
-	int a = 0;
-	int b = 0;
-	int result = 0;
-
-	if (isValidOperator(str)) {
-		// std::cout << "Operator = " << str << std::endl;
-			a = _stack.top();
-			// std::cout << "a = " << a << std::endl;
-			_stack.pop();
-			b = _stack.top();
-			// std::cout << "b = " << b << std::endl;
-			_stack.pop();
-		result = operation(b, a, str);
-		_stack.push(result);
-		// std::cout << "Result = " << result << std::endl;
-	}
-	if (isLast) {
-		if (!_stack.empty()) {
-			// std::cout << "stack: " << _stack.top() << std::endl;
-			return _stack.top();
-		} else {
-			throw std::runtime_error("Stack is empty");
+	try
+	{
+		if (isValidNumber(str)) {
+			int number = std::atoi(str.c_str());
+			_stack.push(number);
+			// std::cout << "Number added to stack -> " << number << std::endl;
+		} else if (isValidOperator(str)) {
+			if (_stack.size() < 2) {
+				std::cerr << "Error: Not enough arguments." << std::endl;
+				return false;
+			}
+			// std::cout << "Operator = " << str << std::endl;
+				int a = _stack.top();
+				// std::cout << "a = " << a << std::endl;
+				_stack.pop();
+				int b = _stack.top();
+				// std::cout << "b = " << b << std::endl;
+				_stack.pop();
+			int result = operation(b, a, str);
+			_stack.push(result);
+			// std::cout << "Result = " << result << std::endl;
 		}
+		if (isLast) {
+			if (!_stack.empty()) {
+				std::cout << _stack.top() << std::endl;
+			} else {
+				throw std::runtime_error("Stack is empty");
+			}
+		}
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
+	return true;
+}
+
+bool argsValidation(int argc, char** argv) {
+	if (argc != 2) {
+		std::cerr << ERROR_MESSAGE << std::endl;
+		return false;
+	}
+	std::string str = argv[1];
+	if (str.empty()) {
+		std::cerr << "Error" << std::endl;
+		return false;
 	}
 	return true;
 }
