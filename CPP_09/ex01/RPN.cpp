@@ -54,14 +54,6 @@ bool RPN::parsing(std::string str) {
 	return true;
 }
 
-bool RPN::isNumberInRange(const std::string& str) {
-	long number = std::atoi(str.c_str());
-
-	if (number >= 0 && number < 10)
-		return true;
-	return false;
-}
-
 bool RPN::isValidOperator(const std::string& token) {
 	return token == "+" || token == "-" || token == "*" || token == "/";
 }
@@ -77,7 +69,7 @@ bool RPN::isValidNumber(const std::string& token) {
 }
 
 bool RPN::validateToken(const std::string& token) {
-	if (isNumberInRange(token) && isValidNumber(token)) {
+	if (isValidNumber(token)) {
 		return true;
 	}
 	if (isValidOperator(token)) {
