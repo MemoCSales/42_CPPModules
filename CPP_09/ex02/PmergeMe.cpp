@@ -40,11 +40,11 @@ PmergeMe::~PmergeMe() {
 }
 
 // Getters
-const std::vector<int>& PmergeMe::getVector() const {
+std::vector<int>& PmergeMe::getVector() {
 	return _myVector;
 }
 
-const std::deque<int>& PmergeMe::getDeque() const {
+std::deque<int>& PmergeMe::getDeque() {
 	return _myDeque;
 }
 
@@ -75,3 +75,5 @@ void PmergeMe::populateVector(int& number) {
 void PmergeMe::populateDeque(int& number) {
 	_myDeque.push_back(number);
 }
+
+

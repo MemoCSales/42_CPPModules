@@ -27,21 +27,52 @@ class PmergeMe {
 		std::deque<int> _myDeque;
 	public:
 		PmergeMe(void);
-		// PmergeMe("Parameter Constructor");
-		// PmergeMe(const PmergeMe &other);
-		// PmergeMe &operator=(const PmergeMe &other);
 		~PmergeMe();
 
 		// Getters
-		const std::vector<int>& getVector() const;
-		const std::deque<int>& getDeque() const;
+		std::vector<int>& getVector();
+		std::deque<int>& getDeque();
 		// Setters
 
 		// Methods
 		void populateVector(int& number);
 		void populateDeque(int& number);
-
+		
 		static bool argsValidation(PmergeMe&, int, char**);
+
+		template <typename T>
+		static void printContainer(const T& container);
+		template <typename T>
+		void insertionSort(T& container);
+
 };
+
+
+template <typename T>
+void PmergeMe::printContainer(const T& container) {
+	for (typename T::const_iterator it = container.begin(); it != container.end(); it++) {
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+}
+
+
+template <typename T>
+void PmergeMe::insertionSort(T& container) {
+	for (typename T::iterator it = container.begin(); it != container.end(); it++)
+	{
+		typename T::difference_type i = std::distance(container.begin(), it);
+		int key = container[i];
+		typename T::difference_type j = i - 1;
+
+		/* Shift elements that are greater than key,
+		to one position ahead of their current position */
+		while (j >= 0 && container[j] > key) {
+			container[j + 1] = container[j];
+			j = j - 1;
+		}
+		container[j + 1] = key; 
+	}
+}
 
 #endif

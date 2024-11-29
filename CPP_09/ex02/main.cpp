@@ -20,5 +20,12 @@ int main(int argc, char **argv) {
 	}
 	std::cout << std::endl;
 	
+	obj.insertionSort(obj.getDeque());
+	std::cout << "Print deque: " << std::endl;
+	PmergeMe::printContainer(obj.getDeque());
+	obj.insertionSort(obj.getVector());
+	std::cout << "Print vector: " << std::endl;
+	PmergeMe::printContainer(obj.getVector());
+
 	return 0;
 }
