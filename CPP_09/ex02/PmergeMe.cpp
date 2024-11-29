@@ -7,31 +7,6 @@ PmergeMe::PmergeMe(void) {
 	}
 }
 
-// ++++Constructor
-// PmergeMe::PmergeMe("Parameters") {
-// 	if (DEBUG) {
-// 		std::cout << "PmergeMe parameter constructor called" << std::endl;
-// 	}
-// }
-
-// Copy Constructor
-// PmergeMe::PmergeMe(const PmergeMe &other) : "_variable(other._variable)"{
-// 	if (DEBUG) {
-// 		std::cout << "PmergeMe copy constructor called" << std::endl;
-// 	}
-// }
-
-// Assignment Operator
-// PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
-// 	if (DEBUG) {
-// 		std::cout << "PmergeMe Assignment Operator called" << std::endl;
-// 	}
-// 	if (this != &other) {
-// 		// Copy data from other to this
-// 	}
-// 	return *this;
-// }
-
 // ----Destructor
 PmergeMe::~PmergeMe() {
 	if (DEBUG) {
@@ -75,5 +50,3 @@ void PmergeMe::populateVector(int& number) {
 void PmergeMe::populateDeque(int& number) {
 	_myDeque.push_back(number);
 }
-
-

@@ -66,13 +66,23 @@ void PmergeMe::insertionSort(T& container) {
 		typename T::difference_type j = i - 1;
 
 		/* Shift elements that are greater than key,
-		to one position ahead of their current position */
+		to one position ahead of their current position
+		it continuos as long as j is non-negative and the
+		element at index j is greater than key */
 		while (j >= 0 && container[j] > key) {
 			container[j + 1] = container[j];
 			j = j - 1;
 		}
+		/* Placing ey in its correct position in the sorted
+		part of the container */
 		container[j + 1] = key; 
 	}
+}
+
+template <typename T>
+void mergeSort(T& container, int left, int right) {
+	// Base case
+	
 }
 
 #endif
