@@ -26,7 +26,7 @@ std::deque<int>& PmergeMe::getDeque() {
 
 // Methods
 
-bool PmergeMe::argsValidation(PmergeMe& obj, int argc, char** argv) {
+bool PmergeMe::argsValidationAndPopulate(PmergeMe& obj, int argc, char** argv) {
 	if (argc < 2) {
 		return false;
 	}

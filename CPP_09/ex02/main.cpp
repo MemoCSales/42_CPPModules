@@ -3,7 +3,7 @@
 int main(int argc, char **argv) {
 	
 	PmergeMe obj;
-	if (!PmergeMe::argsValidation(obj, argc, argv)) {
+	if (!PmergeMe::argsValidationAndPopulate(obj, argc, argv)) {
 		std::cerr << "Error" << std::endl;
 	}
 	
@@ -20,12 +20,14 @@ int main(int argc, char **argv) {
 	}
 	std::cout << std::endl;
 	
-	obj.insertionSort(obj.getDeque());
-	std::cout << "Print deque: " << std::endl;
-	PmergeMe::printContainer(obj.getDeque());
-	obj.insertionSort(obj.getVector());
-	std::cout << "Print vector: " << std::endl;
-	PmergeMe::printContainer(obj.getVector());
+	fordJohnsonAlgo(obj.getDeque());
+	fordJohnsonAlgo(obj.getVector());
+	// obj.insertionSort(obj.getDeque());
+	// std::cout << "Print deque: " << std::endl;
+	// PmergeMe::printContainer(obj.getDeque());
+	// obj.insertionSort(obj.getVector());
+	// std::cout << "Print vector: " << std::endl;
+	// PmergeMe::printContainer(obj.getVector());
 
 	return 0;
 }

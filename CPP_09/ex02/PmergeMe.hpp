@@ -21,6 +21,21 @@
 typedef std::deque<int>::const_iterator itDeque;
 typedef std::vector<int>::const_iterator itVector;
 
+
+// Type trait to determine the appropriate type of container for the pairs
+template <typename T>
+struct pairContainer;
+
+template <>
+struct pairContainer<std::vector<int> > {
+	using type = std::vector<std::pair<int, int>>;
+};
+
+template <>
+struct pairContainer<std::deque<int> > {
+	using type = std::deque<std::pair<int, int>>;
+};
+
 class PmergeMe {
 	private:
 		std::vector<int> _myVector;
@@ -38,51 +53,20 @@ class PmergeMe {
 		void populateVector(int& number);
 		void populateDeque(int& number);
 		
-		static bool argsValidation(PmergeMe&, int, char**);
-
+		static bool argsValidationAndPopulate(PmergeMe&, int, char**);
+		
+		// Template Methods
 		template <typename T>
 		static void printContainer(const T& container);
 		template <typename T>
 		void insertionSort(T& container);
+		template <typename T>
+		void fordJohnsonAlgo(T& container);
+		template <typename T>
+		typename pairContainer<T>::type pairWise(const T& container);
 
 };
 
-
-template <typename T>
-void PmergeMe::printContainer(const T& container) {
-	for (typename T::const_iterator it = container.begin(); it != container.end(); it++) {
-		std::cout << *it << " ";
-	}
-	std::cout << std::endl;
-}
-
-
-template <typename T>
-void PmergeMe::insertionSort(T& container) {
-	for (typename T::iterator it = container.begin(); it != container.end(); it++)
-	{
-		typename T::difference_type i = std::distance(container.begin(), it);
-		int key = container[i];
-		typename T::difference_type j = i - 1;
-
-		/* Shift elements that are greater than key,
-		to one position ahead of their current position
-		it continuos as long as j is non-negative and the
-		element at index j is greater than key */
-		while (j >= 0 && container[j] > key) {
-			container[j + 1] = container[j];
-			j = j - 1;
-		}
-		/* Placing ey in its correct position in the sorted
-		part of the container */
-		container[j + 1] = key; 
-	}
-}
-
-template <typename T>
-void mergeSort(T& container, int left, int right) {
-	// Base case
-	
-}
+# include "PmergeMe.tpp"
 
 #endif
