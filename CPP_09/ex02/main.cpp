@@ -20,14 +20,16 @@ int main(int argc, char **argv) {
 	}
 	std::cout << std::endl;
 	
-	fordJohnsonAlgo(obj.getDeque());
-	fordJohnsonAlgo(obj.getVector());
+	obj.fordJohnsonAlgo(obj.getDeque());
+	// obj.fordJohnsonAlgo(obj.getVector());
 	// obj.insertionSort(obj.getDeque());
 	// std::cout << "Print deque: " << std::endl;
 	// PmergeMe::printContainer(obj.getDeque());
 	// obj.insertionSort(obj.getVector());
 	// std::cout << "Print vector: " << std::endl;
 	// PmergeMe::printContainer(obj.getVector());
+	// std::cout << "Pairwise Deque: " << std::endl;
+	// PmergeMe::printPairwiseContainer<std::deque<int> >(obj.pairWise(obj.getDeque()));
 
 	return 0;
 }

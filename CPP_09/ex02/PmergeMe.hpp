@@ -22,19 +22,45 @@ typedef std::deque<int>::const_iterator itDeque;
 typedef std::vector<int>::const_iterator itVector;
 
 
+
 // Type trait to determine the appropriate type of container for the pairs
-template <typename T>
-struct pairContainer;
 
-template <>
-struct pairContainer<std::vector<int> > {
-	using type = std::vector<std::pair<int, int>>;
-};
+/* There traits use template specialization to determine if a given type
+ is a vector or deque */
+ template <typename T>
+ struct isVector {
+	static const bool value = false;
+ };
 
-template <>
-struct pairContainer<std::deque<int> > {
-	using type = std::deque<std::pair<int, int>>;
-};
+ template <typename T>
+ struct isVector<std::vector<T> > {
+	static const bool value = true;
+ };
+
+  template <typename T>
+ struct isDeque {
+	static const bool value = false;
+ };
+
+ template <typename T>
+ struct isDeque<std::deque<T> > {
+	static const bool value = true;
+ };
+
+ template <typename T, bool itIsVector = isVector<T>::value, bool itIsDeque = isDeque<T>::value>
+ struct pairContainer;
+
+/* This trait uses SFINAE to select appropriate container type based on the results
+of the isVector and isDeque traits */
+ template <typename T>
+ struct pairContainer<T, true, false> {
+	typedef std::vector<std::pair<typename T::value_type, typename T::value_type> > type;
+ };
+
+ template <typename T>
+ struct pairContainer<T, false, true> {
+	typedef std::deque<std::pair<typename T::value_type, typename T::value_type> > type;
+ };
 
 class PmergeMe {
 	private:
@@ -59,7 +85,13 @@ class PmergeMe {
 		template <typename T>
 		static void printContainer(const T& container);
 		template <typename T>
+		static void printPairwiseContainer(const typename pairContainer<T>::type& container);
+		template <typename T>
 		void insertionSort(T& container);
+		template <typename T>
+		void insertionSortRecursive(T& container, int n);
+		template <typename T>
+		void separatePairs(typename pairContainer<T>::type&, T&, T&);
 		template <typename T>
 		void fordJohnsonAlgo(T& container);
 		template <typename T>
