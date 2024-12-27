@@ -5,6 +5,7 @@ int main(int argc, char **argv) {
 	PmergeMe obj;
 	if (!PmergeMe::argsValidationAndPopulate(obj, argc, argv)) {
 		std::cerr << "Error" << std::endl;
+		return 1;
 	}
 	
 	/* printing Deque*/
@@ -20,7 +21,7 @@ int main(int argc, char **argv) {
 	}
 	std::cout << std::endl;
 	
-	obj.fordJohnsonAlgo(obj.getDeque());
+	// obj.fordJohnsonAlgo(obj.getDeque());
 	// obj.fordJohnsonAlgo(obj.getVector());
 	// obj.insertionSort(obj.getDeque());
 	// std::cout << "Print deque: " << std::endl;
