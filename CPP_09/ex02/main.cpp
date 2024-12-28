@@ -2,28 +2,48 @@
 
 int main(int argc, char **argv) {
 	
-	PmergeMe obj;
-	if (!PmergeMe::argsValidationAndPopulate(obj, argc, argv)) {
-		std::cerr << "Error" << std::endl;
+	try
+	{
+		PmergeMe obj;
+		if (!obj.validateArgs(argc, argv)) {
+			std::cerr << "Error: Invalid arguments" << std::endl;
+			return 1;
+		}
+
+		std::string unsorted = argvToString(argv);
+
+		// VECTOR
+		clock_t startVector = clock();
+		obj.populateVector(argv);
+		// Add sorting algorithm here
+		clock_t endVector = clock();
+		double executionTimeVector = (double)(endVector - startVector) / CLOCKS_PER_SEC;
+
+		// DEQUE
+		clock_t startDeque = clock();
+		obj.populateDeque(argv);
+		// Add sorting algorithm here
+		clock_t endDeque = clock();
+		double executionTimeDeque = (double)(endDeque- startDeque) / CLOCKS_PER_SEC;
+
+		// RESULTS
+		std::cout << RED << "Before: " << DEFAULT;
+		std::cout << unsorted << std::endl;
+		std::cout << GREEN <<"After:  " << DEFAULT;
+		PmergeMe::printContainer(obj.getVector());
+		std::cout << "Time to process a range of " <<  WHITE << obj.getVector().size() << DEFAULT
+				  << " elements with " << MAGENT << "std::vector: " << DEFAULT << std::fixed << std::setprecision(6)
+				  << executionTimeVector << "s" << std::endl;
+		std::cout << "Time to process a range of " << WHITE << obj.getVector().size() << DEFAULT
+				  << " elements with " << CYAN << "std::deque: " << DEFAULT << std::fixed << std::setprecision(6)
+				  << executionTimeDeque << "s" << std::endl;
+
+		return 0;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
 		return 1;
 	}
 	
-	/* printing Deque*/
-	// std::cout << "Deque: ";
-	// for (itDeque it = obj.getDeque().begin(); it != obj.getDeque().end(); it++) {
-	// 	std::cout << *it << " ";
-	// }
-
-	// /* printing Vector */
-	// std::cout << "\nVector: ";
-	// for (itVector it = obj.getVector().begin(); it != obj.getVector().end(); it++) {
-	// 	std::cout << *it << " ";
-	// }
-	// std::cout << std::endl;
-	
-	std::cout << "Print deque: " << std::endl;
-	PmergeMe::printContainer(obj.getDeque());
-	std::cout << "Print vector: " << std::endl;
-	PmergeMe::printContainer(obj.getVector());
-	return 0;
 }

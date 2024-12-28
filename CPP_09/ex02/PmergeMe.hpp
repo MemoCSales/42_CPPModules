@@ -1,10 +1,12 @@
 #ifndef PmergeMe_HPP
 # define PmergeMe_HPP
 # include <iostream>
+# include <iomanip>
 # include <sstream>
 # include <cstdlib>
 # include <vector>
 # include <deque>
+# include <ctime>
 
 # define DEBUG 0
 
@@ -27,6 +29,8 @@ class PmergeMe {
 		std::deque<int> _myDeque;
 	public:
 		PmergeMe(void);
+		PmergeMe(const PmergeMe& other);
+		PmergeMe& operator=(const PmergeMe& other);
 		~PmergeMe();
 
 		// Getters
@@ -35,10 +39,10 @@ class PmergeMe {
 		// Setters
 
 		// Methods
-		void populateVector(int& number);
-		void populateDeque(int& number);
+		void populateVector(char** argv);
+		void populateDeque(char** argv);
 		
-		static bool argsValidationAndPopulate(PmergeMe&, int, char**);
+		bool validateArgs(int argc, char** argv);
 		
 		// Template Methods
 		template <typename T>
@@ -46,5 +50,10 @@ class PmergeMe {
 };
 
 # include "PmergeMe.tpp"
+
+std::string argvToString(char **argv);
+
+template <typename T>
+std::string toStr(T const& value);
 
 #endif
