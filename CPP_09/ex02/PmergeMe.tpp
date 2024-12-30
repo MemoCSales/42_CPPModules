@@ -67,6 +67,33 @@ void PmergeMe::fordJohnsonSort(T& container) {
 	printContainer(main);
 	/*...*/
 	
-	
-	
+	// Step 3: Insert 'b' elements into the main sequence using Jacobsthal order
+	std::vector<int> pend;
+	std::vector<std::pair<int, int> >::iterator it = pairs.begin();
+	for (; it != pairs.end(); ++it) {
+		if ((*it).first != INT_MAX) {
+			pend.push_back((*it).first);
+		}
+	}
+
+	// Starting from the 3rd Jacobsthal number
+	int k = 3;
+	int currentJ = jacobsthal(k);						// How many elements to work with so far
+	int previousJ = jacobsthal(k - 1);					// How many elements have already been inserted in previous steps
+	int newElementsToInsert = currentJ - previousJ; 	// The difference between current_jacobsthal and previous_jacobsthal tells you how many new elements to insert
+	while (newElementsToInsert <= pend.size()) {
+		int count = newElementsToInsert;
+		for (int i = 0; i < count; ++i) {
+			binaryInsert(main, pend.back());
+			pend.pop_back();
+		}
+		++k;
+	}
+
+	/* ... */
+
+	// Copy the sorted elements back to the original array
+	for (int i = 0; i < n; ++i) {
+		container[i] = main[i];
+	}
 }
