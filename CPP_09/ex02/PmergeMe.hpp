@@ -8,6 +8,8 @@
 # include <deque>
 # include <ctime>
 # include <limits>
+# include <climits>
+# include <utility>
 
 # define DEBUG 0
 
@@ -44,10 +46,14 @@ class PmergeMe {
 		void populateDeque(char** argv);
 		
 		bool validateArgs(int argc, char** argv);
+
+		static void printPairElements(const std::vector<std::pair<int, int> >& pairs); 
 		
 		// Template Methods
 		template <typename T>
 		static void printContainer(const T& container);
+		template <typename T>
+		static void fordJohnsonSort(T& container);
 };
 
 # include "PmergeMe.tpp"

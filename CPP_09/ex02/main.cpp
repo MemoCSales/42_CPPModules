@@ -16,6 +16,7 @@ int main(int argc, char **argv) {
 		clock_t startVector = clock();
 		obj.populateVector(argv);
 		// Add sorting algorithm here
+		PmergeMe::fordJohnsonSort(obj.getVector());
 		clock_t endVector = clock();
 		double executionTimeVector = (double)(endVector - startVector) / CLOCKS_PER_SEC;
 

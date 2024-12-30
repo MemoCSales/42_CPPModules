@@ -2,7 +2,7 @@
 # Compiler and flags
 CPP			 = c++
 CPPFLAGS	 = -std=c++98
-CPPFLAGS	+= -Wall -Wextra -Werror -Wshadow -pedantic
+CPPFLAGS	+= -Wall -Wextra -Werror -Wshadow #-pedantic
 # CPPFLAGS	+= -fsanitize=address
 CPPFLAGS	+= -g
 

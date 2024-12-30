@@ -80,7 +80,6 @@ void PmergeMe::populateDeque(char** argv) {
 }
 
 
-
 // Functions outside the class
 
 std::string argvToString(char **argv) {
@@ -92,8 +91,19 @@ std::string argvToString(char **argv) {
 	return str;
 }
 
+
+/* Function that returns the k-th Jacobsthal number */
 long jacobsthal(int k) {
 	if (k == 0) return 0;
 	if (k == 1) return 1;
 	return jacobsthal(k -1) + 2 * jacobsthal(k - 2);
+}
+
+/* Debugging function to print the pairs of elements */
+void PmergeMe::printPairElements(const std::vector<std::pair<int, int> >& pairs) {
+	std::vector<std::pair<int, int > >::const_iterator it = pairs.begin();
+	for (; it != pairs.end(); ++it) {
+		std::cout << "(" << it->first << ", " << it->second << ") ";
+	}
+	std::cout << std::endl;
 }
