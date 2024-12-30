@@ -12,7 +12,7 @@ OBJDIR		= .obj
 # Common rules
 $(OBJDIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	@$(CPP) -o "$@" $(CPPFLAGS) "$<" -c
+	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ)
