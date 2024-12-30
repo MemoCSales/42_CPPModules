@@ -91,3 +91,9 @@ std::string argvToString(char **argv) {
 	}
 	return str;
 }
+
+long jacobsthal(int k) {
+	if (k == 0) return 0;
+	if (k == 1) return 1;
+	return jacobsthal(k -1) + 2 * jacobsthal(k - 2);
+}

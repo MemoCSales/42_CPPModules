@@ -2,13 +2,14 @@ NAME = PmergeMe
 
 SRC = $(wildcard *.cpp)
 INC = $(wildcard *.hpp)
+OBJDIR = .obj
 OBJ = $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRC))
 
 all: $(NAME)
 
 include ../common.mk
 
-run:
+run: all
 	@if [ "$(shell uname)" = "Darwin" ]; then \
 		if [ -n "$(ARGS)" ]; then \
 			./$(NAME) `jot -r $(ARGS) 1 100000 | tr '\n' ' '`; \
@@ -24,4 +25,4 @@ run:
 	fi
 
 $(NAME): $(OBJ) $(INC)
-	$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)
+	@$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)

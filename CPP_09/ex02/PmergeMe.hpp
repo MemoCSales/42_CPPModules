@@ -7,6 +7,7 @@
 # include <vector>
 # include <deque>
 # include <ctime>
+# include <limits>
 
 # define DEBUG 0
 
@@ -52,6 +53,7 @@ class PmergeMe {
 # include "PmergeMe.tpp"
 
 std::string argvToString(char **argv);
+long	jacobsthal(int k);
 
 template <typename T>
 std::string toStr(T const& value);
