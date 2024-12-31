@@ -12,6 +12,7 @@
 # include <utility>
 
 # define DEBUG 0
+# define DEBUGSORT 1
 
 # define RED		"\033[1;31m"
 # define GREEN		"\033[1;32m"

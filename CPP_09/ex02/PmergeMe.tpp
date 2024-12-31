@@ -38,7 +38,7 @@ void PmergeMe::fordJohnsonSort(T& container) {
 		pairs.push_back(std::make_pair(container[n - 1], INT_MAX_LIMIT));
 	}
 
-	PmergeMe::printPairElements(pairs);
+	if (DEBUGSORT) PmergeMe::printPairElements(pairs);
 
 	// Step 2: Recursively sort the 'a' elements
 	T main;
@@ -51,15 +51,19 @@ void PmergeMe::fordJohnsonSort(T& container) {
 	}
 
 	// Debug print before recursive call
-	std::cout << "main before:" << std::endl;
-	printContainer(main);
+	if (DEBUGSORT) {
+		std::cout << "main before:" << std::endl;
+		printContainer(main);
+	}
 
 	// Recursion of Step 1
 	fordJohnsonSort(main);
 
 	// Debug print after recursive call
-	std::cout << "main after:" << std::endl;
-	printContainer(main);
+	if (DEBUGSORT) {
+		std::cout << "main after:" << std::endl;
+		printContainer(main);
+	}
 	
 	// // Step 3: Insert 'b' elements into the main sequence using Jacobsthal order
 	T pend;
@@ -70,8 +74,10 @@ void PmergeMe::fordJohnsonSort(T& container) {
 		}
 	}
 
-	std::cout << "pend: " << std::endl;
-	printContainer(pend);
+	if (DEBUGSORT) {
+		std::cout << "pend: " << std::endl;
+		printContainer(pend);
+	}
 
 	// // Starting from the 3rd Jacobsthal number
 	int k = 3;
@@ -83,26 +89,32 @@ void PmergeMe::fordJohnsonSort(T& container) {
 	size_t newElementsToInsert = static_cast<size_t>(currentJ - previousJ);
 	while (newElementsToInsert <= pend.size()) {
 		int count = newElementsToInsert;
-		std::cout << "count: " << count << std::endl;
+		if (DEBUGSORT) std::cout << "New Elements to insert: " << count << std::endl;
 		for (int i = 0; i < count; ++i) {
-			std::cout << "main inside Jacobsthal: " << std::endl;
-			printContainer(main);
+			if (DEBUGSORT) {
+				std::cout << "main inside Jacobsthal: " << std::endl;
+				printContainer(main);
+			}
 			binaryInsert(main, pend.back());
 			pend.pop_back();
 		}
 		++k;
 	}
 
-	std::cout << "pend elements after jacobsthal: " << std::endl;
-	printContainer(pend);
+	if (DEBUGSORT) {
+		std::cout << "pend elements after jacobsthal: " << std::endl;
+		printContainer(pend);
+	}
 	// If newElementsToInsert is bigger than the size of pend, then insert the remaining numbers using binarySearch
 	while (!pend.empty()) {
 		binaryInsert(main, pend.back());
 		pend.pop_back();
 	}
 
-	std::cout << "main after oddElement binaryInsert: " << std::endl;
-	printContainer(main);
+	if (DEBUGSORT) {
+		std::cout << "main after checking pend elements binaryInsert: " << std::endl;
+		printContainer(main);
+	}
 
 	// // Copy the sorted elements back to the original array
 	for (int i = 0; i < n; ++i) {

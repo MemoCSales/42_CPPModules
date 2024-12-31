@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
 		clock_t startDeque = clock();
 		obj.populateDeque(argv);
 		// Add sorting algorithm here
+		PmergeMe::fordJohnsonSort(obj.getDeque());
 		clock_t endDeque = clock();
 		double executionTimeDeque = (double)(endDeque- startDeque) / CLOCKS_PER_SEC;
 
