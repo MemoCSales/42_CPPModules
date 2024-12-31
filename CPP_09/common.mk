@@ -9,17 +9,26 @@ CPPFLAGS	+= -g
 # Directories
 OBJDIR		= .obj
 
+# Colors
+GREEN   = \033[1;32m
+WHITE   = \033[1;37m
+YELLOW  = \033[1;33m
+DEFAULT = \033[0m
+
 # Common rules
 $(OBJDIR)/%.o: %.cpp $(INC)
 	@mkdir -p $(dir $@)
-	$(CPP) $(CPPFLAGS) -c $< -o $@
+	@echo "$(GREEN)Compiling... $(WHITE)$<$(DEFAULT)"
+	@$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJ)
+	@$(RM) $(OBJ)
+	@echo "$(YELLOW)Removing dependencies... $(WHITE)$(OBJ)$(DEFAULT)"
 	-@rmdir $(OBJDIR) 2>/dev/null || true
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
+	@echo "$(YELLOW)Removing executable... $(WHITE)$(NAME)$(DEFAULT)"
 
 re: fclean
 	$(MAKE) $(NAME)

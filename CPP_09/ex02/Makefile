@@ -25,4 +25,5 @@ run: all
 	fi
 
 $(NAME): $(OBJ) $(INC)
-	$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)
+	@$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)
+	@echo "$(GREEN)PmergeMe $(WHITE)Ready ✅ $(DEFAULT)"
