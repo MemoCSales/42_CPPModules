@@ -1,25 +1,19 @@
 # include "PmergeMe.hpp"
 
 template <typename T>
-void PmergeMe::printContainer(const T& container) {
-	for (typename T::const_iterator it = container.begin(); it != container.end(); it++) {
-		std::cout << *it << " ";
-	}
-	std::cout << std::endl;
-}
+void PmergeMe::binaryInsert(T& main, int value) {
+	int left = 0;
+	int right = main.size();
 
-/**
- * @brief Converts an integer value to a string.
- * 
- * @param value The integer value to be converted.
- * @return std::string The string representation of the integer value.
- */
-template <typename T>
-std::string toStr(T const& value)
-{
-	std::ostringstream ss;
-	ss << std::fixed << value;
-	return ss.str();
+	while (left < right) {
+		int mid = left + (right - left) / 2;
+		if (main[mid] < value) {
+			left = mid + 1;
+		} else {
+			right = mid;
+		}
+	}
+	main.insert(main.begin() + left, value);
 }
 
 template <typename T>
@@ -29,7 +23,7 @@ void PmergeMe::fordJohnsonSort(T& container) {
 	if (n <= 1) return;
 
 	// Step 1: Divide into pairs and sort each pair
-	std::vector<std::pair<int, int> > pairs;
+	std::vector<std::pair<typename T::value_type, typename T::value_type> > pairs;
 	for (int i = 0; i < n - 1; i += 2)
 	{
 		if (container[i] > container[i + 1]) {
@@ -41,18 +35,18 @@ void PmergeMe::fordJohnsonSort(T& container) {
 
 	// Handling odd element
 	if (n % 2 != 0) {
-		pairs.push_back(std::make_pair(container[n - 1], INT_MAX));
+		pairs.push_back(std::make_pair(container[n - 1], INT_MAX_LIMIT));
 	}
 
 	PmergeMe::printPairElements(pairs);
 
 	// Step 2: Recursively sort the 'a' elements
-	std::vector<int> main;
-	std::vector<std::pair<int, int> >::iterator it = pairs.begin();
-	for (; it != pairs.end(); ++it)
+	T main;
+	typename std::vector<std::pair<typename T::value_type, typename T::value_type> >::iterator itMain = pairs.begin();
+	for (; itMain != pairs.end(); ++itMain)
 	{
-		if ((*it).second != INT_MAX) {
-			main.push_back((*it).second);
+		if ((*itMain).second != INT_MAX_LIMIT) {
+			main.push_back((*itMain).second);
 		}
 	}
 
@@ -60,39 +54,57 @@ void PmergeMe::fordJohnsonSort(T& container) {
 	std::cout << "main before:" << std::endl;
 	printContainer(main);
 
+	// Recursion of Step 1
 	fordJohnsonSort(main);
 
 	// Debug print after recursive call
 	std::cout << "main after:" << std::endl;
 	printContainer(main);
-	/*...*/
 	
-	// Step 3: Insert 'b' elements into the main sequence using Jacobsthal order
-	std::vector<int> pend;
-	std::vector<std::pair<int, int> >::iterator it = pairs.begin();
-	for (; it != pairs.end(); ++it) {
-		if ((*it).first != INT_MAX) {
-			pend.push_back((*it).first);
+	// // Step 3: Insert 'b' elements into the main sequence using Jacobsthal order
+	T pend;
+	typename std::vector<std::pair<typename T::value_type, typename T::value_type> >::iterator itPend = pairs.begin();
+	for (; itPend != pairs.end(); ++itPend) {
+		if ((*itPend).first != INT_MAX_LIMIT) {
+			pend.push_back((*itPend).first);
 		}
 	}
 
-	// Starting from the 3rd Jacobsthal number
+	std::cout << "pend: " << std::endl;
+	printContainer(pend);
+
+	// // Starting from the 3rd Jacobsthal number
 	int k = 3;
-	int currentJ = jacobsthal(k);						// How many elements to work with so far
-	int previousJ = jacobsthal(k - 1);					// How many elements have already been inserted in previous steps
-	int newElementsToInsert = currentJ - previousJ; 	// The difference between current_jacobsthal and previous_jacobsthal tells you how many new elements to insert
+	// How many elements to work with so far
+	int currentJ = jacobsthal(k);
+	// How many elements have already been inserted in previous steps
+	int previousJ = jacobsthal(k - 1);
+	// The difference between current_jacobsthal and previous_jacobsthal tells you how many new elements to insert
+	size_t newElementsToInsert = static_cast<size_t>(currentJ - previousJ);
 	while (newElementsToInsert <= pend.size()) {
 		int count = newElementsToInsert;
+		std::cout << "count: " << count << std::endl;
 		for (int i = 0; i < count; ++i) {
+			std::cout << "main inside Jacobsthal: " << std::endl;
+			printContainer(main);
 			binaryInsert(main, pend.back());
 			pend.pop_back();
 		}
 		++k;
 	}
 
-	/* ... */
+	std::cout << "pend elements after jacobsthal: " << std::endl;
+	printContainer(pend);
+	// If newElementsToInsert is bigger than the size of pend, then insert the remaining numbers using binarySearch
+	while (!pend.empty()) {
+		binaryInsert(main, pend.back());
+		pend.pop_back();
+	}
 
-	// Copy the sorted elements back to the original array
+	std::cout << "main after oddElement binaryInsert: " << std::endl;
+	printContainer(main);
+
+	// // Copy the sorted elements back to the original array
 	for (int i = 0; i < n; ++i) {
 		container[i] = main[i];
 	}

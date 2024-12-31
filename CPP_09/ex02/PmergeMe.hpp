@@ -26,6 +26,8 @@
 typedef std::deque<int>::const_iterator itDeque;
 typedef std::vector<int>::const_iterator itVector;
 
+static const int INT_MAX_LIMIT = std::numeric_limits<int>::max();
+
 class PmergeMe {
 	private:
 		std::vector<int> _myVector;
@@ -54,14 +56,18 @@ class PmergeMe {
 		static void printContainer(const T& container);
 		template <typename T>
 		static void fordJohnsonSort(T& container);
+		template <typename T>
+		static void binaryInsert(T& main, int value);
 };
 
-# include "PmergeMe.tpp"
 
 std::string argvToString(char **argv);
 long	jacobsthal(int k);
 
 template <typename T>
 std::string toStr(T const& value);
+
+# include "PmergeMe.tpp"
+# include "Utils.tpp"
 
 #endif
