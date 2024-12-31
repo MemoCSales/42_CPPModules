@@ -1,7 +1,7 @@
 NAME = PmergeMe
 
 SRC = $(wildcard *.cpp)
-INC = $(wildcard *.hpp)
+INC = $(wildcard *.hpp *.tpp)
 OBJDIR = .obj
 OBJ = $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRC))
 
@@ -25,4 +25,4 @@ run: all
 	fi
 
 $(NAME): $(OBJ) $(INC)
-	@$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)
+	$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)

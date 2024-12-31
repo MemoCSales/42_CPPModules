@@ -10,7 +10,7 @@ CPPFLAGS	+= -g
 OBJDIR		= .obj
 
 # Common rules
-$(OBJDIR)/%.o: %.cpp
+$(OBJDIR)/%.o: %.cpp $(INC)
 	@mkdir -p $(dir $@)
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
