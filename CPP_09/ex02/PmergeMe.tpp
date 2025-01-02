@@ -82,33 +82,33 @@ void PmergeMe::fordJohnsonSort(T& container) {
 	// // Starting from the 3rd Jacobsthal number
 	int k = 3;
 	// How many elements to work with so far
-	int currentJ = jacobsthal(k);
+	// jacobsthal(k);
 	// How many elements have already been inserted in previous steps
-	int previousJ = jacobsthal(k - 1);
+	// jacobsthal(k - 1);
 	// The difference between current_jacobsthal and previous_jacobsthal tells you how many new elements to insert
-	size_t newElementsToInsert = static_cast<size_t>(currentJ - previousJ);
-	while (newElementsToInsert <= pend.size()) {
-		int count = newElementsToInsert;
-		if (DEBUGSORT) std::cout << "New Elements to insert: " << count << std::endl;
-		for (int i = 0; i < count; ++i) {
-			if (DEBUGSORT) {
-				std::cout << "main inside Jacobsthal: " << std::endl;
-				printContainer(main);
+	// jacobsthal(k) - jacobsthal(k - 1)
+	while (!pend.empty()) {
+		// Calculate next group size using Jacobsthal numbers
+		int nextGroupSize = jacobsthal(k) - jacobsthal(k - 1);
+		if (DEBUGSORT) std::cout << "Group size: " << nextGroupSize << std::endl;
+		
+		// Check if next group size is suitable (not larger than remaining elements)
+		if (nextGroupSize <= static_cast<int>(pend.size())) {
+			// Insert next group using Jacobsthal sequence
+			for (int i = 0; i < nextGroupSize; ++i) {
+				if (DEBUGSORT) {
+					std::cout << "main inside Jacobsthal: " << std::endl;
+					printContainer(main);
+				}
+				binaryInsert(main, pend.back());
+				pend.pop_back();
 			}
+		} else {
+			// Insert remaining elements one by one
 			binaryInsert(main, pend.back());
 			pend.pop_back();
 		}
 		++k;
-	}
-
-	if (DEBUGSORT) {
-		std::cout << "pend elements after jacobsthal: " << std::endl;
-		printContainer(pend);
-	}
-	// If newElementsToInsert is bigger than the size of pend, then insert the remaining numbers using binarySearch
-	while (!pend.empty()) {
-		binaryInsert(main, pend.back());
-		pend.pop_back();
 	}
 
 	if (DEBUGSORT) {

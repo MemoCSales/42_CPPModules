@@ -13,7 +13,7 @@ bool PmergeMe::validateArgs(int argc, char** argv) {
 		if (number < std::numeric_limits<int>::min() || number > std::numeric_limits<int>::max()) {
 			throw std::out_of_range("Argument is out of integer range: " + std::string(argv[i]));
 		}
-		if (number < 0) {
+		if (number <= 0) {
 			throw std::invalid_argument("Argument must be a positive integer: " + std::string(argv[i]));
 		}
 	}
