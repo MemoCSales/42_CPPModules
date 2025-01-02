@@ -22,6 +22,9 @@ void PmergeMe::fordJohnsonSort(T& container) {
 	int n = container.size();
 	if (n <= 1) return;
 
+	if (isSorted(container)) 
+		return;
+
 	// Step 1: Divide into pairs and sort each pair
 	std::vector<std::pair<typename T::value_type, typename T::value_type> > pairs;
 	for (int i = 0; i < n - 1; i += 2)

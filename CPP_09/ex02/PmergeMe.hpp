@@ -12,7 +12,7 @@
 # include <utility>
 
 # define DEBUG 0
-# define DEBUGSORT 1
+# define DEBUGSORT 0
 
 # define RED		"\033[1;31m"
 # define GREEN		"\033[1;32m"
@@ -59,6 +59,8 @@ class PmergeMe {
 		static void fordJohnsonSort(T& container);
 		template <typename T>
 		static void binaryInsert(T& main, int value);
+		template <typename T>
+		static bool isSorted(const T& container);
 };
 
 

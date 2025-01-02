@@ -21,3 +21,15 @@ std::string toStr(T const& value)
 	ss << std::fixed << value;
 	return ss.str();
 }
+
+template <typename T>
+bool PmergeMe::isSorted(const T& container) {
+	bool sorted = true;
+	for (size_t i = 0; i < container.size() - 1; ++i) {
+		if (container[i] > container[i + 1]) {
+			sorted = false;
+			break;
+		}
+	}
+	return sorted;
+}
