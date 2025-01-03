@@ -40,7 +40,7 @@ bool RPN::parsing(std::string str) {
 	std::string token;
 
 	while(ss >> token) {
-		// std::cout << token << std::endl;
+		// if (DEBUG) std::cout << token << std::endl;
 		bool isLast = ss.peek() == EOF;
 
 		if (!validateToken(token)) {
@@ -110,22 +110,23 @@ bool RPN::solving(std::string str, bool isLast) {
 		if (isValidNumber(str)) {
 			int number = std::atoi(str.c_str());
 			_stack.push(number);
-			// std::cout << "Number added to stack -> " << number << std::endl;
+			if (DEBUG) std::cout << "Number added to stack -> " << number << std::endl;
 		} else if (isValidOperator(str)) {
 			if (_stack.size() < 2) {
 				std::cerr << "Error: Not enough arguments." << std::endl;
 				return false;
 			}
-			// std::cout << "Operator = " << str << std::endl;
+			if (DEBUG) std::cout << "Operator = " << str << std::endl;
 				int a = _stack.top();
-				// std::cout << "a = " << a << std::endl;
+				if (DEBUG) std::cout << "a = " << a << std::endl;
 				_stack.pop();
 				int b = _stack.top();
-				// std::cout << "b = " << b << std::endl;
+				if (DEBUG) std::cout << "b = " << b << std::endl;
 				_stack.pop();
 			int result = operation(b, a, str);
 			_stack.push(result);
-			// std::cout << "Result = " << result << std::endl;
+			if (DEBUG) std::cout << "Result = " << result << std::endl;
+			if (DEBUG) std::cout << "Result added to stack -> " << result << std::endl;
 		}
 		if (isLast) {
 			if (!_stack.empty()) {
