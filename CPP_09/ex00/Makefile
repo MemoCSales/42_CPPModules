@@ -11,4 +11,4 @@ run: $(NAME)
 	@./$(NAME) input.txt
 
 $(NAME): $(OBJ)
-	$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)
+	@$(CPP) -o "$@" $(CPPFLAGS) $(OBJ)
