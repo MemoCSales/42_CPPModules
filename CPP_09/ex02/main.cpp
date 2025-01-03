@@ -19,7 +19,14 @@ int main(int argc, char **argv) {
 		PmergeMe::fordJohnsonSort(obj.getVector());
 		clock_t endVector = clock();
 		double executionTimeVector = (double)(endVector - startVector) / CLOCKS_PER_SEC;
-
+		bool sorted = PmergeMe::isSorted(obj.getVector());
+		if (DEBUG) {
+			if (sorted) {
+				std::cout << "Vector SORTED!" << std::endl;
+			} else {
+				std::cout << "Vector NOT SORTED :(" << std::endl;
+			}
+		}
 		// DEQUE
 		clock_t startDeque = clock();
 		obj.populateDeque(argv);
@@ -27,6 +34,14 @@ int main(int argc, char **argv) {
 		PmergeMe::fordJohnsonSort(obj.getDeque());
 		clock_t endDeque = clock();
 		double executionTimeDeque = (double)(endDeque- startDeque) / CLOCKS_PER_SEC;
+		bool sortedDeque = PmergeMe::isSorted(obj.getDeque());
+		if (DEBUG) {
+			if (sortedDeque) {
+				std::cout << "Deque SORTED!" << std::endl;
+			} else {
+				std::cout << "Deque NOT SORTED :(" << std::endl;
+			}
+		}
 
 		// RESULTS
 		std::cout << RED << "Before: " << DEFAULT;
