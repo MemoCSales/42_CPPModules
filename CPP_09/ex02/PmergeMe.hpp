@@ -27,8 +27,6 @@
 typedef std::deque<int>::const_iterator itDeque;
 typedef std::vector<int>::const_iterator itVector;
 
-static const int INT_MAX_LIMIT = std::numeric_limits<int>::max();
-
 class PmergeMe {
 	private:
 		std::vector<int> _myVector;

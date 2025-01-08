@@ -26,63 +26,53 @@ void PmergeMe::fordJohnsonSort(T& container) {
 		return;
 
 	// Step 1: Divide into pairs and sort each pair
-	std::vector<std::pair<typename T::value_type, typename T::value_type> > pairs;
+	T as; // Large elements
+	T bs; // Small elements
 	for (int i = 0; i < n - 1; i += 2)
 	{
 		if (container[i] > container[i + 1]) {
-			pairs.push_back(std::make_pair(container[i + 1], container[i]));
+			as.push_back(container[i]);
+			bs.push_back(container[i + 1]);
 		} else {
-			pairs.push_back(std::make_pair(container[i], container[i + 1]));
+			as.push_back(container[i + 1]);
+			bs.push_back(container[i]);
 		}
 	}
 
 	// Handling odd element
 	if (n % 2 != 0) {
-		pairs.push_back(std::make_pair(container[n - 1], INT_MAX_LIMIT));
+		as.push_back(container[n - 1]);
 	}
 
-	if (DEBUGSORT) PmergeMe::printPairElements(pairs);
-
-	// Step 2: Recursively sort the 'a' elements
-	T main;
-	typename std::vector<std::pair<typename T::value_type, typename T::value_type> >::iterator itMain = pairs.begin();
-	for (; itMain != pairs.end(); ++itMain)
-	{
-		if ((*itMain).second != INT_MAX_LIMIT) {
-			main.push_back((*itMain).second);
-		}
+	if (DEBUGSORT) {
+		std::cout << "Large elements (as):" << std::endl;
+		PmergeMe::printContainer(as);
+		std::cout << "Small elements (bs):" << std::endl;
+		PmergeMe::printContainer(bs);
 	}
 
 	// Debug print before recursive call
 	if (DEBUGSORT) {
-		std::cout << "main before:" << std::endl;
-		printContainer(main);
+		std::cout << "As before:" << std::endl;
+		printContainer(as);
 	}
 
 	// Recursion of Step 1
-	fordJohnsonSort(main);
+	fordJohnsonSort(as);
 
 	// Debug print after recursive call
 	if (DEBUGSORT) {
-		std::cout << "main after:" << std::endl;
-		printContainer(main);
-	}
-	
-	// // Step 3: Insert 'b' elements into the main sequence using Jacobsthal order
-	T pend;
-	typename std::vector<std::pair<typename T::value_type, typename T::value_type> >::iterator itPend = pairs.begin();
-	for (; itPend != pairs.end(); ++itPend) {
-		if ((*itPend).first != INT_MAX_LIMIT) {
-			pend.push_back((*itPend).first);
-		}
+		std::cout << "As after:" << std::endl;
+		printContainer(as);
 	}
 
 	if (DEBUGSORT) {
-		std::cout << "pend: " << std::endl;
-		printContainer(pend);
+		std::cout << "Bs: " << std::endl;
+		printContainer(bs);
 	}
 
-	// // Starting from the 3rd Jacobsthal number
+	// Step 2, 3, 4: Insertion
+	// Starting from the 3rd Jacobsthal number
 	int k = 3;
 	// How many elements to work with so far
 	// jacobsthal(k);
@@ -90,37 +80,35 @@ void PmergeMe::fordJohnsonSort(T& container) {
 	// jacobsthal(k - 1);
 	// The difference between current_jacobsthal and previous_jacobsthal tells you how many new elements to insert
 	// jacobsthal(k) - jacobsthal(k - 1)
-	while ((jacobsthal(k) - jacobsthal(k - 1)) <= static_cast<int>(pend.size()) ) {
+	while ((jacobsthal(k) - jacobsthal(k - 1)) <= static_cast<int>(bs.size()) ) {
 		int newGroupSize = jacobsthal(k) - jacobsthal(k - 1);
 		if (DEBUGSORT) std::cout << "Group size: " << newGroupSize << std::endl;
-		for (int i = 0; i < newGroupSize; ++i) {
+		for (int i = 0; i < newGroupSize && !bs.empty(); ++i) {
 			if (DEBUGSORT) {
-				std::cout << "main inside Jacobsthal: " << std::endl;
-				printContainer(main);
+				std::cout << "As inside Jacobsthal: " << std::endl;
+				printContainer(as);
 			}
-			binaryInsert(main, pend.back());
-			pend.pop_back();
+			binaryInsert(as, bs.back());
+			bs.pop_back();
 		}
 		++k;
 	}
 
 	if (DEBUGSORT) {
-		std::cout << "pend elements after jacobsthal: " << std::endl;
-		printContainer(pend);
+		std::cout << "Bs elements after jacobsthal: " << std::endl;
+		printContainer(bs);
 	}
 
-	while (!pend.empty()) {
-		binaryInsert(main, pend.back());
-		pend.pop_back();
+	while (!bs.empty()) {
+		binaryInsert(as, bs.back());
+		bs.pop_back();
 	}
 
 	if (DEBUGSORT) {
-		std::cout << "main after odd elements is inserted: " << std::endl;
-		printContainer(main);
+		std::cout << "As after odd elements is inserted: " << std::endl;
+		printContainer(as);
 	}
 
 	// // Copy the sorted elements back to the original array
-	for (int i = 0; i < n; ++i) {
-		container[i] = main[i];
-	}
+	container = as;
 }
