@@ -69,7 +69,7 @@ int BitcoinExchange::fileManagement(char** argv) {
 	std::ifstream inputFile(argv[1], std::ifstream::in);
 	std::string line;
 	std::string dateString, valueString;
-	float price;
+	float price = -0.1f;
 
 	if (!(inputFile.is_open())) {
 		std::cerr << ERROR_MESSAGE << std::endl;
@@ -150,7 +150,7 @@ bool BitcoinExchange::parseLine(std::string &dateString, std::string &valueStrin
 			std::cerr << "💀 Error: bad input => " << dateString << std::endl;
 			return false;
 		}
-		if (!price) {
+		if (price < 0) {
 			throw InvalidValue();
 			return false;
 		}
